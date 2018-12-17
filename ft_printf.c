@@ -6,84 +6,89 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 20:06:42 by mnishimo          #+#    #+#             */
-/*   Updated: 2018/12/13 21:22:33 by mnishimo         ###   ########.fr       */
+/*   Updated: 2018/12/17 15:11:28 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+#include <stdio.h>
 
 int		ft_printf(const char *fmt, ...)
 {
 	char		*output;
 	va_list		ap;
-	size_t		l1;
-	size_t		l2;
-	char		*s;
+	size_t		len;
+	char		*start;
 
 	va_start(ap, fmt);
-	l1 = 0;
-	if ((fmt = join_chars(&output, fmt, &l1)) == NULL)
-			return (-1)
-	while (*fmt != '\0')
-	{
-		if ((s = convert(&ap, &fmt, &l2)) == NULL)
-		{
-			free(output);
+	start = (char *)fmt;
+	len = 0;
+	if ((start = join_chars(&output, start, &len)) == NULL)
 			return (-1);
-		}
-		if ((output = ft_memjoinfree(&output, &s, l1, l2)) == NULL)
+	while (*start != '\0')
+	{
+		output = join_cnvrt(&output, &start, &ap, &len);
+		if (output == NULL)
 				return (-1);
-		if ((fmt = join_chars(output, fmt)) == NULL)
+		if ((start = join_chars(&output, start, &len)) == NULL)
 			return(-1);
 	}
-	printoutput(&output, l1);
+	printoutput(output,len);
 	return (0);
 }
 
-void printoutput(char **output, size_t len)
+void printoutput(char *output, size_t len)
 {
 	write(1, output, len);
-	ft_memdel(output);
+	free(output);
 }
 
-char	*join_chars(char **output, char *fmt, size_t *len)
+char	*join_chars(char **output, char *start, size_t *len)
 {
 	char	*s;
-	size_t	*i;
+	size_t	i;
 
-	//TODO
 	i = 0;
-	while(fmt[i] != '%' && fmt[i] != '\0')
+	while(*(start + i) != '%' && *(start + i) != '\0')
 		i++;
+//	printf("i is %zu\n", i);
 	if (i == 0)
-		return (fmt + i);
+		return (start);
 	s = *output;
-	if ((*output = ft_memalloc(l1 + l2 + 1)) == NULL)
+	if ((*output = ft_memalloc(*len + i + 1)) == NULL)
 	{
 			free(s);
 			return (NULL);
 	}
-	if (len != 0)
+	if (*len != 0)
 	{
-		ft_memccpy(*output, s, l1);
-		ft_memdel(s);
+		ft_memcpy(*output, s, *len);
+		free(s);
 	}
-	ft_memccpy(*output, fmt, i);
-	return (fmt + i);
+	ft_memcpy(*output + *len, start, i);
+	*len += i;
+	//printf("output is %s, start is at %s\n", *output, start);
+	return (start + i);
 }
 
-char	*memjoinfree(char **output, char **s, size_t l1, size_t l2)
+char	*join_cnvrt(char **output, char **start, va_list *ap, size_t *len)
 {
 	char	*ret;
+	char	*s;
+	size_t	slen;
 
-	if ((ret = ft_memalloc(l1 + l2)) == NULL)
+	s = convert(ap, start, &slen);
+	if (s == NULL || (ret = ft_memalloc(*len + slen + 1)) == NULL)
 	{
 		free(*output);
 		return (NULL);
 	}
-	ft_memccpy(ret, *output, l1);
-	ft_memccpy(ret, s, l2);
-	ft_memdel(output);
-	ft_memdel(s);
+	ft_memcpy(ret, *output, *len);
+	ft_memcpy(ret + *len, s, slen);
+	//printf("ret is %s, len is %zu, slen is %zu\n", ret,*len, slen);
+	//printf("output is %s, start is at %s\n", *output, *start);
+	*len += slen;
+	free(*output);
+	free(s);
 	return (ret);
 }
