@@ -12,16 +12,14 @@
 
 #include "libft/libft.h"
 
-s_printops	*readops(char *opt)
+s_printops	*readops(char **start)
 {
 	s_printops	options;
 
 	options = NULL;
 	//TODO
-	//read something like "%#lx" 
-	//but assume there is no %
-	//new string that is copied from fmt 
-	//and terminated is expected
+	//read something like "%#lx"
+	//change the start to the end of convertion specifier
 	return (NULL);
 }
 
@@ -34,6 +32,3 @@ void		resetops(s_printops options)
 {
 	//reset every option as NULL or default
 }
-
-
-

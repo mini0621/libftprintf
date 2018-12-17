@@ -19,7 +19,24 @@ typedef struct	s_printops
 	int		width;
 	int		prescision;
 	char	*lmod;
-	char	specif;
+	char	cnvrtsp;
 }				t_printops;
 
+typedef char *(*t_prcs_fp)(va_list *, t_printops, int *);
+
+typedef struct	s_funcs
+{
+	char		cnvrt_specifier;
+	char		*length_modifier;
+	t_cnvrt_fp	function;
+}				t_funcs;
+
+t_funcs	prcsfs[] = 
+[
+	{'d', "", &prcs_d},
+	{'d', "h", &prcs_dh},
+	{'d', "hh", &prcs_dhh},
+	{'d', "l", &prcs_dl},
+	{'d', "ll", &prcs_dll}
+];
 int	printf(const char *fmt, ...);
