@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:55:20 by mnishimo          #+#    #+#             */
-/*   Updated: 2018/12/17 14:13:03 by mnishimo         ###   ########.fr       */
+/*   Updated: 2018/12/18 15:28:11 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,21 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+typedef enum	e_lm;
+{
+	i = 0
+	h = 
+}				t_lm;
+typedef struct	s_flags
+{
+	char	sharp;
+	char	min_0;
+	char	plus_sp;
+}				t_flags;
+
 typedef struct	s_printops
 {
-	char	flag;
+	t_flags	flag;
 	int		width;
 	int		prescision;
 	char	*lmod;
@@ -33,7 +45,9 @@ typedef struct	s_funcs
 	char		cnvrt_specifier;
 	char		*length_modifier;
 	t_prcs_fp	function;
-}				t_funcs;
+}t_funcs;
+
+
 /*
 t_funcs	prcsfs[] = 
 {
