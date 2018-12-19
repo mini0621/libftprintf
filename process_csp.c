@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwer.c                                          :+:      :+:    :+:   */
+/*   process_csp.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnishimo <mnishimo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/28 22:29:37 by mnishimo          #+#    #+#             */
-/*   Updated: 2018/12/19 19:30:40 by mnishimo         ###   ########.fr       */
+/*   Created: 2018/12/19 17:58:39 by mnishimo          #+#    #+#             */
+/*   Updated: 2018/12/19 18:18:58 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
-int	ft_power(int base, int power)
+char	*prcs_c(va_list *ap, t_printops *opt, size_t *l)
 {
-	if (power == 0)
-		return (1);
-	if (power < 0)
-		return (1);
-	return (base * ft_power(base, power - 1));
+	return (NULL);
+}
+
+char	*prcs_s(va_list *ap, t_printops *opt, size_t *l)
+{
+	return (NULL);
+}
+
+char	*prcs_p(va_list *ap, t_printops *opt, size_t *l)
+{
+	return (NULL);
 }
