@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:55:20 by mnishimo          #+#    #+#             */
-/*   Updated: 2018/12/19 18:45:35 by mnishimo         ###   ########.fr       */
+/*   Updated: 2018/12/25 23:08:24 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <stdio.h>
 
 typedef enum	e_lm
 {
@@ -77,5 +78,9 @@ char	*prcs_p(va_list *ap, t_printops *opt, size_t *l);
 char	*prcs_s(va_list *ap, t_printops *opt, size_t *l);
 char	*prcs_c(va_list *ap, t_printops *opt, size_t *l);
 char	*prcs_f(va_list *ap, t_printops *opt, size_t *l);
+long long ft_llpower(long long base, longlong power);
 char	*ft_lltoa(long long n);
+unsigned long long ft_lluporwer(unsigned long long base, unsigned long long power);
+char	*ft_llutoa(unsigned long long n);
+
 #endif 

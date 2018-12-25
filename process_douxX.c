@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 20:06:42 by mnishimo          #+#    #+#             */
-/*   Updated: 2018/12/19 19:56:05 by mnishimo         ###   ########.fr       */
+/*   Updated: 2018/12/25 22:52:45 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,22 @@ char	*prcs_d(va_list *ap, t_printops *opt, size_t *l)
 {
 	t_lm		lm;
 	char		*ret;
-	long long	arg;
+	long long	arg = 0;
+	short i;
 	
 	lm = opt->lmod;
 	//printf("lm = %i", lm);
 	if (lm == 1)
 		arg = (short)va_arg(*ap, int);
-	if (lm == 2)
-		arg = (signed char)va_arg(*ap, int);
-	if (lm == 3)
-		arg = (long long)va_arg(*ap, long);
-	if (lm == 4)
-		arg = (long long)va_arg(*ap, long long);
+	else if (lm == 2)
+		arg = (signed char)(va_arg(*ap, int));
+	else if (lm == 3)
+		arg = (long long)(va_arg(*ap, long));
+	else if (lm == 4)
+		arg = (long long)(va_arg(*ap, long long));
 	else
 		arg = (int)va_arg(*ap, int);
+
 	printf("arg is %lld\n", arg);
 	if ((ret = ft_lltoa(arg)) == NULL)
 		return (NULL);
