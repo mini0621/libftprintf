@@ -14,6 +14,8 @@
 #ifndef PRCSFS_H
 # define PRCSFS_H
 
+#include "libftprintf.h"
+
 t_funcs	prcsfs[] =
 {
 	{'d', &prcs_d},
@@ -23,10 +25,11 @@ t_funcs	prcsfs[] =
 	{'X', &prcs_x},
 	{'c', &prcs_c},
 	{'s', &prcs_s},
-	{'p', &prcs_p},
+	{'p', &prcs_x},
 	{'f', &prcs_f},
 	{'g', &prcs_g},
-	{'e', &prcs_e}
+	{'e', &prcs_e},
+	{'\0', NULL}
 };
 
 #endif

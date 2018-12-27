@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_f.c                                        :+:      :+:    :+:   */
+/*   ft_strupper.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/19 17:59:51 by mnishimo          #+#    #+#             */
-/*   Updated: 2018/12/27 23:32:55 by mnishimo         ###   ########.fr       */
+/*   Created: 2018/11/21 19:45:42 by mnishimo          #+#    #+#             */
+/*   Updated: 2018/12/27 20:07:44 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft.h"
 
-char	*prcs_f(va_list *ap, t_printops *opt, size_t *l)
+char	*ft_strupper(char *s)
 {
-	long double	arg;
-	char		*ret;
-	t_lm		lm;
-//TODO
-	lm = opt->lmod;
-	if (lm == 3)
-		arg = (long double)va_arg(*ap, double);
-	else
-		arg = va_arg(*ap, long double);
-	printf("%Lf\n", arg);
-	if ((ret = ft_dltoa(arg, opt->precision))== NULL)
-		return (NULL);
-	*l = ft_strlen(ret);
-	return (ret);
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		s[i] = ft_toupper(s[i]);
+		i++;
+	}
+	return (s);
 }

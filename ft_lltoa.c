@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:47:00 by mnishimo          #+#    #+#             */
-/*   Updated: 2018/12/25 23:08:41 by mnishimo         ###   ########.fr       */
+/*   Updated: 2018/12/27 19:58:50 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,19 @@ char		*ft_lltoa(long long n)
 	return (ptr);
 }
 
-unsigned long long	ft_llupower(unsigned long long base,
-		unsigned long long power)
+char	*create_base(unsigned int base)
+{
+	char	*ret;
+
+	if (base > 16)
+		return (NULL);
+	if((ret = ft_strnew(base)) == NULL)
+		return (NULL);
+	ft_strncpy(ret, "0123456789abcdef", base * sizeof(char));
+	return (ret);
+}
+
+unsigned long long	ft_llupower(unsigned long long base, long long power)
 {
 	if (power == 0)
 		return (1);
@@ -59,24 +70,28 @@ unsigned long long	ft_llupower(unsigned long long base,
 	return (base * ft_power(base, power - 1));
 }
 
-char		*ft_llutoa(unsigned long long n)
+char		*ft_llutoa(unsigned long long n, unsigned int base)
 {
 	char	*ptr;
 	unsigned long long	i;
+	char	*rep;
 
 	i = 0;
 	if (n == 0)
 		return (ft_strdup("0"));
-	while (n / ft_llpower(10, i) != 0)
+	if ((rep = create_base(base)) == NULL)
+		return (NULL);
+	while (n / ft_llpower(base, i) != 0)
 		i++;
 	if ((ptr = ft_strnew(i)) == NULL)
 		return (NULL);
 	i = i - 1;
-	while (i >= 0)
+	while ((int)i > -1)
 	{
-		ptr[i] = n % 10 + '0';
-		n = n / 10;
+		ptr[i] = rep[n % base];
+		n = n / base;
 		i--;
 	}
+	free(rep);
 	return (ptr);
 }
