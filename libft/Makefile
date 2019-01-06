@@ -8,7 +8,7 @@ SRC = ft_lstiter.c    ft_putchar.c    ft_strdel.c     ft_strnew.c  ft_lstlast.c 
 OBJ = $(SRC:.c=.o)
 INCLUDES = .
 
-.PHONY: all fclean clean &(NAME)
+.PHONY: all fclean clean $(NAME)
 
 RM = rm -f 
 

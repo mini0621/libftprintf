@@ -1,16 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   expo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/19 16:53:15 by mnishimo          #+#    #+#             */
-/*   Updated: 2018/12/19 16:57:58 by mnishimo         ###   ########.fr       */
+/*   Created: 2019/01/06 13:27:07 by mnishimo          #+#    #+#             */
+/*   Updated: 2019/01/06 18:22:09 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <math.h>
+#include <stdio.h>
+#include "libft/libft.h"
 
-int	vertify_cnvrt(char **start)
+int main()
 {
+	long double a;
+
+	a = 1.0;
+		//3.64519953188247460253E-4951L;
+	short c;
+	int exp;
+
+
+	ft_memcpy(&c, &a, 2);
+	printf("%x\n",c);
 	return (0);
 }

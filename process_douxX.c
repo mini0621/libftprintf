@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 20:06:42 by mnishimo          #+#    #+#             */
-/*   Updated: 2018/12/27 21:34:13 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/06 16:14:37 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char	*prcs_d(va_list *ap, t_printops *opt, size_t *l)
 	t_lm		lm;
 	char		*ret;
 	long long	arg;
+	int			sign;
 
 	lm = opt->lmod;
 	if (lm == 1)
@@ -29,8 +30,10 @@ char	*prcs_d(va_list *ap, t_printops *opt, size_t *l)
 		arg = (long long)(va_arg(*ap, long long));
 	else
 		arg = (int)va_arg(*ap, int);
-	printf("arg is %lld\n", arg);
-	if ((ret = ft_lltoa(arg)) == NULL)
+	sign = (arg > 0) ? 1:0;
+	if (sign == 0)
+		sign = (arg < 0 && sign == 0) ? -1: 0;
+	if ((ret = ft_lltoa(arg)) == NULL || prcs_flags(opt, &ret, sign) == NULL)
 		return (NULL);
 	*l = ft_strlen(ret);
 	return (ret);
@@ -41,7 +44,8 @@ char	*prcs_o(va_list *ap, t_printops *opt, size_t *l)
 	t_lm		lm;
 	char		*ret;
 	unsigned long long	arg;
-	
+	int					sign;
+
 	lm = opt->lmod;
 	if (lm == 1)
 		arg = (unsigned short)va_arg(*ap, unsigned int);
@@ -53,9 +57,8 @@ char	*prcs_o(va_list *ap, t_printops *opt, size_t *l)
 		arg = (unsigned long long)(va_arg(*ap, unsigned long long));
 	else
 		arg = (unsigned int)va_arg(*ap, unsigned int);
-	
-	printf("arg is %llu\n", arg);
-	if ((ret = ft_llutoa(arg, 8)) == NULL)
+	sign = (arg > 0) ? 1:0;
+	if ((ret = ft_llutoa(arg, 8)) == NULL || prcs_flags(opt, &ret, sign) == NULL)
 		return (NULL);
 	*l = ft_strlen(ret);
 	return (ret);
@@ -66,7 +69,8 @@ char	*prcs_u(va_list *ap, t_printops *opt, size_t *l)
 	t_lm		lm;
 	char		*ret;
 	unsigned long long	arg;
-	
+	int					sign;
+
 	lm = opt->lmod;
 	if (lm == 1)
 		arg = (unsigned short)va_arg(*ap, unsigned int);
@@ -77,10 +81,9 @@ char	*prcs_u(va_list *ap, t_printops *opt, size_t *l)
 	else if (lm == 4)
 		arg = (unsigned long long)(va_arg(*ap, unsigned long long));
 	else
-		arg = (unsigned int)va_arg(*ap, unsigned int);
-	
-	printf("arg is %llu\n", arg);
-	if ((ret = ft_llutoa(arg, 10)) == NULL)
+		arg = (unsigned int)va_arg(*ap, unsigned int);	
+	sign = (arg == 0) ? 0:1;
+	if ((ret = ft_llutoa(arg, 10)) == NULL || prcs_flags(opt, &ret, sign) == NULL)
 		return (NULL);
 	*l = ft_strlen(ret);
 	return (ret);
@@ -91,6 +94,7 @@ char	*prcs_x(va_list *ap, t_printops *opt, size_t *l)
 	t_lm		lm;
 	char		*ret;
 	unsigned long long	arg;
+	int					sign;
 	
 	lm = opt->lmod;
 	if (lm == 1)
@@ -103,9 +107,8 @@ char	*prcs_x(va_list *ap, t_printops *opt, size_t *l)
 		arg = (unsigned long long)(va_arg(*ap, unsigned long long));
 	else
 		arg = (unsigned int)va_arg(*ap, unsigned int);
-	
-	printf("arg is %llu\n", arg);
-	if ((ret = ft_llutoa(arg, 16)) == NULL)
+	sign = (arg > 0) ? 1:0;
+	if ((ret = ft_llutoa(arg, 16)) == NULL || prcs_flags(opt, &ret, sign) == NULL)
 		return (NULL);
 	if (opt->cnvrtsp == 'X')
 		ft_strupper(ret);

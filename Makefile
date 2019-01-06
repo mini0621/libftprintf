@@ -1,35 +1,24 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile Template                                  :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/11/21 08:40:41 by mnishimo          #+#    #+#              #
-#    Updated: 2018/12/12 09:09:47 by mnishimo         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-# name of the program you want to make 
-NAME =
+NAME = libftprintf.a
 
 CC = gcc 
 
 FLAGS = -Wall -Werror -Wexra
 
-# where the linking files are 
 INCLUDES = .
 
 
-SRC =
+SRC = ft_printf.c ft_lltoa.c ft_dltoa.c convertion.c errors.c libftprintf.h process_csp.c process_flag.c process_douxX.c setting.c process_eg.c process_f.c 
 OBJ = $(SRC:.c=.o)
+
+.PHONY: all fclean clean $(NAME)
 
 RM = rm -f 
 
 $(NAME):
+	make -C libft/ fclean
+	make -C libft/ re
 	$(CC) $(CFLAGS) -c $(SRC) -I $(INCLUDES)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
-
+	ar rc  $(NAME) $(OBJ)
 all: $(NAME)
 
 clean:

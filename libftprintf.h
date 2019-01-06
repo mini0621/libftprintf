@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:55:20 by mnishimo          #+#    #+#             */
-/*   Updated: 2018/12/27 23:18:19 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/06 19:37:43 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,16 @@ char	*ft_lltoa(long long n);
 unsigned long long ft_lluporwer(unsigned long long base, unsigned long long power);
 char	*ft_llutoa(unsigned long long n, unsigned int base);
 
+unsigned short		get_exponent(long double n);
 long double	ft_neg_power(int power);
 char		get_n_dig(long double n);
 long double round_ld(long double n, int precision);
-char	*ft_dltoa(long double n, int precision);
+char	*ft_lditoa(long double n, int precision);
+char	*ft_ldtoa(long double n, int precision);
+char	*prcs_flags(t_printops *opt, char **s, int sign);
+char	*prcs_sharp(char sp, char **s);
+char	*prcs_plus(char	sp, char **s, char c);
+char	*prcs_zero(char sp, char **s, int w);
+char	*prcs_min(char sp, char **s, int w, char min);
+
 #endif 
