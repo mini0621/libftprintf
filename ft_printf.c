@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 20:06:42 by mnishimo          #+#    #+#             */
-/*   Updated: 2018/12/30 22:24:14 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/08 19:37:37 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int		ft_printf(const char *fmt, ...)
 				return (-1);
 		if ((start = join_chars(&output, start, &len)) == NULL)
 			return(-1);
+
 	}
 	va_end(ap);
 	printoutput(output,len);

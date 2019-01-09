@@ -19,6 +19,7 @@
 t_funcs	prcsfs[] =
 {
 	{'d', &prcs_d},
+	{'i', &prcs_d},
 	{'o', &prcs_o},
 	{'u', &prcs_u},
 	{'x', &prcs_x},

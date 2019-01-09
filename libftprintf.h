@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:55:20 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/06 19:37:43 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/09 23:32:47 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,12 @@ typedef struct	s_funcs
 	t_prcs_fp	function;
 }				t_funcs;
 
-
-
+typedef struct	s_double
+{
+	int		sign;
+	uint16_t	expo;
+	uint64_t	frac;
+}				t_double;
 
 int		ft_printf(const char *fmt, ...);
 void	printoutput(char *output, size_t len);
@@ -78,17 +82,27 @@ char	*prcs_p(va_list *ap, t_printops *opt, size_t *l);
 char	*prcs_s(va_list *ap, t_printops *opt, size_t *l);
 char	*prcs_c(va_list *ap, t_printops *opt, size_t *l);
 char	*prcs_f(va_list *ap, t_printops *opt, size_t *l);
+char	*prcs_ld(va_list *ap, t_printops *opt);
+char	*prcs_db(va_list *ap, t_printops *opt);
 long long ft_llpower(long long base, long long power);
 char	*ft_lltoa(long long n);
 unsigned long long ft_lluporwer(unsigned long long base, unsigned long long power);
 char	*ft_llutoa(unsigned long long n, unsigned int base);
 
-unsigned short		get_exponent(long double n);
+t_double		*get_ldouble(long double n);
+t_double		*get_double(double n);
 long double	ft_neg_power(int power);
 char		get_n_dig(long double n);
 long double round_ld(long double n, int precision);
-char	*ft_lditoa(long double n, int precision);
-char	*ft_ldtoa(long double n, int precision);
+char	*ft_ldtolltoa(long double n, int precision);
+void	carry_frac(unsigned long long *frac10);
+unsigned long long *init_frac(uint64_t frac, short expo, char flag);
+void	add_frac(unsigned long long *a, unsigned long long **b);
+void	mult_frac(unsigned long long *frac, int a, int times);
+void	div_frac(unsigned long long *a, int times);
+char	*fractoa(unsigned long long *frac);
+char	*ft_ldtoa(t_double *n, int precision);
+
 char	*prcs_flags(t_printops *opt, char **s, int sign);
 char	*prcs_sharp(char sp, char **s);
 char	*prcs_plus(char	sp, char **s, char c);

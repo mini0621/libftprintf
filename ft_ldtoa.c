@@ -1,84 +1,73 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dltoa.c                                         :+:      :+:    :+:   */
+/*   ft_ldtoa.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/27 21:56:41 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/06 19:37:38 by mnishimo         ###   ########.fr       */
+/*   Created: 2019/01/09 15:21:57 by mnishimo          #+#    #+#             */
+/*   Updated: 2019/01/09 23:32:51 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-long double ft_neg_power(int power)
+char	*ft_ldtoa(t_double *n, int precision)
 {
-	if (power <= 0)
-		return (1);
-	return (0.1 * ft_neg_power(power -1));
-}
+	unsigned long long	*a;
+	unsigned long long	*b;
+	short		expo;
+	char		*ret;
 
-long double round_ld(long double n, int precision)
-{
-	int i;
-	int d;
-	long double	ret;
-
-	ret = n;
-	n = n - (long double)(long long)n;
-	i = 0;
-	while (i <= precision)
+	expo = n->expo;
+	if ((a = init_frac(n->frac, n->expo, 1)) == NULL)
+		return (NULL);
+	if ((b = init_frac(n->frac, n->expo, 0)) == NULL)
 	{
-		n *= 10;
-		d = (int)n % 10;
-		i++;
+		free(a);
+		return (NULL);
 	}
-	if (d > 4)
-		ret = ret + ft_neg_power(precision);
+	if (expo > 0)
+	{
+		mult_frac(a, 10, 52);
+		mult_frac(a, 2, (int)expo);
+		mult_frac(b, 10, (int)expo);
+		mult_frac(b, 5, (int)(52 - expo));
+	}
+	else
+	{
+		mult_frac(a, 5, 52);
+		printf("a-1 %llu%llu%llu\n%llu%llu%llu\n%llu%llu%llu\n",a[18],a[17],a[16],a[15],a[14],a[13],a[12], a[11], a[10]);
+		mult_frac(a, 2, 52 + (int)expo);
+		printf("a-2 %llu%llu%llu\n%llu%llu%llu\n%llu%llu%llu\n",a[18],a[17],a[16],a[15],a[14],a[13],a[12], a[11], a[10]);
+		mult_frac(b, 5, 52);
+		printf("b-1 %llu %llu %llu %llu %llu %llu %llu %llu %llu\n",b[18],b[17],b[16],b[15],b[14],b[13],b[12], b[11], b[10]);
+		div_frac(b,(int)(-expo));
+		printf("b-2 %llu %llu %llu %llu %llu %llu %llu %llu %llu\n",b[16],b[15],b[14],b[13],b[12], b[11], b[10], b[9], b[8]);
+	}
+	add_frac(a, &b);
+	ret = fractoa(a);
+	free(a);
 	return (ret);
-	
-	
 }
 
-long double removeint(long double n, int precision, char **integer)
+char	*fractoa(unsigned long long *frac)
 {
+	int	i;
+	char *ret;
 	char *s;
 
-	if (n < 0)
+	i = 19;
+	ret = ft_llutoa(frac[20], 10);
+	printf("check : %s ", ret);
+	while (i != 0)
 	{
-		n = -n;
-		n = round_ld(n, precision);
-		*integer = ft_llutoa((unsigned long long)n, 10);
-		s = ft_strdup("-");
-		*integer = ft_strjoinfree(&s, integer, 3);
-		return (n - (unsigned long long)n);
+		s = ft_llutoa(frac[i], 10);
+		printf("%s ", s);
+		if ((ret = ft_strjoinfree(&ret, &s, 3)) == NULL)
+			return (NULL);
+		i--;
 	}
-	n = round_ld(n, precision);
-	*integer = ft_llutoa((unsigned long long)n, 10);
-	return (n - (unsigned long long)n);
-
-}
-
-char	*ft_lditoa(long double n, int precision)
-{
-	char	*integer;
-	int		i;
-	char	*ret;
-
-	n = removeint(n, precision, &integer);
-	if (precision == 0)
-		return (integer);
-	i = 1;
-	if ((ret = ft_strnew(precision + 1))== NULL)
-		return (0);
-	ret[0] = '.';
-	while(i <= precision)
-	{
-		n = n * 10;
-		ret[i] = (int)n + '0';
-		n = n - (int)n;
-		i++;
-	}
-	return (ft_strjoinfree(&integer, &ret, 3));
+	printf("\n");
+	return (ret);
 }
