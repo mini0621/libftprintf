@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 15:21:57 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/10 23:24:56 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/11 00:57:41 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,34 +20,55 @@ char	*ft_ldtoa(t_double *n, int precision)
 
 	if ((ret = get_frac10(n)) == NULL)
 		return (NULL);
-	printf("check %s\n", ret);
 	p = 0;
 	while (n->frac % 2 == 0)
 	{
 		n->frac = n->frac >> 1;
 		p--;
 	}
-	p = ft_strlen(ret) - (52 + p - (short)(n->expo));
+	p = (short)ft_strlen(ret) - (52 + p - (n->expo));
 	printf("p : %i", p);
 	if (p < 0)
-		p = 0;	
+	{
+		integer = ft_strnew(-p);
+		ft_memset(integer, '0', -p);
+		ret = ft_strjoinfree(&integer, &ret, 3);
+		p = 0;
+	}	
+	if (precision != 0 && p + precision -1 < ft_strlen(ret))
+		ret = round_ldchar(&ret, p + precision - 1);
 	integer = sub_integer(ret, (int)p, precision);
 	if (precision == 0)
 	{
+		integer = sub_integer(ret, (int)p, precision);
 		free(ret);
 		return (integer);
 	}
-	if (p > 0)
-		ret = ft_strsubfree(ret,(int)p, precision);
-	else
-	{
-		free(ret);
-		ret = ft_strnew(0);
-	}
+	ret = ft_strsubfree(ret,(int)p, precision);
 	if (ft_strlen(ret) < precision)
 		ret = prcs_precision_end('d', &ret, precision);
 	ret = ft_strjoinfree(&integer, &ret, 3);
 	return (ret);
+}
+
+char	*round_ldchar(char **s, int index)
+{
+	char	*ret;
+
+	if (*(*s + index + 1) < '5')
+		return (*s);
+	while (index != 0)
+	{
+		if (*(*s + index) != '9')
+		{
+			*(*s + index) += 1;
+			return (*s);
+		}
+		*(*s + index) = '0';
+		index--;
+	}
+	ret = ft_strdup("1");
+	return (ft_strjoinfree(&ret, s, 3));
 }
 
 void	del_end0(char *s)

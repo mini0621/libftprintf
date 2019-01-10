@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:55:20 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/10 23:16:35 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/11 00:51:36 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,14 +98,15 @@ char	*ft_ldtolltoa(long double n, int precision);
 
 void	carry_frac(unsigned long long *frac10);
 unsigned long long *init_frac(uint64_t frac, short expo, int zero);
-int		add_frac(unsigned long long *a, unsigned long long **b);
-int		mult_frac(unsigned long long *frac, int a, int times, int zero);
+void		add_frac(unsigned long long *a, unsigned long long **b);
+void	mult_frac(unsigned long long *frac, int a, int times, int zero);
 int		div_frac(unsigned long long *a, int times);
-char	*fractoa(unsigned long long *frac);
+int			shift_frac(unsigned long long *a);
+unsigned long long get_mincarry(unsigned long long *a, unsigned long long carry);
+char	*fractoa(unsigned long long *frac, int e);
 char	*ft_ldtoa(t_double *n, int precision);
 char	*get_frac10(t_double *n);
-int		frac_expo_min(unsigned long long *frac);
-int		frac_expo(unsigned long long *frac);
+char	*round_ldchar(char **s, int index);
 
 void	del_end0(char *s);
 char	*sub_integer(char *s, int point, int precision);
