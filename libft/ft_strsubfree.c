@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_strsubfree.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/26 23:23:49 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/10 18:40:07 by mnishimo         ###   ########.fr       */
+/*   Created: 2018/11/26 23:02:24 by mnishimo          #+#    #+#             */
+/*   Updated: 2019/01/10 18:45:13 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <string.h>
+#include <stdlib.h>
 
-char	*ft_strtrim(char const *s)
+char	*ft_strsubfree(char *s, unsigned int start, size_t len)
 {
-	int		i;
-	int		j;
 	char	*ptr;
+	size_t	i;
 
 	if (s == NULL)
 		return (NULL);
+	ptr = (char *)malloc(len + 1);
+	if (ptr == NULL)
+		return (NULL);
 	i = 0;
-	while (s[i] != '\0' && (s[i] == '\t' || s[i] == '\n' || s[i] == ' '))
+	while (i < len)
+	{
+		ptr[i] = s[start];
 		i++;
-	j = ft_strlen(s) - 1;
-	while (j > i && (s[j] == '\t' || s[j] == '\n' || s[j] == ' '))
-		j--;
-	ptr = ft_strsub(s, i, j - i + 1);
+		start++;
+	}
+	free(s);
+	ptr[i] = '\0';
 	return (ptr);
 }

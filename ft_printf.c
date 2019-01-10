@@ -6,12 +6,11 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 20:06:42 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/08 19:37:37 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/10 15:10:58 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include <stdio.h>
 
 int		ft_printf(const char *fmt, ...)
 {

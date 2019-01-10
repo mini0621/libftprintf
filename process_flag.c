@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 23:12:11 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/05 22:22:46 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/10 15:49:11 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,16 @@ char	*prcs_flags(t_printops *opt, char **s, int sign)
 	sp = opt->cnvrtsp;
 	char	*ret;
 
-	printf("min = %i\n", opt->width);
+	if (s == NULL || *s == NULL)
+		return (NULL);
+	if ((sp == 'd' || sp == 'i' || sp == 'o'|| sp == 'u'|| sp == 'x'|| sp == 'X')
+			&& (*s = prcs_precision(sp, s, opt->precision)) == NULL)
+		return (NULL);
 	if (sign > 0 && flags.sharp == '#' && (*s = prcs_sharp(sp, s)) == NULL)
 		return (NULL);
 	if (sign > 0 && flags.plus_sp != '\0' && (*s = prcs_plus(sp, s, flags.plus_sp)) == NULL)
 		return (NULL);
-	if (flags.min_0 == '0' && opt->width > 0 && (*s = prcs_zero(sp, s, opt->width)) == NULL)
+	if (flags.min_0 == '0' && opt->width > 0 && (*s = prcs_zero(sp, s, opt->width, &flags)) == NULL)
 		return (NULL);
 	if (opt->width > 0 && (*s = prcs_min(sp, s, opt->width, flags.min_0)) == NULL)
 		return (NULL);
@@ -54,17 +58,19 @@ char	*prcs_plus(char	sp, char **s, char c)
 {
 	char	*ret;
 	
-	if (sp == 'd' || sp == 'f')
+	if (sp == 'd' || sp == 'i' || sp == 'f')
 	{
 		ret = ft_strnew(ft_strlen(*s) + 1);
 		if (ret != NULL)
-			ft_memset(ret, '+', 1);
+		{
+			ft_memset(ret, c, 1);
+		}
 		return (ft_strjoinfree(&ret, s, 3));
 	}
 	return (*s);
 }
 
-char	*prcs_zero(char sp, char **s, int w)
+char	*prcs_zero(char sp, char **s, int w, t_flags *flags)
 {
 	char	*ret;
 
@@ -77,9 +83,13 @@ char	*prcs_zero(char sp, char **s, int w)
 		free(*s);
 		return (NULL);
 	}
-	if (**s == '-' || **s == '+')
+	if (flags->sharp == '#' && sp == 'x')
 	{
-		printf("strlen is %s, and the w is %i\n",*s, w);
+		ft_strncpy(ret, *s, 2);
+		ft_memset(ret + 2, '0', (w - ft_strlen(*s)) *sizeof(char));
+	}
+	else if (**s == '-' || **s == '+' || **s == ' ')
+	{
 		ft_strncpy(ret, *s, 1);
 		ft_memset(ret + 1, '0', (w - ft_strlen(*s)) *sizeof(char));
 		ft_strcat(ret, *s + 1);

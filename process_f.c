@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:59:51 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/09 19:11:12 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/10 18:37:17 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_double	*get_double(double n)
 		d->sign = 1;
 	//printf("first 16 bit is %04hx\n", c);
 	printf("first 16 bit is %04x\n", c >> 4);
-	d->expo = (((c & 0x7fff) >> 4 )-1023);
+	d->expo = (((c & 0x7fff) >> 4 ) - 1023);
 	d->frac = *((uint64_t*)&n);
 	d->frac = d->frac & 0x000fffffffffffff;
 	printf("63bit: %llx\n", d->frac);

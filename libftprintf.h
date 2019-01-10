@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:55:20 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/09 23:32:47 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/10 23:16:35 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,18 +95,27 @@ long double	ft_neg_power(int power);
 char		get_n_dig(long double n);
 long double round_ld(long double n, int precision);
 char	*ft_ldtolltoa(long double n, int precision);
+
 void	carry_frac(unsigned long long *frac10);
-unsigned long long *init_frac(uint64_t frac, short expo, char flag);
-void	add_frac(unsigned long long *a, unsigned long long **b);
-void	mult_frac(unsigned long long *frac, int a, int times);
-void	div_frac(unsigned long long *a, int times);
+unsigned long long *init_frac(uint64_t frac, short expo, int zero);
+int		add_frac(unsigned long long *a, unsigned long long **b);
+int		mult_frac(unsigned long long *frac, int a, int times, int zero);
+int		div_frac(unsigned long long *a, int times);
 char	*fractoa(unsigned long long *frac);
 char	*ft_ldtoa(t_double *n, int precision);
+char	*get_frac10(t_double *n);
+int		frac_expo_min(unsigned long long *frac);
+int		frac_expo(unsigned long long *frac);
+
+void	del_end0(char *s);
+char	*sub_integer(char *s, int point, int precision);
 
 char	*prcs_flags(t_printops *opt, char **s, int sign);
 char	*prcs_sharp(char sp, char **s);
 char	*prcs_plus(char	sp, char **s, char c);
-char	*prcs_zero(char sp, char **s, int w);
+char	*prcs_zero(char sp, char **s, int w, t_flags *flags);
 char	*prcs_min(char sp, char **s, int w, char min);
 
+char	*prcs_precision(char sp, char **s, int precision);
+char	*prcs_precision_end(char sp, char **s, int precision);
 #endif 

@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/26 23:23:49 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/10 18:40:07 by mnishimo         ###   ########.fr       */
+/*   Created: 2018/11/21 18:15:57 by mnishimo          #+#    #+#             */
+/*   Updated: 2019/01/10 17:08:35 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strtrim(char const *s)
+char	*ft_strndup(const char *s1, size_t n)
 {
-	int		i;
-	int		j;
+	size_t	len;
 	char	*ptr;
 
-	if (s == NULL)
+	len = ft_strlen(s1);
+	if (len > n )
+		len = n;
+	if ((ptr = ft_memalloc((len + 1))) == NULL)
 		return (NULL);
-	i = 0;
-	while (s[i] != '\0' && (s[i] == '\t' || s[i] == '\n' || s[i] == ' '))
-		i++;
-	j = ft_strlen(s) - 1;
-	while (j > i && (s[j] == '\t' || s[j] == '\n' || s[j] == ' '))
-		j--;
-	ptr = ft_strsub(s, i, j - i + 1);
+	ft_strncpy(ptr, s1, len);
 	return (ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 18:57:02 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/05 22:26:20 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/10 15:42:12 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,16 @@ t_printops	*readops(char **start)
 	{
 //		printf("hello :: *(*start + i) = %ccheck : %c\n", *(*start + i), opt->flag.sharp);
 		storeops(start, i, opt);
-		if (*(*start + i) <= '9' && *(*start + i) >= '1')
+		if ((*(*start + i) <= '9' && *(*start + i) >= '1') || *(*start + i) == '.')
 		{
+			if (*(*start + i) == '.')
+				i++;
 			while (*(*start + i) <= '9' && *(*start + i) >= '0')
 				i++;
 		}
 		else
 			i++;
-		}
+	}
 	opt->cnvrtsp = *(*start + i);
 	if (opt->precision == -1 && opt->cnvrtsp == 'f')
 		opt->precision = 6;

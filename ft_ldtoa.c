@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 15:21:57 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/09 23:32:51 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/10 23:24:56 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,60 +14,73 @@
 
 char	*ft_ldtoa(t_double *n, int precision)
 {
-	unsigned long long	*a;
-	unsigned long long	*b;
-	short		expo;
-	char		*ret;
+	char	*ret;
+	char	*integer;
+	short	p;
 
-	expo = n->expo;
-	if ((a = init_frac(n->frac, n->expo, 1)) == NULL)
+	if ((ret = get_frac10(n)) == NULL)
 		return (NULL);
-	if ((b = init_frac(n->frac, n->expo, 0)) == NULL)
+	printf("check %s\n", ret);
+	p = 0;
+	while (n->frac % 2 == 0)
 	{
-		free(a);
-		return (NULL);
+		n->frac = n->frac >> 1;
+		p--;
 	}
-	if (expo > 0)
+	p = ft_strlen(ret) - (52 + p - (short)(n->expo));
+	printf("p : %i", p);
+	if (p < 0)
+		p = 0;	
+	integer = sub_integer(ret, (int)p, precision);
+	if (precision == 0)
 	{
-		mult_frac(a, 10, 52);
-		mult_frac(a, 2, (int)expo);
-		mult_frac(b, 10, (int)expo);
-		mult_frac(b, 5, (int)(52 - expo));
+		free(ret);
+		return (integer);
 	}
+	if (p > 0)
+		ret = ft_strsubfree(ret,(int)p, precision);
 	else
 	{
-		mult_frac(a, 5, 52);
-		printf("a-1 %llu%llu%llu\n%llu%llu%llu\n%llu%llu%llu\n",a[18],a[17],a[16],a[15],a[14],a[13],a[12], a[11], a[10]);
-		mult_frac(a, 2, 52 + (int)expo);
-		printf("a-2 %llu%llu%llu\n%llu%llu%llu\n%llu%llu%llu\n",a[18],a[17],a[16],a[15],a[14],a[13],a[12], a[11], a[10]);
-		mult_frac(b, 5, 52);
-		printf("b-1 %llu %llu %llu %llu %llu %llu %llu %llu %llu\n",b[18],b[17],b[16],b[15],b[14],b[13],b[12], b[11], b[10]);
-		div_frac(b,(int)(-expo));
-		printf("b-2 %llu %llu %llu %llu %llu %llu %llu %llu %llu\n",b[16],b[15],b[14],b[13],b[12], b[11], b[10], b[9], b[8]);
+		free(ret);
+		ret = ft_strnew(0);
 	}
-	add_frac(a, &b);
-	ret = fractoa(a);
-	free(a);
+	if (ft_strlen(ret) < precision)
+		ret = prcs_precision_end('d', &ret, precision);
+	ret = ft_strjoinfree(&integer, &ret, 3);
 	return (ret);
 }
 
-char	*fractoa(unsigned long long *frac)
+void	del_end0(char *s)
 {
 	int	i;
-	char *ret;
-	char *s;
 
-	i = 19;
-	ret = ft_llutoa(frac[20], 10);
-	printf("check : %s ", ret);
+	i = ft_strlen(s) - 1;
 	while (i != 0)
 	{
-		s = ft_llutoa(frac[i], 10);
-		printf("%s ", s);
-		if ((ret = ft_strjoinfree(&ret, &s, 3)) == NULL)
-			return (NULL);
+		if (s[i] != '0')
+			return;
+		s[i] = '\0';
 		i--;
 	}
-	printf("\n");
+}
+
+char	*sub_integer(char *s, int point, int precision)
+{
+	int		i;
+	char	*ret;
+	char	*tmp;
+
+	i = 0;
+	while (i < point && s[i] == '0')
+		i++;
+	if (i == point)
+		ret = ft_strdup("0");
+	else if ((ret = ft_strsub(s, i, point - i)) == NULL)
+			return (NULL);
+	if (precision != 0)
+	{
+		tmp = ft_strdup(".");
+		ret = ft_strjoinfree(&ret, &tmp, 3);
+	}
 	return (ret);
 }
