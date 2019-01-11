@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 18:49:16 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/11 17:40:40 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/11 19:29:19 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ int		div_frac(unsigned long long *a, int times)
 			i--;
 		}
 		carry_frac(a);
-		e += shift_frac(a);
+		e += shift_frac_right(a);
 		times--;
 	}
 	return (e);
 }
 
-int		shift_frac(unsigned long long *a)
+int		shift_frac_right(unsigned long long *a)
 {
 	int	e;
 	int i;
@@ -47,6 +47,11 @@ int		shift_frac(unsigned long long *a)
 	while (i - e > -1)
 	{
 		a[i] = a[i - e];
+		i--;
+	}
+	while (i > -1)
+	{
+		a[i] = 0;
 		i--;
 	}
 	return (e);
@@ -103,6 +108,7 @@ void	mult_frac(unsigned long long *frac, int a, int times, int zero)
 		carry_frac(frac);
 		i++;
 	}
+	shift_frac_left(frac);
 }
 
 void	carry_frac(unsigned long long *frac10)
@@ -124,3 +130,26 @@ void	carry_frac(unsigned long long *frac10)
 		i++;
 	}
 }
+
+int		shift_frac_left(unsigned long long *a)
+{
+	int	e;
+	int i;
+	int	max;
+
+	max = 100;
+	while (max > 0 && a[max] == 0)
+		max--;
+	e = 0;
+	while (e < 100 && a[e] == 0)
+		e++;
+	i = 0;
+	while (i + e < 100 && max - i- e < 6)
+	{
+		a[i] = a[i + e];
+		i++;
+	}
+	return (e);
+}
+
+

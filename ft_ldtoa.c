@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 15:21:57 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/11 18:29:24 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/11 19:30:32 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	del_end0(char *s)
 ; 
 	i = ft_strlen(s)- 1;
 	min = 0;
-	while (min > 0 && s[min] == '0')
+	while (min < i  && s[min] == '0')
 		min++;
 	while (i > min + 52 && s[i] == '0')
 	{

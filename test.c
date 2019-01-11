@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:08:51 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/11 18:29:28 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/11 19:30:38 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <math.h>
@@ -64,7 +64,7 @@ printf("ft: %.100Lf\n", );
 //	printf("returned : %i\n", ret);
 
 	
-long double a = 1.1e+300;
+long double a = 1.0;
 printf("real1 is %.100Lf\n", a);	
 ft_printf("real1 is %.100f\n", (double)a);	
 

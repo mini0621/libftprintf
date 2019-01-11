@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 18:49:16 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/11 18:29:26 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/11 19:30:36 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ unsigned long long *init_frac(uint64_t frac, short expo, int zero)
 	ft_bzero(a, sizeof(unsigned long long) * 101);
 	if (frac == 0)
 	{
-		a[zero + 6] = 10000;
+		a[zero + 7] = 10000;
 		return (a);
 	}
 	a[zero] = i % 100000000 + frac % 100000000;
@@ -48,7 +48,7 @@ char	*get_frac10(t_double *n)
 
 	e = 0;
 	expo = n->expo;
-	zero = (expo >= 0) ? 10:95;
+	zero = (expo >= 0) ? 0:95;
 		a = init_frac(n->frac, n->expo, zero);
 	if (a == NULL)
 		return (NULL);
