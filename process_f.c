@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:59:51 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/11 18:33:01 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/12 00:37:46 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,24 @@ char	*prcs_db(va_list *ap, t_printops *opt, int *sign)
 {
 	double	arg;
 	t_double	*n;
-	t_lm	lm;
 	char	*ret;
-
+	char	*s;
 
 	arg = va_arg(*ap, double);
 	n = get_double(arg);
 	*sign = (arg == 0) ?  0:n->sign;
 	printf("n is... sign:%d, expo is %hd, and fra is %lld\n", n->sign, n->expo, n->frac);
-	if (opt->precision < 7 && arg < 100000000 && arg > -10000000)
-		ret = ft_ldtolltoa((long double)arg, opt->precision);
-	else if (n->expo == 1024)
+	if (n->expo == 1024)
 		ret = sp_double(n->sign ,n->frac);
+	else if ((opt->precision < 7 && arg < 100000000 && arg > -10000000))
+		ret = ft_ldtolltoa((long double)arg, opt->precision);
 	else
 		ret = ft_ldtoa(n, opt->precision);
+	if (*sign < 0)
+	{
+		s = ft_strdup("-");
+		ret = ft_strjoinfree(&s, &ret, 3);
+	}
 	free(n);
 	return(ret);
 }

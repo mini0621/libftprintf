@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 18:49:16 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/11 19:30:36 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/12 00:55:15 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,24 @@ unsigned long long *init_frac(uint64_t frac, short expo, int zero)
 	// 		// where 99999999 * 10 can be stored
 	// 			// this mean ret can hold 15 * 8 digits	
 	
-	i = 4503599627370496;
 	ft_bzero(a, sizeof(unsigned long long) * 101);
 	if (frac == 0)
 	{
 		a[zero + 7] = 10000;
 		return (a);
 	}
+	if (expo == -1023)
+	{
+		a[zero + 3] = 99999999;
+		a[zero + 4] = 99999;
+		i = 9977795539507496;
+	}
+	else
+		i = 4503599627370496;
 	a[zero] = i % 100000000 + frac % 100000000;
 	a[zero + 1] = i / 100000000 + frac / 100000000;
 	a[zero + 2] = frac / 10000000000000000;
 	carry_frac(a);
-	//	printf("init frac is %llu%llu%llu\n", a[12],a[11], a[10]);
 	return (a);
 }
 
@@ -48,10 +54,15 @@ char	*get_frac10(t_double *n)
 
 	e = 0;
 	expo = n->expo;
-	zero = (expo >= 0) ? 0:95;
+	zero = (expo >= 0) ? 50:50;
 		a = init_frac(n->frac, n->expo, zero);
 	if (a == NULL)
 		return (NULL);
+	if ((int)n->expo == -1023)
+	{
+		e = div_frac(a, 1022);
+		return (fractoa(a, e));
+	}
 	if (n->frac != 0)
 		mult_frac(a, 5, 52, zero);
 	if (expo > 0)
@@ -87,7 +98,6 @@ char	*fractoa(unsigned long long *frac, int e)
 		i--;
 	}
 	printf("\n");
-	del_end0(ret);
 	free(frac);
 	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:55:20 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/11 19:22:26 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/11 22:09:23 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ char	*ft_ldtoa(t_double *n, int precision);
 char	*get_frac10(t_double *n);
 char	*round_ldchar(char **s, int index);
 
-void	del_end0(char *s);
+int	skip_zeros(char *s);
 char	*sub_integer(char *s, int point, int precision);
 
 char	*prcs_flags(t_printops *opt, char **s, int sign);

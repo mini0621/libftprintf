@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 18:49:16 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/11 19:29:19 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/12 00:55:17 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,27 +29,30 @@ int		div_frac(unsigned long long *a, int times)
 			i--;
 		}
 		carry_frac(a);
-		e += shift_frac_right(a);
+		e += shift_frac_left(a);
 		times--;
 	}
 	return (e);
 }
 
-int		shift_frac_right(unsigned long long *a)
+int		shift_frac_left(unsigned long long *a)
 {
 	int	e;
 	int i;
 
-	e = 0;
-	while (100 - e > 0 && a[100 - e] == 0)
-		e++;	
+	e = 100;
+	while (e >= 0 && a[e] == 0)
+		e--;
+	if (e == 100)
+		return (0);
 	i = 100;
-	while (i - e > -1)
+	while (e >= 0)
 	{
-		a[i] = a[i - e];
+		a[i] = a[e];
 		i--;
+		e--;
 	}
-	while (i > -1)
+	while (i >= 0)
 	{
 		a[i] = 0;
 		i--;
@@ -108,7 +111,6 @@ void	mult_frac(unsigned long long *frac, int a, int times, int zero)
 		carry_frac(frac);
 		i++;
 	}
-	shift_frac_left(frac);
 }
 
 void	carry_frac(unsigned long long *frac10)
@@ -131,22 +133,26 @@ void	carry_frac(unsigned long long *frac10)
 	}
 }
 
-int		shift_frac_left(unsigned long long *a)
+int		shift_frac_right(unsigned long long *a)
 {
 	int	e;
 	int i;
-	int	max;
 
-	max = 100;
-	while (max > 0 && a[max] == 0)
-		max--;
 	e = 0;
-	while (e < 100 && a[e] == 0)
+	while (e <= 100 && a[e] == 0)
 		e++;
-	i = 0;
-	while (i + e < 100 && max - i- e < 6)
+	if (e < 10)
+		return (0);
+	i = 10;
+	while (e <= 100)
 	{
-		a[i] = a[i + e];
+		a[i] = a[e];
+		i++;
+		e++;
+	}
+	while (i <= 100)
+	{
+		a[i] = 0;
 		i++;
 	}
 	return (e);
