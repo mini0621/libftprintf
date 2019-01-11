@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:55:20 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/11 00:51:36 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/11 18:00:55 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,10 @@ char	*prcs_p(va_list *ap, t_printops *opt, size_t *l);
 char	*prcs_s(va_list *ap, t_printops *opt, size_t *l);
 char	*prcs_c(va_list *ap, t_printops *opt, size_t *l);
 char	*prcs_f(va_list *ap, t_printops *opt, size_t *l);
-char	*prcs_ld(va_list *ap, t_printops *opt);
-char	*prcs_db(va_list *ap, t_printops *opt);
+char	*prcs_ld(va_list *ap, t_printops *opt, int *sign);
+char	*prcs_db(va_list *ap, t_printops *opt, int *sign);
+char	*sp_double(int sign, uint64_t frac);
+
 long long ft_llpower(long long base, long long power);
 char	*ft_lltoa(long long n);
 unsigned long long ft_lluporwer(unsigned long long base, unsigned long long power);

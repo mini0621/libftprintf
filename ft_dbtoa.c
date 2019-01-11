@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 15:21:57 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/11 18:29:24 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/11 17:56:52 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,13 @@ char	*ft_ldtoa(t_double *n, int precision)
 	if ((ret = get_frac10(n)) == NULL)
 		return (NULL);
 	p = 0;
-	if (n->frac != 0)
+	while (n->frac % 2 == 0)
 	{
-		while (n->frac % 2 == 0)
-		{
-			n->frac = n->frac >> 1;
-			p--;
-		}
+		n->frac = n->frac >> 1;
+		p--;
 	}
 	p = (short)ft_strlen(ret) - (52 + p - (n->expo));
+	fafprintf("check : %s\n", ret);
 	printf("p : %i", p);
 	if (p < 0)
 	{
@@ -77,14 +75,14 @@ char	*round_ldchar(char **s, int index)
 void	del_end0(char *s)
 {
 	int	i;
-	int	min;
-; 
-	i = ft_strlen(s)- 1;
-	min = 0;
-	while (min > 0 && s[min] == '0')
-		min++;
-	while (i > min + 52 && s[i] == '0')
+	int	len;
+
+	len = ft_strlen(s);
+	i = len - 1;
+	while (len - i < 80 && i != 0)
 	{
+		if (s[i] != '0')
+			return;
 		s[i] = '\0';
 		i--;
 	}

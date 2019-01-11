@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 18:49:16 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/11 00:06:53 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/11 18:29:26 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,15 @@ unsigned long long *init_frac(uint64_t frac, short expo, int zero)
 	// 2^52 = 45035996 27370496
 	// 	// 1 long holds 8 digits, max_long = 4,294,967,295
 	// 		// where 99999999 * 10 can be stored
-	// 			// this mean ret can hold 15 * 8 digits
+	// 			// this mean ret can hold 15 * 8 digits	
+	
 	i = 4503599627370496;
 	ft_bzero(a, sizeof(unsigned long long) * 101);
+	if (frac == 0)
+	{
+		a[zero + 6] = 10000;
+		return (a);
+	}
 	a[zero] = i % 100000000 + frac % 100000000;
 	a[zero + 1] = i / 100000000 + frac / 100000000;
 	a[zero + 2] = frac / 10000000000000000;
@@ -46,10 +52,11 @@ char	*get_frac10(t_double *n)
 		a = init_frac(n->frac, n->expo, zero);
 	if (a == NULL)
 		return (NULL);
-	mult_frac(a, 5, 52, zero);
+	if (n->frac != 0)
+		mult_frac(a, 5, 52, zero);
 	if (expo > 0)
 		 mult_frac(a, 2, (int)expo, zero);
-	else
+	else if (expo < 0)
 		e = div_frac(a, -(int)(expo));
 	return (fractoa(a, e));
 }

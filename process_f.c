@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:59:51 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/11 00:23:46 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/11 17:43:43 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,38 +17,41 @@ char	*prcs_f(va_list *ap, t_printops *opt, size_t *l)
 	long double	arg;
 	char		*ret;
 	t_lm		lm;
-	lm = opt->lmod;
+	int			sign;
 
+	lm = opt->lmod;
 	ret = NULL;
 	if (lm == 5)
-		ret = prcs_ld(ap, opt);
+		ret = prcs_ld(ap, opt, &sign);
 	else
-		ret = prcs_db(ap, opt);
+		ret = prcs_db(ap, opt, &sign);
+	ret = prcs_flags(opt, &ret, sign);
 	if (ret == NULL)
 		return (NULL);
 	*l = ft_strlen(ret);
 	return (ret);
 }
 
-char	*prcs_ld(va_list *ap, t_printops *opt)
+char	*prcs_ld(va_list *ap, t_printops *opt, int *sign)
 {
 	long double	arg;
 	t_double	*n;
 	t_lm		lm;
-	//take fra and exp and check if -inf and inf and Nan
-	//nan is when exp == 0x7fff and fra isnot 0
-	//-inf is exp == 0xffff (and fra is 0?)
-	//is nan with exp == 0xffff is a nan? 
+	char		*ret;
+	
 	arg = va_arg(*ap, long double);
 	n = get_ldouble(arg);
-	printf("ld is... sign:%i, expo is %hd, and fra is %llx\n", n->sign, n->expo, n->frac);
 	free(n);
 	if (opt->precision < 7 && arg < 100000000 && arg >-10000000)
 		return(ft_ldtolltoa(arg, opt->precision));
+	else if (n->expo == 1024)
+		ret = sp_double(n->sign ,n->frac);
+	else
+		ret = ft_ldtoa(n, opt->precision);
 	return (NULL);
 }
 
-char	*prcs_db(va_list *ap, t_printops *opt)
+char	*prcs_db(va_list *ap, t_printops *opt, int *sign)
 {
 	double	arg;
 	t_double	*n;
@@ -58,9 +61,12 @@ char	*prcs_db(va_list *ap, t_printops *opt)
 
 	arg = va_arg(*ap, double);
 	n = get_double(arg);
+	*sign = (arg == 0) ?  0:n->sign;
 	printf("n is... sign:%d, expo is %hd, and fra is %lld\n", n->sign, n->expo, n->frac);
 	if (opt->precision < 7 && arg < 100000000 && arg > -10000000)
 		ret = ft_ldtolltoa((long double)arg, opt->precision);
+	else if (n->expo == 1024)
+		ret = sp_double(n->sign ,n->frac);
 	else
 		ret = ft_ldtoa(n, opt->precision);
 	free(n);
@@ -105,4 +111,13 @@ t_double	*get_ldouble(long double n)
 	d->frac = *((uint64_t*)&n);
 	return (d);
 }
-//if (c == 0x7fff || c == 0xffff)
+
+char	*sp_double(int sign, uint64_t frac)
+{
+	if (frac != 0)
+		return (ft_strdup("nan"));
+	else if (sign > 0)
+		return (ft_strdup("inf"));
+	return (ft_strdup("-inf"));
+}
+

@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 23:12:11 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/10 15:49:11 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/11 17:52:01 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@ char	*prcs_plus(char	sp, char **s, char c)
 char	*prcs_zero(char sp, char **s, int w, t_flags *flags)
 {
 	char	*ret;
+	size_t		i;
 
-	if (sp == 'c' || sp == 's' || sp == 'p')
-		return (*s);
-	if (ft_strlen(*s) >= w)
+	if (sp == 'c' || sp == 's' || sp == 'p' || ft_strlen(*s) >= w
+			|| ft_strchr(*s, 'n') != NULL)
 		return (*s);
 	if ((ret = ft_strnew(w)) == NULL)
 	{
@@ -84,21 +84,15 @@ char	*prcs_zero(char sp, char **s, int w, t_flags *flags)
 		return (NULL);
 	}
 	if (flags->sharp == '#' && sp == 'x')
-	{
-		ft_strncpy(ret, *s, 2);
-		ft_memset(ret + 2, '0', (w - ft_strlen(*s)) *sizeof(char));
-	}
+		i = 2;
 	else if (**s == '-' || **s == '+' || **s == ' ')
-	{
-		ft_strncpy(ret, *s, 1);
-		ft_memset(ret + 1, '0', (w - ft_strlen(*s)) *sizeof(char));
-		ft_strcat(ret, *s + 1);
-	}
+		i = 1;
 	else
-	{
-		ft_memset(ret, '0', (w - ft_strlen(*s)) *sizeof(char));
-		ft_strcat(ret, *s);
-	}
+		i = 0;
+	if (i != 0)	
+		ft_strncpy(ret, *s, i);
+	ft_memset(ret + i, '0', (w - ft_strlen(*s)) *sizeof(char));
+	ft_strcat(ret, *s + i);
 	free(*s);
 	return (ret);
 }
