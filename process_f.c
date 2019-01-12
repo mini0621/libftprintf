@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:59:51 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/12 00:37:46 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/12 17:11:57 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ t_double	*get_double(double n)
 	d->expo = (((c & 0x7fff) >> 4 ) - 1023);
 	d->frac = *((uint64_t*)&n);
 	d->frac = d->frac & 0x000fffffffffffff;
+	if ((short)d->expo != -1023)
+		d->frac = d->frac | 0x0010000000000000;
 	printf("63bit: %llx\n", d->frac);
 	return (d);
 }
