@@ -6,12 +6,11 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:47:00 by mnishimo          #+#    #+#             */
-/*   Updated: 2018/12/27 19:58:50 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/12 22:21:42 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include "libft/libft.h"
 
 long long	ft_llpower(long long base, long long power)
 {
