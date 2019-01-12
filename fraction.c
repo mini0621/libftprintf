@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 18:49:16 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/12 00:55:15 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/12 01:00:46 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ unsigned long long *init_frac(uint64_t frac, short expo, int zero)
 {
 	unsigned long long	*a;
 	uint64_t			i;
-
+//TODO make init frac ld
+//
 	if ((a = (unsigned long long*)malloc(sizeof(unsigned long long) * 101)) == NULL)
 		return (NULL);
 	// 2^52 = 45035996 27370496
@@ -60,6 +61,7 @@ char	*get_frac10(t_double *n)
 		return (NULL);
 	if ((int)n->expo == -1023)
 	{
+		//subnormal TODO
 		e = div_frac(a, 1022);
 		return (fractoa(a, e));
 	}
