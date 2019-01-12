@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 18:49:16 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/12 17:03:06 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/12 19:50:16 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,11 @@ void		add_frac(unsigned long long *a, unsigned long long **b)
 	free(*b);
 }
 
-void	mult_frac(unsigned long long *frac, int a, int times, int zero)
+void	mult_frac(unsigned long long *frac, int a, int times)
 {
 	int	i;
 	int	index;
+	int	zero = 50;
 
 	i = 0;
 	while (i < times)

@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:59:51 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/12 19:09:43 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/12 22:01:43 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,16 @@ char	*prcs_db(va_list *ap, t_printops *opt, int *sign)
 	char	*s;
 
 	arg = va_arg(*ap, double);
-	n = get_double(arg);
+	if ((n = get_double(arg)) == NULL)
+		return (NULL);
 	*sign = (arg == 0) ?  0:n->sign;
-	printf("n is... sign:%d, expo is %hd, and fra is %lld\n", n->sign, n->expo, n->frac);
+//	printf("n is... sign:%d, expo is %hd, and fra is %lld\n", n->sign, n->expo, n->frac);
 	if (n->expo == 1024)
 		ret = sp_double(n->sign ,n->frac);
 	else if (arg == 0 || (opt->precision < 7 && arg < 100000000 && arg > -10000000))
 		ret = ft_ldtolltoa((long double)arg, opt->precision);
 	else
-		ret = ft_ldtoa(n, opt->precision);
+		ret = ft_dbtoa(n, opt->precision);
 	if (*sign < 0)
 	{
 		s = ft_strdup("-");
@@ -77,7 +78,7 @@ t_double	*get_double(double n)
 	d->frac = d->frac & 0x000fffffffffffff;
 	if ((short)d->expo != -1023)
 		d->frac = d->frac | 0x0010000000000000;
-	printf("63bit: %llx\n", d->frac);
+//	printf("63bit: %llx\n", d->frac);
 	return (d);
 }
 

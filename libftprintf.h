@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:55:20 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/12 19:09:41 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/12 20:36:36 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,17 +99,20 @@ long double round_ld(long double n, int precision);
 char	*ft_ldtolltoa(long double n, int precision);
 
 void	carry_frac(unsigned long long *frac10);
-unsigned long long *init_frac(uint64_t frac, short expo, int zero);
 void		add_frac(unsigned long long *a, unsigned long long **b);
-void	mult_frac(unsigned long long *frac, int a, int times, int zero);
+void	mult_frac(unsigned long long *frac, int a, int times);
 int		div_frac(unsigned long long *a, int times);
 int			shift_frac_right(unsigned long long *a);
 int			shift_frac_left(unsigned long long *a);
 unsigned long long get_mincarry(unsigned long long *a, unsigned long long carry);
+
 char	*fractoa(unsigned long long *frac, int e);
+unsigned long long *init_frac(uint64_t frac, short expo, int frac_bits);
+char	*get_frac10(t_double *n, int frac_bits, int subnormal);
 
 char	*ft_ldtoa(t_double *n, int precision);
-char	*get_frac10(t_double *n);
+char	*ft_dbtoa(t_double *n, int precision);
+int		get10th_expo(uint16_t expo);
 int		round_s(char **s, int point, int precision);
 int		skip_zeros(char *s);
 char	*sub_integer(char **s, int point, int precision);
@@ -122,4 +125,5 @@ char	*prcs_min(char sp, char **s, int w, char min);
 
 char	*prcs_precision(char sp, char **s, int precision);
 char	*prcs_precision_end(char sp, char **s, int precision);
+
 #endif 
