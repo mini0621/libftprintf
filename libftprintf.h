@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:55:20 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/11 22:09:23 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/12 19:09:41 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,12 +107,12 @@ int			shift_frac_right(unsigned long long *a);
 int			shift_frac_left(unsigned long long *a);
 unsigned long long get_mincarry(unsigned long long *a, unsigned long long carry);
 char	*fractoa(unsigned long long *frac, int e);
+
 char	*ft_ldtoa(t_double *n, int precision);
 char	*get_frac10(t_double *n);
-char	*round_ldchar(char **s, int index);
-
-int	skip_zeros(char *s);
-char	*sub_integer(char *s, int point, int precision);
+int		round_s(char **s, int point, int precision);
+int		skip_zeros(char *s);
+char	*sub_integer(char **s, int point, int precision);
 
 char	*prcs_flags(t_printops *opt, char **s, int sign);
 char	*prcs_sharp(char sp, char **s);

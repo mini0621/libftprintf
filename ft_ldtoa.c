@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 15:21:57 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/12 17:01:36 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/12 19:08:39 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,70 +36,48 @@ char	*ft_ldtoa(t_double *n, int precision)
 	char	*ret;
 	char	*integer;
 	int		p;
-	int		len;
 
 	if ((ret = get_frac10(n)) == NULL)
 		return (NULL);
-//	printf("check :%s\n", ret);
+	printf("check :%s\n", ret);
 	p = get10th_expo(n->expo);
+	ret = ft_strsubfree(ret, skip_zeros(ret), p + precision + 1);
+	printf("check2 :%s\n", ret);
 	printf("p : %i\n", p);
-	if (p >= 0)
-		ret = ft_strsubfree(ret, skip_zeros(ret), p + precision);
-	//printf("check2 :%s\n", ret);
-	len = ft_strlen(ret);
-	if (p < 0)
-	{
-		integer = ft_strnew(-p);
-		ft_memset(integer, '0', -p);
-		ret = ft_strjoinfree(&integer, &ret, 3);
-		p = 0;
-	}
-	//printf("check3 :%s\n", ret);
-	if (p > len)
-	{
-		integer = ft_strnew(p - len);
-		ft_memset(integer, '0', p - len);
-		ret = ft_strjoinfree(&ret, &integer, 3);
-	}	
-
-//	printf("check4 :%s\n", ret);
-	if (p + precision < len)
-		ret = round_ldchar(&ret, p + precision - 1);
-//	printf("p : %i\n", p);
-	integer = sub_integer(ret, p, precision);
-//	printf("check5 ret:%s\ncheck5 int:%s\n", ret, integer);
+	integer = sub_integer(&ret, p, precision);
 	if (precision == 0)
-	{
-		free(ret);
 		return (integer);
-	}
-	ret = ft_strsubfree(ret,(int)p + 1, precision);
+	printf("check3 :%s\n", ret);	
+	ret = ft_strsubfree(ret, 0, precision);
 	if (ft_strlen(ret) < precision)
 		ret = prcs_precision_end('d', &ret, precision);
+	printf("check5 ret:%s\ncheck5 int:%s\n", ret, integer);
 	ret = ft_strjoinfree(&integer, &ret, 3);
 	return (ret);
 }
 
-char	*round_ldchar(char **s, int index)
+int round_s(char **s, int	point, int precision)
 {
-	char	*ret;
+	int	index;
 
-	if (ft_strlen(*s) == index)
-		return (*s);
+	index =  (point < 0) ? precision : point + precision;
+	if (ft_strlen(*s) <= index + 1)
+		return (0);
 	if (*(*s + index + 1) < '5')
-		return (*s);
+		return (0);
 	while (index != 0)
 	{
 		if (*(*s + index) != '9')
 		{
 			*(*s + index) += 1;
-			return (*s);
+			return (0);
 		}
 		*(*s + index) = '0';
 		index--;
 	}
-	ret = ft_strdup("1");
-	return (ft_strjoinfree(&ret, s, 3));
+	if (index == 0)
+		return (1);
+	return (0);
 }
 
 int	skip_zeros(char *s)
@@ -112,23 +90,30 @@ int	skip_zeros(char *s)
 	return (i);
 }
 
-char	*sub_integer(char *s, int point, int precision)
+char	*sub_integer(char **s, int point, int precision)
 {
 	int		i;
 	char	*ret;
 	char	*tmp;
-
-	if (point == 0)
+ 
+	if (point < 0)
 	{
-		ret = ft_strnew(1);
-		ret[0] = *s;
+		tmp = ft_strnew(-point);
+		ft_memset(tmp, '0', -point);
+		*s = ft_strjoinfree(&tmp, s, 3);
 	}
-	else if ((ret = ft_strsub(s, 0, point + 1)) == NULL)
+ 	if (round_s(s, point, precision) == 1)
+		ret = ft_strdup("1");
+	else if (point == 0)
+		ret = ft_strdup("0");
+	else if ((ret = ft_strsub(*s, 0, point)) == NULL)
 		return (NULL);
 	if (precision != 0)
 	{
 		tmp = ft_strdup(".");
 		ret = ft_strjoinfree(&ret, &tmp, 3);
 	}
+	else
+		free(*s);
 	return (ret);
 }
