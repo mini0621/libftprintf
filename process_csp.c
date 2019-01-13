@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:58:39 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/10 14:55:23 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/13 16:53:14 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ char	*prcs_s(va_list *ap, t_printops *opt, size_t *l)
 
 char	*prcs_p(va_list *ap, t_printops *opt, size_t *l)
 {
-	//TODO
-/*	char		*ret;
+	char		*ret;
 	unsigned long long arg;
 
 	arg = va_arg(*ap, long long);
@@ -46,6 +45,4 @@ char	*prcs_p(va_list *ap, t_printops *opt, size_t *l)
 		return (NULL);
 	*l = ft_strlen(ret);
 	return (ret);
-	*/
-	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:47:00 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/12 22:21:42 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/13 16:57:55 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,13 @@ char		*ft_llutoa(unsigned long long n, unsigned int base)
 		return (ft_strdup("0"));
 	if ((rep = create_base(base)) == NULL)
 		return (NULL);
-	while (n / ft_llpower(base, i) != 0)
+		printf("hello i is 9 then %lld\n", ft_llupower(base, 9));
+	while ((unsigned long long)(n / ft_llupower(base, i)) > 1)
+	{
+		printf("hello i is %i\n", i);
+		i++;
+	}
+	if (n / ft_llupower(base, i) == 1)
 		i++;
 	if ((ptr = ft_strnew(i)) == NULL)
 		return (NULL);

@@ -6,10 +6,9 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:08:51 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/13 02:07:23 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/13 16:58:06 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <math.h>
 #include "libftprintf.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -66,8 +65,8 @@ printf("ft: %.100Lf\n", );
 	
 long double a = -1.933870e+37L;
 double b = 0.101;
-printf("real1 is %Le\n", a);	
-ft_printf("ftft1 is %Le\n", a);	
+//printf("real1 is %Le\n");	
+ft_printf("%llx", 9223372036854775807);	
 
 
 	return (0);

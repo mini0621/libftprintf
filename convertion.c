@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 20:38:25 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/13 00:15:50 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/13 15:50:15 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,24 @@ char	*convert(va_list *ap, char **start, size_t *l)
 
 	opt = readops(start);
 	if (opt->cnvrtsp == '%')
-	{
-		*l = 1;
-		return (ft_strdup("%"));
-	}
+		return (prcs_percent(opt, l));
 	if ((prcs = getprcsf(opt)) == NULL)
 		return (NULL);
 	ret = (*prcs)(ap, opt, l);
 	return (ret);
+}
+
+char	*prcs_percent(t_printops *opt, size_t *l)
+{
+	char	*ret;
+
+	if ((ret = ft_strdup("%")) == NULL)
+		return (NULL);
+	prcs_flags(opt, &ret, 0);
+	if (ret == NULL)
+		return (NULL);
+	*l = ft_strlen(ret);
+	return(ret);
 }
 
 t_prcs_fp	getprcsf(t_printops *opt)

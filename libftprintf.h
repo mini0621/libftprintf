@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:55:20 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/13 01:49:58 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/13 16:23:18 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ char				*join_cnvrt(char **output, char **start, va_list *ap, size_t *len);
 
 char				*convert(va_list *ap, char **start, size_t *l);
 t_prcs_fp			getprcsf(t_printops *opt);
+char				*prcs_percent(t_printops *opt, size_t *l);
 
 int 				is_cnvrtsp(char c);
 t_printops			*initoption(void);

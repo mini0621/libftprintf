@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:59:51 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/13 01:24:56 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/13 14:55:53 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ t_double	*get_ldouble(long double n)
 
 	if ((d = (t_double *)malloc(sizeof(t_double))) == NULL)
 		return (NULL);
-	if ((c = *((uint16_t*)&n + 4)) > 0xefff)
+	if ((short)(c = *((uint16_t*)&n + 4)) < 0)
 		d->sign = -1;
 	else
 		d->sign = 1;
-	//printf("first 16 bit is %04hx\n", c);
+	//printf("first 16 bit is %04hd\n", c);
 	d->expo = (c & 0x7fff) - 16383;
 	d->frac = *((uint64_t*)&n);
 	//printf("frac = %llx\n", d->frac);

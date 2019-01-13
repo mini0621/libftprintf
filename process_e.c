@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 18:00:27 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/13 02:07:06 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/13 14:55:51 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ char	*prcs_eld(va_list *ap, t_printops *opt, int *sign)
 	else
 		return (normalize(NULL, 0, 0, 1));
 	ret = normalize(&ret, get10th_expo(n->expo), opt->precision, 0);
-		printf("hi sign %i", *sign);
 	if (*sign < 0)
 	{
 		s = ft_strdup("-");

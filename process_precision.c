@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 14:06:47 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/10 19:26:11 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/13 15:22:46 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*prcs_precision(char sp, char **s, int precision)
 {
 	char	*ret;
 
-	if (ft_strlen(*s) >= precision)
+	if (precision == -1 || ft_strlen(*s) >= precision)
 		return (*s);
 	if ((ret = ft_strnew(precision)) == NULL)
 	{
