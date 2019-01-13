@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 20:06:42 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/13 16:55:15 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/13 20:24:47 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*prcs_d(va_list *ap, t_printops *opt, size_t *l)
 		arg = (signed char)(va_arg(*ap, int));
 	else if (lm == 3)
 		arg = (long long)(va_arg(*ap, long));
-	else if (lm == 4)
+	else if (lm == 4 || lm == 6)
 		arg = (long long)(va_arg(*ap, long long));
 	else
 		arg = (int)va_arg(*ap, int);
@@ -53,7 +53,7 @@ char	*prcs_o(va_list *ap, t_printops *opt, size_t *l)
 		arg = (unsigned char)(va_arg(*ap,unsigned int));
 	else if (lm == 3)
 		arg = (unsigned long)(va_arg(*ap, unsigned long));
-	else if (lm == 4)
+	else if (lm == 4 || lm == 6)
 		arg = (unsigned long long)(va_arg(*ap, unsigned long long));
 	else
 		arg = (unsigned int)va_arg(*ap, unsigned int);
@@ -78,7 +78,7 @@ char	*prcs_u(va_list *ap, t_printops *opt, size_t *l)
 		arg = (unsigned char)(va_arg(*ap,unsigned int));
 	else if (lm == 3)
 		arg = (unsigned long)(va_arg(*ap, unsigned long));
-	else if (lm == 4)
+	else if (lm == 4 || lm == 6)
 		arg = (unsigned long long)(va_arg(*ap, unsigned long long));
 	else
 		arg = (unsigned int)va_arg(*ap, unsigned int);	
@@ -103,11 +103,12 @@ char	*prcs_x(va_list *ap, t_printops *opt, size_t *l)
 		arg = (unsigned char)(va_arg(*ap,unsigned int));
 	else if (lm == 3)
 		arg = (unsigned long)(va_arg(*ap, unsigned long));
-	else if (lm == 4)
+	else if (lm == 4 || lm == 6)
 		arg = (unsigned long long)(va_arg(*ap, unsigned long long));
 	else
 		arg = (unsigned int)va_arg(*ap, unsigned int);
 	sign = (arg > 0) ? 1:0;
+	//printf("arg : %llu\n", arg);
 	if ((ret = ft_llutoa(arg, 16)) == NULL || prcs_flags(opt, &ret, sign) == NULL)
 		return (NULL);
 	if (opt->cnvrtsp == 'X')

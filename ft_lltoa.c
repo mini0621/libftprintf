@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:47:00 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/13 16:57:55 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/13 18:24:20 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ long long	ft_llpower(long long base, long long power)
 		return (1);
 	if (power < 0)
 		return (1);
-	return (base * ft_power(base, power - 1));
+	return (base * ft_llpower(base, power - 1));
 }
 
 char		*ft_lltoa(long long n)
@@ -66,7 +66,7 @@ unsigned long long	ft_llupower(unsigned long long base, long long power)
 		return (1);
 	if (power < 0)
 		return (1);
-	return (base * ft_power(base, power - 1));
+	return (base * ft_llupower(base, power - 1));
 }
 
 char		*ft_llutoa(unsigned long long n, unsigned int base)
@@ -80,13 +80,10 @@ char		*ft_llutoa(unsigned long long n, unsigned int base)
 		return (ft_strdup("0"));
 	if ((rep = create_base(base)) == NULL)
 		return (NULL);
-		printf("hello i is 9 then %lld\n", ft_llupower(base, 9));
-	while ((unsigned long long)(n / ft_llupower(base, i)) > 1)
-	{
-		printf("hello i is %i\n", i);
+	while (i < 16 && n / ft_llupower(base, i) > 1)
 		i++;
-	}
-	if (n / ft_llupower(base, i) == 1)
+//	printf("i is %llu\n", i);
+	if (i < 16 && n / ft_llupower(base, i) == 1)
 		i++;
 	if ((ptr = ft_strnew(i)) == NULL)
 		return (NULL);

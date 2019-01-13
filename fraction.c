@@ -6,16 +6,15 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 18:49:16 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/13 01:45:26 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/13 18:59:21 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-unsigned long long *init_frac(uint64_t frac, short expo, int frac_bits)
+unsigned long long *init_frac(uint64_t frac)
 {
 	unsigned long long	*a;
-	uint64_t			i;
 	int	zero = 50;
 
 	if ((a = (unsigned long long*)malloc(sizeof(unsigned long long) * 101)) == NULL)
@@ -43,7 +42,7 @@ char	*get_frac10(t_double *n , int frac_bits, int subnormal)
 		return (NULL);
 	e = 0;
 	expo = n->expo;
-		a = init_frac(n->frac, n->expo, frac_bits);
+		a = init_frac(n->frac);
 	if (a == NULL)
 		return (NULL);
 	if (n->frac != 0)
@@ -80,7 +79,7 @@ char	*fractoa(unsigned long long *frac, int e)
 	while (i != 0)
 	{
 		s = ft_llutoa(frac[i], 10);
-		s = prcs_precision( 'd', &s, 8);
+		s = prcs_precision(&s, 8);
 	//	printf("%s ", s);
 		if ((ret = ft_strjoinfree(&ret, &s, 3)) == NULL)
 			return (NULL);

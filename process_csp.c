@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:58:39 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/13 16:53:14 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/13 20:37:52 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,39 @@
 char	*prcs_c(va_list *ap, t_printops *opt, size_t *l)
 {
 	char	c;
-	char	*ptr;
+	char	*ret;
+	char	*tmp;
+	int		terminate;
 
 	*l = 1;
 	c = (char)va_arg(*ap, int);
-	if ((ptr = ft_strnew(1)) == NULL)
+
+	terminate = (c == '\0') ? 1:0;
+	c = (terminate == 1) ? 'A':c;
+	if ((ret = ft_strnew(1)) == NULL)
 		return (NULL);
-	ft_strncpy(ptr, &c, 1);
-	return (ptr);
+	ft_strncpy(ret, &c, 1);
+	if (prcs_flags(opt, &ret, 0) == NULL)
+		return (NULL);
+	if (terminate == 1 && (tmp = ft_strchr(ret, 'A')) != NULL)
+		*tmp = '\0';
+	return (ret);
 }
 
 char	*prcs_s(va_list *ap, t_printops *opt, size_t *l)
 {
 	char	*s;
+	char	*ret;
 
 	s = va_arg(*ap, char *);
-	*l = ft_strlen(s);
-	return (ft_strdup(s));
+	if (s == NULL)
+		ret = ft_strdup("(null)");
+	else
+		ret = ft_strdup(s);
+	if (prcs_flags(opt, &ret, 0) == NULL)
+		return (NULL);
+	*l = ft_strlen(ret);
+	return (ret);
 }
 
 char	*prcs_p(va_list *ap, t_printops *opt, size_t *l)
@@ -39,9 +55,10 @@ char	*prcs_p(va_list *ap, t_printops *opt, size_t *l)
 	char		*ret;
 	unsigned long long arg;
 
-	arg = va_arg(*ap, long long);
-	printf("arg is %llu\n", arg);
+	arg = va_arg(*ap, unsigned long long);
 	if ((ret = ft_llutoa(arg, 16)) == NULL)
+		return (NULL);
+	if (prcs_flags(opt, &ret, 0) == NULL)
 		return (NULL);
 	*l = ft_strlen(ret);
 	return (ret);

@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 23:12:11 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/13 15:17:18 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/13 20:37:54 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,13 @@ char	*prcs_flags(t_printops *opt, char **s, int sign)
 	char	sp;
 	flags = opt->flag;
 	sp = opt->cnvrtsp;
-	char	*ret;
 
 	if (s == NULL || *s == NULL)
 		return (NULL);
+	if (sp == 's' && (*s = prcs_precision_s(s, opt->precision)) == NULL)
+			return (NULL);
 	if ((sp == 'd' || sp == 'i' || sp == 'o'|| sp == 'u'|| sp == 'x'|| sp == 'X')
-			&& (*s = prcs_precision(sp, s, opt->precision)) == NULL)
+			&& (*s = prcs_precision(s, opt->precision)) == NULL)
 		return (NULL);
 	if (sign > 0 && flags.sharp == '#' && (*s = prcs_sharp(sp, s)) == NULL)
 		return (NULL);
@@ -31,7 +32,7 @@ char	*prcs_flags(t_printops *opt, char **s, int sign)
 		return (NULL);
 	if (flags.min_0 == '0' && opt->width > 0 && (*s = prcs_zero(sp, s, opt->width, &flags)) == NULL)
 		return (NULL);
-	if (opt->width > 0 && (*s = prcs_min(sp, s, opt->width, flags.min_0)) == NULL)
+	if (opt->width > 0 && (*s = prcs_min(s, opt->width, flags.min_0)) == NULL)
 		return (NULL);
 	return (*s);
 }
@@ -70,7 +71,7 @@ char	*prcs_plus(char	sp, char **s, char c)
 	return (*s);
 }
 
-char	*prcs_zero(char sp, char **s, int w, t_flags *flags)
+char	*prcs_zero(char sp, char **s, size_t w, t_flags *flags)
 {
 	char	*ret;
 	size_t		i;
@@ -97,13 +98,14 @@ char	*prcs_zero(char sp, char **s, int w, t_flags *flags)
 	return (ret);
 }
 
-char	*prcs_min(char sp, char **s, int w, char min)
+char	*prcs_min(char **s, size_t w, char min)
 {
 	char	*ret;
 	size_t	len;
 
-	if ((len = w - ft_strlen(*s)) <= 0)
+	if (w == 0 || (w < ft_strlen(*s)))
 		return (*s);
+	len = w - ft_strlen(*s);
 	ret = ft_strnew(len);
 	ft_memset(ret, ' ', len);
 	if (min == '-')

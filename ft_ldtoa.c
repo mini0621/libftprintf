@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 15:21:57 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/13 01:53:51 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/13 19:47:59 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	get10th_expo(uint16_t expo)
 
 }
 
-char	*ft_ldtoa(t_double *n, int precision, int e)
+char	*ft_ldtoa(t_double *n, size_t precision, int e)
 {
 	char	*ret;
 	char	*integer;
@@ -55,22 +55,22 @@ char	*ft_ldtoa(t_double *n, int precision, int e)
 //	printf("check3 :%s\n", ret);	
 	ret = ft_strsubfree(ret, 0, precision);
 	if (ft_strlen(ret) < precision)
-		ret = prcs_precision_end('d', &ret, precision);
+		ret = prcs_precision_end(&ret, precision);
 //	printf("check5 ret:%s\ncheck5 int:%s\n", ret, integer);
 	ret = ft_strjoinfree(&integer, &ret, 3);
 	return (ret);
 }
 
-int round_s(char **s, int	point, int precision)
+int round_s(char **s, int point, size_t precision)
 {
-	int	index;
+	size_t	index;
 
-	index =  (point < 0) ? precision : point + precision;
+	index =  (point < 0) ? precision : (unsigned int)point + precision;
 	if (ft_strlen(*s) <= index + 1)
 		return (0);
 	if (*(*s + index + 1) < '5')
 		return (0);
-	while (index > -1)
+	while (index > 0)
 	{
 		if (*(*s + index) != '9')
 		{
@@ -79,10 +79,14 @@ int round_s(char **s, int	point, int precision)
 		}
 		*(*s + index) = '0';
 		index--;
+	
 	}
-	if (index == -1)
-		return (1);
-	return (0);
+	if (*(*s + index) != '9')
+	{
+		*(*s + index) += 1;
+		return (0);
+	}
+	return (1);
 }
 
 int	skip_zeros(char *s)
@@ -97,7 +101,6 @@ int	skip_zeros(char *s)
 
 char	*sub_integer(char **s, int point, int precision)
 {
-	int		i;
 	char	*ret;
 	char	*tmp;
 

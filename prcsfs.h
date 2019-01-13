@@ -29,6 +29,7 @@ t_funcs	g_prcsfs[] =
 	{'p', &prcs_x},
 	{'f', &prcs_f},
 	{'e', &prcs_e},
+	{'j', &prcs_d},
 	{'\0', NULL}
 };
 

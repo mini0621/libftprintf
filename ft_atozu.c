@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atozu.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 19:31:04 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/13 18:27:24 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/13 18:29:22 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	ft_atoi(const char *str)
+size_t	ft_atozu(const char *str)
 {
 	int	i;
-	int	ret;
-	int neg;
+	size_t	ret;
+	size_t neg;
 
 	i = 0;
 	neg = 1;

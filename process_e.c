@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 18:00:27 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/13 14:55:51 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/13 18:59:58 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*prcs_e(va_list *ap, t_printops *opt, size_t *l)
 }
 
 
-char	*normalize(char **s, int expo, int precision,  int iszero)
+char	*normalize(char **s, int expo, size_t precision,  int iszero)
 {
 	char	*a;
 	char	*b;
@@ -118,7 +118,7 @@ char	*prcs_eld(va_list *ap, t_printops *opt, int *sign)
 	return (ret);
 }
 
-void	round_e(char **s, int precision)
+void	round_e(char **s, size_t precision)
 {
 	char	*ret;
 

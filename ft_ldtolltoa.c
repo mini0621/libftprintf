@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/27 21:56:41 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/11 22:03:48 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/13 18:57:57 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ long double round_ld(long double n, int precision)
 
 long double removeint(long double n, int precision, char **integer)
 {
-	char *s;
-
 	if (n < 0)
 		n = -n;
 	n = round_ld(n, precision);

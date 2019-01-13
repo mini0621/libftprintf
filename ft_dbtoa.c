@@ -6,13 +6,13 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 15:21:57 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/13 01:25:48 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/13 19:21:26 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-char	*ft_dbtoa(t_double *n, int precision, int e)
+char	*ft_dbtoa(t_double *n, size_t precision, int e)
 {
 	char	*ret;
 	char	*integer;
@@ -35,7 +35,7 @@ char	*ft_dbtoa(t_double *n, int precision, int e)
 //	printf("check3 :%s\n", ret);	
 	ret = ft_strsubfree(ret, 0, precision);
 	if (ft_strlen(ret) < precision)
-		ret = prcs_precision_end('d', &ret, precision);
+		ret = prcs_precision_end(&ret, precision);
 //	printf("check5 ret:%s\ncheck5 int:%s\n", ret, integer);
 	ret = ft_strjoinfree(&integer, &ret, 3);
 	return (ret);

@@ -6,17 +6,22 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 14:06:47 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/13 15:22:46 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/13 20:16:15 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-char	*prcs_precision(char sp, char **s, int precision)
+char	*prcs_precision(char **s, size_t precision)
 {
 	char	*ret;
 
-	if (precision == -1 || ft_strlen(*s) >= precision)
+	if (precision == 0)
+	{
+		**s = '\0';
+		return (*s);
+	}
+	if (precision == 0xffffffffffffffff || ft_strlen(*s) >= precision)
 		return (*s);
 	if ((ret = ft_strnew(precision)) == NULL)
 	{
@@ -29,7 +34,21 @@ char	*prcs_precision(char sp, char **s, int precision)
 	return (ret);
 }
 
-char	*prcs_precision_end(char sp, char **s, int precision)
+char	*prcs_precision_s(char **s, size_t precision)
+{
+	if (precision == 0)
+	{
+		**s = '\0';
+		return (*s);
+	}
+	if (precision == 0xffffffffffffffff)
+		return (*s);
+	*s = ft_strsubfree(*s, 0, precision);
+	return (*s);
+}
+
+
+char	*prcs_precision_end(char **s, size_t precision)
 {
 	char	*ret;
 

@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:55:20 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/13 16:23:18 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/13 20:25:22 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ typedef enum	e_lm
 	hh,
 	l,
 	ll,
-	L
+	L,
+	j
 }				t_lm;
 
 typedef struct	s_flags
@@ -40,8 +41,8 @@ typedef struct	s_flags
 typedef struct	s_printops
 {
 	t_flags	flag;
-	int		width;
-	int		precision;
+	size_t		width;
+	size_t		precision;
 	t_lm	lmod;
 	char	cnvrtsp;
 }				t_printops;
@@ -92,6 +93,7 @@ char				*ft_strnstr(const char *haystack, const char *needle,
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_atoi(const char *str);
+size_t					ft_atozu(const char *str);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
 int					ft_isalnum(int c);
@@ -189,31 +191,32 @@ int					shift_frac_left(unsigned long long *a);
 unsigned long long get_mincarry(unsigned long long *a, unsigned long long carry);
 
 char				*fractoa(unsigned long long *frac, int e);
-unsigned long long *init_frac(uint64_t frac, short expo, int frac_bits);
+unsigned long long *init_frac(uint64_t frac);
 char				*get_frac10(t_double *n, int frac_bits, int subnormal);
 
 int					get10th_expo(uint16_t expo);
-char				*ft_ldtoa(t_double *n, int precision, int e);
+char				*ft_ldtoa(t_double *n, size_t precision, int e);
 t_double			*get_ldouble(long double n);
-int		round_s(char **s, int point, int precision);
-int		skip_zeros(char *s);
-char	*sub_integer(char **s, int point, int precision);
+int					round_s(char **s, int point, size_t precision);
+int					skip_zeros(char *s);
+char				*sub_integer(char **s, int point, int precision);
 
 
-char				*ft_dbtoa(t_double *n, int precision, int e);
+char				*ft_dbtoa(t_double *n, size_t precision, int e);
 t_double			*get_double(double n);
 
-char				*normalize(char **s, int expo, int precision, int iszero);
+char				*normalize(char **s, int expo, size_t precision, int iszero);
 char				*prcs_eld(va_list *ap, t_printops *opt, int *sign);
 char				*prcs_edb(va_list *ap, t_printops *opt, int *sign);
-void				round_e(char **s, int precision);
+void				round_e(char **s, size_t precision);
 char	*prcs_flags(t_printops *opt, char **s, int sign);
 char	*prcs_sharp(char sp, char **s);
 char	*prcs_plus(char	sp, char **s, char c);
-char	*prcs_zero(char sp, char **s, int w, t_flags *flags);
-char	*prcs_min(char sp, char **s, int w, char min);
+char	*prcs_zero(char sp, char **s, size_t w, t_flags *flags);
+char	*prcs_min(char **s, size_t w, char min);
 
-char	*prcs_precision(char sp, char **s, int precision);
-char	*prcs_precision_end(char sp, char **s, int precision);
+char	*prcs_precision(char **s, size_t precision);
+char	*prcs_precision_s(char **s, size_t precision);
+char	*prcs_precision_end(char **s, size_t precision);
 
 #endif 

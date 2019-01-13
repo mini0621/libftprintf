@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 20:38:25 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/13 15:50:15 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/13 19:48:08 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ char	*convert(va_list *ap, char **start, size_t *l)
 	opt = readops(start);
 	if (opt->cnvrtsp == '%')
 		return (prcs_percent(opt, l));
+	if (opt->cnvrtsp == 'j')
+		opt->lmod = 4;
 	if ((prcs = getprcsf(opt)) == NULL)
 		return (NULL);
 	ret = (*prcs)(ap, opt, l);
@@ -43,7 +45,6 @@ char	*prcs_percent(t_printops *opt, size_t *l)
 
 t_prcs_fp	getprcsf(t_printops *opt)
 {
-	t_prcs_fp	func;
 	char		cs;
 	int			i;
 

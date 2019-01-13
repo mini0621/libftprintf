@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 18:57:02 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/13 01:22:02 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/13 20:31:06 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ t_printops	*initoption(void)
 	opt->flag.sharp = '\0';
 	opt->flag.min_0 = '\0';
 	opt->flag.plus_sp = '\0';
-	opt->width = -1;
-	opt->precision = -1;
+	opt->width = 0;
+	opt->precision = 0xffffffffffffffff;
 	opt->lmod = 0;
 	opt->cnvrtsp = '\0';
 	return (opt);
@@ -43,6 +43,8 @@ t_printops	*readops(char **start)
 
 	if ((opt = initoption()) == NULL)
 		return (NULL);
+	if (opt->cnvrtsp == 'f' || opt->cnvrtsp == 'e')
+		opt->precision = 6;
 	i = 1;
 	while (*(*start + i) != '\0' && is_cnvrtsp(*(*start + i)) == 0)
 	{
@@ -59,8 +61,6 @@ t_printops	*readops(char **start)
 			i++;
 	}
 	opt->cnvrtsp = *(*start + i);
-	if (opt->precision == -1 && (opt->cnvrtsp == 'f' || opt->cnvrtsp == 'e'))
-		opt->precision = 6;
 	*start = *start + i + 1;
 	return (opt);
 }
@@ -74,10 +74,10 @@ void		storeops(char **start, int i, t_printops *opt)
 		if ((*(*start + i) == ' ' && opt->flag.plus_sp != '+')
 				|| *(*start + i) == '+')
 			opt->flag.plus_sp = *(*start + i); 
-		if (*(*start + i) <= '9' && *(*start + i) > '0' && opt->width == -1)
-			opt->width = ft_atoi(*start + i);
+		if (*(*start + i) <= '9' && *(*start + i) > '0' && opt->width == 0)
+			opt->width = ft_atozu(*start + i);
 		if (*(*start + i) == '.')
-			opt->precision = ft_atoi(*start + ++i);
+			opt->precision = ft_atozu(*start + ++i);
 		if (*(*start + i) == 'l' && opt->lmod == none)
 			opt->lmod = l;
 		else if (*(*start + i) == 'l' && opt->lmod != none)
@@ -88,4 +88,7 @@ void		storeops(char **start, int i, t_printops *opt)
 			opt->lmod = hh;
 		if (*(*start + i) == 'L')
 			opt->lmod = L;
+		if (*(*start + i) == 'j')
+			opt->lmod = j;
+
 }
