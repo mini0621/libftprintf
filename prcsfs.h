@@ -16,7 +16,7 @@
 
 #include "libftprintf.h"
 
-t_funcs	prcsfs[] =
+t_funcs	g_prcsfs[] =
 {
 	{'d', &prcs_d},
 	{'i', &prcs_d},
@@ -28,7 +28,6 @@ t_funcs	prcsfs[] =
 	{'s', &prcs_s},
 	{'p', &prcs_x},
 	{'f', &prcs_f},
-	{'g', &prcs_g},
 	{'e', &prcs_e},
 	{'\0', NULL}
 };

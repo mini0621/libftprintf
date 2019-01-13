@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 18:49:16 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/12 22:01:50 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/13 01:45:26 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ char	*get_frac10(t_double *n , int frac_bits, int subnormal)
 	short		expo;
 	int			e;
 
+	if (n == NULL)
+		return (NULL);
 	e = 0;
 	expo = n->expo;
 		a = init_frac(n->frac, n->expo, frac_bits);

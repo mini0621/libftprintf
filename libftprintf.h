@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:55:20 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/12 22:20:58 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/13 01:49:58 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,6 @@ t_printops			*initoption(void);
 t_printops			*readops(char **start);
 void				storeops(char **start, int i, t_printops *opt);
 
-char				*prcs_g(va_list *ap, t_printops *opt, size_t *l);
 char				*prcs_e(va_list *ap, t_printops *opt, size_t *l);
 char				*prcs_x(va_list *ap, t_printops *opt, size_t *l);
 char				*prcs_o(va_list *ap, t_printops *opt, size_t *l);
@@ -193,17 +192,20 @@ unsigned long long *init_frac(uint64_t frac, short expo, int frac_bits);
 char				*get_frac10(t_double *n, int frac_bits, int subnormal);
 
 int					get10th_expo(uint16_t expo);
-char				*ft_ldtoa(t_double *n, int precision);
+char				*ft_ldtoa(t_double *n, int precision, int e);
 t_double			*get_ldouble(long double n);
 int		round_s(char **s, int point, int precision);
 int		skip_zeros(char *s);
 char	*sub_integer(char **s, int point, int precision);
 
 
-char				*ft_dbtoa(t_double *n, int precision);
+char				*ft_dbtoa(t_double *n, int precision, int e);
 t_double			*get_double(double n);
 
-
+char				*normalize(char **s, int expo, int precision, int iszero);
+char				*prcs_eld(va_list *ap, t_printops *opt, int *sign);
+char				*prcs_edb(va_list *ap, t_printops *opt, int *sign);
+void				round_e(char **s, int precision);
 char	*prcs_flags(t_printops *opt, char **s, int sign);
 char	*prcs_sharp(char sp, char **s);
 char	*prcs_plus(char	sp, char **s, char c);

@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 15:21:57 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/12 22:02:35 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/13 01:53:51 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	get10th_expo(uint16_t expo)
 
 }
 
-char	*ft_ldtoa(t_double *n, int precision)
+char	*ft_ldtoa(t_double *n, int precision, int e)
 {
 	char	*ret;
 	char	*integer;
@@ -42,6 +42,10 @@ char	*ft_ldtoa(t_double *n, int precision)
 		return (NULL);
 	//printf("check :%s\n", ret);
 	p = get10th_expo(n->expo) + 1;
+	if (e == 1)
+		return (ft_strsubfree(ret, skip_zeros(ret), precision + 2));
+	if (p < 0)
+		ret = ft_strsubfree(ret, skip_zeros(ret), precision + 1);
 	ret = ft_strsubfree(ret, skip_zeros(ret), p + precision + 1);
 	//printf("check2 :%s\n", ret);
 	//printf("p : %i\n", p);
@@ -66,7 +70,7 @@ int round_s(char **s, int	point, int precision)
 		return (0);
 	if (*(*s + index + 1) < '5')
 		return (0);
-	while (index != 0)
+	while (index > -1)
 	{
 		if (*(*s + index) != '9')
 		{
@@ -76,7 +80,7 @@ int round_s(char **s, int	point, int precision)
 		*(*s + index) = '0';
 		index--;
 	}
-	if (index == 0)
+	if (index == -1)
 		return (1);
 	return (0);
 }
@@ -102,13 +106,16 @@ char	*sub_integer(char **s, int point, int precision)
 		tmp = ft_strnew(-point);
 		ft_memset(tmp, '0', -point);
 		*s = ft_strjoinfree(&tmp, s, 3);
+		point = 0;
 	}
 	if (round_s(s, point, precision) == 1)
 		ret = ft_strdup("1");
 	else if (point == 0)
 		ret = ft_strdup("0");
-	else if ((ret = ft_strsub(*s, 0, point)) == NULL)
-		return (NULL);
+	else
+		ret = ft_strsub(*s, 0, point);
+	if (point > 0)
+		*s = ft_strsubfree(*s, point, precision);
 	if (precision != 0)
 	{
 		tmp = ft_strdup(".");

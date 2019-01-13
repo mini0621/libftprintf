@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 20:38:25 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/11 18:10:48 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/13 00:15:50 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ t_prcs_fp	getprcsf(t_printops *opt)
 
 	cs = opt->cnvrtsp;
 	i = 0;
-	while (prcsfs[i].cnvrt_specifier != '\0')
+	while (g_prcsfs[i].cnvrt_specifier != '\0')
 	{
-		if (prcsfs[i].cnvrt_specifier == cs )
-			return (prcsfs[i].function);
+		if (g_prcsfs[i].cnvrt_specifier == cs )
+			return (g_prcsfs[i].function);
 		i++;
 	}
 	return (NULL);

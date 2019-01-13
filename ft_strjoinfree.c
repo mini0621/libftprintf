@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 10:20:38 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/12 22:23:57 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/13 01:45:10 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,18 @@ char	*ft_strjoinfree(char **s1, char **s2, int i)
 {
 	char	*ptr;
 
-	if (s1 == NULL || s2 == NULL || *s1 == NULL || *s2 == NULL)
+	if (s1 == NULL || *s1 == NULL)
+	{
+		if ((i == 3 || i == 2) && (s2 != NULL && *s2 != NULL))
+			ft_strdel(s2);
 		return (NULL);
+	}
+	if (s2 == NULL || *s2 == NULL)
+	{
+		if ((i == 3 || i == 1) && (s1 != NULL && *s1 != NULL))
+			ft_strdel(s1);
+		return (NULL);
+	}
 	ptr = ft_strnew(ft_strlen(*s1) + ft_strlen(*s2) + 1);
 	if (ptr != NULL)
 	{

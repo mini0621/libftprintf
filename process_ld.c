@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:59:51 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/12 22:02:51 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/13 01:24:56 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ char	*prcs_ld(va_list *ap, t_printops *opt, int *sign)
 	else if (arg == 0 || (opt->precision < 7 && arg < 100000000 && arg >-10000000))
 		ret = ft_ldtolltoa(arg, opt->precision);
 	else
-		ret = ft_ldtoa(n, opt->precision);
-	if (*sign < 0 && arg != 0)
+		ret = ft_ldtoa(n, opt->precision, 0);
+	if (*sign < 0)
 	{
 		s = ft_strdup("-");
 		ret = ft_strjoinfree(&s, &ret, 3);

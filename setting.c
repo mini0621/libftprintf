@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 18:57:02 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/12 22:22:03 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/13 01:22:02 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 int is_cnvrtsp(char c)
 {
 	if (c == 'i' || c == 'd' || c == 'o' || c == 'u' || c == 'x' || c == 'X'
-		|| c == 'c' || c == 'f' || c == 's' || c == 'p' || c == 'e' || c == 'g'
-		|| c == '%')
+		|| c == 'c' || c == 'f' || c == 's' || c == 'p' || c == 'e' || c == '%')
 		return (1);
 	return (0);
 }
@@ -60,7 +59,7 @@ t_printops	*readops(char **start)
 			i++;
 	}
 	opt->cnvrtsp = *(*start + i);
-	if (opt->precision == -1 && opt->cnvrtsp == 'f')
+	if (opt->precision == -1 && (opt->cnvrtsp == 'f' || opt->cnvrtsp == 'e'))
 		opt->precision = 6;
 	*start = *start + i + 1;
 	return (opt);
