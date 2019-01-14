@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 18:49:16 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/13 18:59:21 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/14 23:33:07 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	*fractoa(unsigned long long *frac, int e)
 	while (i != 0)
 	{
 		s = ft_llutoa(frac[i], 10);
-		s = prcs_precision(&s, 8);
+		s = prcs_precision(&s, 8, 1);
 	//	printf("%s ", s);
 		if ((ret = ft_strjoinfree(&ret, &s, 3)) == NULL)
 			return (NULL);

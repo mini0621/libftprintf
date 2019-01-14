@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 20:06:42 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/13 20:24:47 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/14 23:22:18 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,12 @@ char	*prcs_d(va_list *ap, t_printops *opt, size_t *l)
 		arg = (long long)(va_arg(*ap, long long));
 	else
 		arg = (int)va_arg(*ap, int);
-	sign = (arg > 0) ? 1:0;
-	if (sign == 0)
-		sign = (arg < 0 && sign == 0) ? -1: 0;
-	if ((ret = ft_lltoa(arg)) == NULL || prcs_flags(opt, &ret, sign) == NULL)
+	sign = (arg >= 0) ? 1:-1;
+	ret = ft_lltoa(arg);
+	if (prcs_flags(opt, &ret, sign) == NULL)
 		return (NULL);
+	if (arg == 0 && opt->precision == 0)
+		*ret = '\0';
 	*l = ft_strlen(ret);
 	return (ret);
 }
@@ -58,7 +59,10 @@ char	*prcs_o(va_list *ap, t_printops *opt, size_t *l)
 	else
 		arg = (unsigned int)va_arg(*ap, unsigned int);
 	sign = (arg > 0) ? 1:0;
-	if ((ret = ft_llutoa(arg, 8)) == NULL || prcs_flags(opt, &ret, sign) == NULL)
+	ret = ft_llutoa(arg, 8);
+	if (arg == 0 && opt->precision == 0 && (opt->flag).sharp != '#')
+		*ret = '\0';
+	if (prcs_flags(opt, &ret, sign) == NULL)
 		return (NULL);
 	*l = ft_strlen(ret);
 	return (ret);
@@ -83,7 +87,10 @@ char	*prcs_u(va_list *ap, t_printops *opt, size_t *l)
 	else
 		arg = (unsigned int)va_arg(*ap, unsigned int);	
 	sign = (arg == 0) ? 0:1;
-	if ((ret = ft_llutoa(arg, 10)) == NULL || prcs_flags(opt, &ret, sign) == NULL)
+	ret = ft_llutoa(arg, 10);
+	if (arg == 0 && opt->precision == 0)
+		*ret = '\0';
+	if (prcs_flags(opt, &ret, sign) == NULL)
 		return (NULL);
 	*l = ft_strlen(ret);
 	return (ret);
@@ -108,8 +115,10 @@ char	*prcs_x(va_list *ap, t_printops *opt, size_t *l)
 	else
 		arg = (unsigned int)va_arg(*ap, unsigned int);
 	sign = (arg > 0) ? 1:0;
-	//printf("arg : %llu\n", arg);
-	if ((ret = ft_llutoa(arg, 16)) == NULL || prcs_flags(opt, &ret, sign) == NULL)
+	ret = ft_llutoa(arg, 16);
+	if (arg == 0 && opt->precision == 0)
+		*ret = '\0';
+	if (prcs_flags(opt, &ret, sign) == NULL)
 		return (NULL);
 	if (opt->cnvrtsp == 'X')
 		ft_strupper(ret);

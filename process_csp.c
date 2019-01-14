@@ -1,4 +1,5 @@
 /* ************************************************************************** */
+
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   process_csp.c                                      :+:      :+:    :+:   */
@@ -6,7 +7,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:58:39 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/13 20:37:52 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/14 22:19:44 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +20,6 @@ char	*prcs_c(va_list *ap, t_printops *opt, size_t *l)
 	char	*tmp;
 	int		terminate;
 
-	*l = 1;
 	c = (char)va_arg(*ap, int);
 
 	terminate = (c == '\0') ? 1:0;
@@ -27,7 +27,7 @@ char	*prcs_c(va_list *ap, t_printops *opt, size_t *l)
 	if ((ret = ft_strnew(1)) == NULL)
 		return (NULL);
 	ft_strncpy(ret, &c, 1);
-	if (prcs_flags(opt, &ret, 0) == NULL)
+	if (prcs_cflags(opt, &ret, l) == NULL)
 		return (NULL);
 	if (terminate == 1 && (tmp = ft_strchr(ret, 'A')) != NULL)
 		*tmp = '\0';
@@ -61,5 +61,33 @@ char	*prcs_p(va_list *ap, t_printops *opt, size_t *l)
 	if (prcs_flags(opt, &ret, 0) == NULL)
 		return (NULL);
 	*l = ft_strlen(ret);
+	return (ret);
+}
+
+char	*prcs_cflags(t_printops *opt, char **s, size_t *l)
+{
+	size_t	w;
+	char	*ret;
+
+	*l = 1;
+	w = opt->width;
+	if (s == NULL || *s == NULL)
+		return (NULL);
+	if (w < 1)
+		return (*s);
+	ret = ft_strnew(w);
+	if ((opt->flag).min_0 == '-')
+	{
+		ft_memcpy(ret, *s, 1);
+		ft_memset(ret + 1, ' ', w - 1);
+	}
+	else
+	{
+		ft_memset(ret, ' ', w - 1);
+		ft_memcpy(ret + w - 1, *s, 1);
+	}
+	*l = w;
+	free(*s);
+	*s = ret;
 	return (ret);
 }

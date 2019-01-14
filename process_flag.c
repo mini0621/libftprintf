@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 23:12:11 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/13 20:37:54 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/14 23:30:23 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*prcs_flags(t_printops *opt, char **s, int sign)
 	if (sp == 's' && (*s = prcs_precision_s(s, opt->precision)) == NULL)
 			return (NULL);
 	if ((sp == 'd' || sp == 'i' || sp == 'o'|| sp == 'u'|| sp == 'x'|| sp == 'X')
-			&& (*s = prcs_precision(s, opt->precision)) == NULL)
+			&& (*s = prcs_precision(s, opt->precision, sign)) == NULL)
 		return (NULL);
 	if (sign > 0 && flags.sharp == '#' && (*s = prcs_sharp(sp, s)) == NULL)
 		return (NULL);

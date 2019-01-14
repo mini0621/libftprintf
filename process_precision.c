@@ -6,30 +6,34 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 14:06:47 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/13 20:16:15 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/14 23:33:02 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-char	*prcs_precision(char **s, size_t precision)
+char	*prcs_precision(char **s, size_t precision, int sign)
 {
 	char	*ret;
 
-	if (precision == 0)
-	{
-		**s = '\0';
-		return (*s);
-	}
 	if (precision == 0xffffffffffffffff || ft_strlen(*s) >= precision)
 		return (*s);
-	if ((ret = ft_strnew(precision)) == NULL)
+	if ((ret = ft_strnew(precision + ft_strlen(*s))) == NULL)
 	{
 		free(*s);
 		return (NULL);
 	}
-	ft_memset(ret, '0', (precision - ft_strlen(*s)) *sizeof(char));
-	ft_strcat(ret, *s);
+	if (sign < 0)
+	{
+		*ret = '-';		
+		ft_memset(ret + 1, '0', (precision - ft_strlen(*s)) *sizeof(char));
+		ft_strcpy(ret + precision + 1, *s + 1);
+	}
+	else
+	{
+		ft_memset(ret, '0', (precision - ft_strlen(*s)) *sizeof(char));
+		ft_strcat(ret, *s);
+	}
 	free(*s);
 	return (ret);
 }

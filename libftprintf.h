@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:55:20 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/13 20:25:22 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/14 23:29:40 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,12 +210,13 @@ char				*prcs_eld(va_list *ap, t_printops *opt, int *sign);
 char				*prcs_edb(va_list *ap, t_printops *opt, int *sign);
 void				round_e(char **s, size_t precision);
 char	*prcs_flags(t_printops *opt, char **s, int sign);
+char	*prcs_cflags(t_printops *opt, char **s, size_t *l);
 char	*prcs_sharp(char sp, char **s);
 char	*prcs_plus(char	sp, char **s, char c);
 char	*prcs_zero(char sp, char **s, size_t w, t_flags *flags);
 char	*prcs_min(char **s, size_t w, char min);
 
-char	*prcs_precision(char **s, size_t precision);
+char	*prcs_precision(char **s, size_t precision, int sign);
 char	*prcs_precision_s(char **s, size_t precision);
 char	*prcs_precision_end(char **s, size_t precision);
 

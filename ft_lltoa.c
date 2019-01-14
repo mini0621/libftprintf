@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:47:00 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/13 18:24:20 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/14 22:19:21 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char		*ft_lltoa(long long n)
 		return (ft_strdup("0"));
 	neg = (n < 0) ? 1 : 0;
 	n = (n < 0) ? -n : n;
-	while (n / ft_llpower(10, i) != 0)
+	while (n / ft_llpower(10, i) >= 1)
 		i++;
 	if ((ptr = ft_strnew(i + neg)) == NULL)
 		return (NULL);

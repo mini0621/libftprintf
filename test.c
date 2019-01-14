@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:08:51 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/13 20:37:56 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/14 23:33:04 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libftprintf.h"
@@ -65,10 +65,9 @@ printf("ft: %.100Lf\n", );
 	
 long double a = -1.933870e+37L;
 double b = 0.101;
-//printf("real1 is %Le\n");	
-ft_printf("%c is a string", '\0');
-printf("%10c is a string", '\0');
-
+ft_printf("real1 is %x, %d, %.0o\n", 42,0,0);	
+printf("real1 is %u, %d, %.0o\n", 0,0,0);	
+//ft_printf("%5c", 42);
 
 	return (0);
 }
