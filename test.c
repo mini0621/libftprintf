@@ -6,13 +6,13 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:08:51 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/14 23:33:04 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/15 20:16:34 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libftprintf.h"
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <limits.h>
 int main(int argc, char **argv)
 {
 	int ret;
@@ -65,9 +65,9 @@ printf("ft: %.100Lf\n", );
 	
 long double a = -1.933870e+37L;
 double b = 0.101;
-ft_printf("real1 is %x, %d, %.0o\n", 42,0,0);	
-printf("real1 is %u, %d, %.0o\n", 0,0,0);	
-//ft_printf("%5c", 42);
-
-	return (0);
+//ft_printf("%lu\n", -42);
+//printf("%lu\n", -42);
+printf("%s%d%p%%%ld%i%o%lo%u%lu%x%X%c\n\n","bonjour", 42, &a, LONG_MAX, 42, 42, 42, 100000, ULONG_MAX, 42, 42, 'c');
+ft_printf("%s%d%p%%%ld%i%o%lo%u%lu%x%X%c","bonjour", 42, &a, LONG_MAX, 42, 42, 42, 100000, ULONG_MAX, 42, 42, 'c');
+return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 14:06:47 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/14 23:33:02 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/15 18:17:07 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 char	*prcs_precision(char **s, size_t precision, int sign)
 {
 	char	*ret;
+	size_t	len;
 
-	if (precision == 0xffffffffffffffff || ft_strlen(*s) >= precision)
+	len = (sign < 0) ?  ft_strlen(*s) - 1 : ft_strlen(*s);
+	if (precision == 0xffffffffffffffff || len >= precision)
 		return (*s);
 	if ((ret = ft_strnew(precision + ft_strlen(*s))) == NULL)
 	{
@@ -25,9 +27,10 @@ char	*prcs_precision(char **s, size_t precision, int sign)
 	}
 	if (sign < 0)
 	{
-		*ret = '-';		
-		ft_memset(ret + 1, '0', (precision - ft_strlen(*s)) *sizeof(char));
-		ft_strcpy(ret + precision + 1, *s + 1);
+		precision = precision - len;
+		*ret = '-';
+		ft_memset(ret + 1, '0', precision * sizeof(char));
+		ft_strcpy(ret + 1 + precision, *s + 1);
 	}
 	else
 	{
@@ -50,7 +53,6 @@ char	*prcs_precision_s(char **s, size_t precision)
 	*s = ft_strsubfree(*s, 0, precision);
 	return (*s);
 }
-
 
 char	*prcs_precision_end(char **s, size_t precision)
 {

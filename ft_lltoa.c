@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:47:00 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/14 22:19:21 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/15 22:07:42 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 long long	ft_llpower(long long base, long long power)
 {
+
 	if (power == 0)
 		return (1);
 	if (power < 0)
@@ -27,12 +28,14 @@ char		*ft_lltoa(long long n)
 	long long	i;
 	long long	neg;
 
+	if (n == (-9223372036854775807LL -1LL))
+		return (ft_strdup("-9223372036854775808"));
 	i = 0;
 	if (n == 0)
 		return (ft_strdup("0"));
 	neg = (n < 0) ? 1 : 0;
 	n = (n < 0) ? -n : n;
-	while (n / ft_llpower(10, i) >= 1)
+	while (i < 20 && n / ft_llpower(10, i) >= 1)
 		i++;
 	if ((ptr = ft_strnew(i + neg)) == NULL)
 		return (NULL);
@@ -69,7 +72,7 @@ unsigned long long	ft_llupower(unsigned long long base, long long power)
 	return (base * ft_llupower(base, power - 1));
 }
 
-char		*ft_llutoa(unsigned long long n, unsigned int base)
+char		*ft_llutoa(unsigned long long n, unsigned int base, unsigned long long max)
 {
 	char	*ptr;
 	unsigned long long	i;
@@ -80,10 +83,10 @@ char		*ft_llutoa(unsigned long long n, unsigned int base)
 		return (ft_strdup("0"));
 	if ((rep = create_base(base)) == NULL)
 		return (NULL);
-	while (i < 16 && n / ft_llupower(base, i) > 1)
+	while (i < max && n / ft_llupower(base, i) > 1)
 		i++;
 //	printf("i is %llu\n", i);
-	if (i < 16 && n / ft_llupower(base, i) == 1)
+	if (i < max && n / ft_llupower(base, i) == 1)
 		i++;
 	if ((ptr = ft_strnew(i)) == NULL)
 		return (NULL);

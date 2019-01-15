@@ -55,10 +55,12 @@ char	*prcs_p(va_list *ap, t_printops *opt, size_t *l)
 	char		*ret;
 	unsigned long long arg;
 
-	arg = va_arg(*ap, unsigned long long);
-	if ((ret = ft_llutoa(arg, 16)) == NULL)
+	arg = (unsigned long long )va_arg(*ap, void *);
+	(opt->flag).sharp = '#';
+	opt->cnvrtsp = 'x';
+	if ((ret = ft_llutoa(arg, 16, 16)) == NULL)
 		return (NULL);
-	if (prcs_flags(opt, &ret, 0) == NULL)
+	if (prcs_flags(opt, &ret, 1) == NULL)
 		return (NULL);
 	*l = ft_strlen(ret);
 	return (ret);

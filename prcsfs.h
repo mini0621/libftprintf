@@ -26,7 +26,7 @@ t_funcs	g_prcsfs[] =
 	{'X', &prcs_x},
 	{'c', &prcs_c},
 	{'s', &prcs_s},
-	{'p', &prcs_x},
+	{'p', &prcs_p},
 	{'f', &prcs_f},
 	{'e', &prcs_e},
 	{'j', &prcs_d},

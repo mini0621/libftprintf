@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/27 21:56:41 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/13 18:57:57 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/15 22:18:01 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ long double removeint(long double n, int precision, char **integer)
 	if (n < 0)
 		n = -n;
 	n = round_ld(n, precision);
-	*integer = ft_llutoa((unsigned long long)n, 10);
+	*integer = ft_llutoa((unsigned long long)n, 10, 20);
 	return (n - (unsigned long long)n);
 
 }

@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 18:57:02 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/14 23:15:20 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/15 20:09:49 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ int is_cnvrtsp(char c)
 	if (c == 'i' || c == 'd' || c == 'o' || c == 'u' || c == 'x' || c == 'X'
 		|| c == 'c' || c == 'f' || c == 's' || c == 'p' || c == 'e' || c == '%')
 		return (1);
+	if (c != 'l' && c != 'h' && c != '.' && c != 'L' && c != ' '
+		&& c != ' ' && c != '#' && c != '-' && c != '+'
+		&& ft_isdigit(c) == 0 && c != 'j')
+		return (-1);
 	return (0);
 }
 
@@ -40,13 +44,14 @@ t_printops	*readops(char **start)
 {
 	int	i;
 	t_printops	*opt;
+	int	ret;
 
 	if ((opt = initoption()) == NULL)
 		return (NULL);
 	if (opt->cnvrtsp == 'f' || opt->cnvrtsp == 'e')
 		opt->precision = 6;
 	i = 1;
-	while (*(*start + i) != '\0' && is_cnvrtsp(*(*start + i)) == 0)
+	while (*(*start + i) != '\0' && (ret = is_cnvrtsp(*(*start + i))) == 0)
 	{
 //		printf("hello :: *(*start + i) = %ccheck : %c\n", *(*start + i), opt->flag.sharp);
 		storeops(start, i, opt);
@@ -61,8 +66,23 @@ t_printops	*readops(char **start)
 			i++;
 	}
 	opt->cnvrtsp = *(*start + i);
+	if (ret == -1)
+		opt->cnvrtsp = '\0';
 	*start = *start + i + 1;
+	adjust_ops(opt);
 	return (opt);
+}
+
+void		adjust_ops(t_printops *opt)
+{
+	char sp;
+	size_t precision;
+
+	precision = opt->precision;
+	sp = opt->cnvrtsp;
+	if (precision != 0xffffffffffffffff && (opt->flag).min_0 == '0'
+	&& (sp == 'd' || sp == 'i' || sp == 'o' || sp == 'u' || sp == 'x' || sp == 'X'))
+		(opt->flag).min_0 = '\0';
 }
 
 void		storeops(char **start, int i, t_printops *opt)

@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:55:20 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/14 23:29:40 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/15 20:11:37 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,7 @@ char				*prcs_percent(t_printops *opt, size_t *l);
 int 				is_cnvrtsp(char c);
 t_printops			*initoption(void);
 t_printops			*readops(char **start);
+void				adjust_ops(t_printops *opt);
 void				storeops(char **start, int i, t_printops *opt);
 
 char				*prcs_e(va_list *ap, t_printops *opt, size_t *l);
@@ -175,7 +176,7 @@ char				*sp_double(int sign, uint64_t frac);
 long long 			ft_llpower(long long base, long long power);
 char				*ft_lltoa(long long n);
 unsigned long long 	ft_lluporwer(unsigned long long base, unsigned long long power);
-char				*ft_llutoa(unsigned long long n, unsigned int base);
+char				*ft_llutoa(unsigned long long n, unsigned int base, unsigned long long max);
 
 long double			ft_neg_power(int power);
 char				get_n_dig(long double n);
