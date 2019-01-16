@@ -6,30 +6,26 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 15:21:57 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/15 23:38:43 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/16 03:26:12 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	get10th_expo(uint16_t expo)
+int		add_zeros(char **s, int point)
 {
-	long double  p;
-	int i;
+	char	*tmp;
 
-	p = (short)(expo);
-	p = (p * 0.301029999566L);
-//	printf("p is %Lf\n",p);
-	i = (int)p;
-
-	if (p == i)
-		return (i);
-	if (p > i)
-		i = (i + 1 - p < p - i) ? i + 1:i;
-	else
-		i = (p - i + 1 < p - 1) ? i - 1:i;
-	return (i);
-
+	point--;
+	if ((tmp = ft_strnew(-point)) == NULL)
+	{
+		free(*s);
+		return (-1);
+	}
+	ft_memset(tmp, '0', -point);
+	if ((*s = ft_strjoinfree(&tmp, s, 3)) == NULL)
+		return (-1);
+	return (0);
 }
 
 char	*ft_ldtoa(t_double *n, size_t precision, int e)
@@ -40,30 +36,32 @@ char	*ft_ldtoa(t_double *n, size_t precision, int e)
 
 	if ((ret = get_frac10(n, 63, 0)) == NULL)
 		return (NULL);
-	//printf("check :%s\n", ret);
 	p = get10th_expo(n->expo) + 1;
 	if (e == 1)
 		return (ft_strsubfree(ret, skip_zeros(ret), precision + 2));
 	if (p < 0)
 		ret = ft_strsubfree(ret, skip_zeros(ret), precision + 1);
-	ret = ft_strsubfree(ret, skip_zeros(ret), (size_t)p + precision + 1);
+	if ((ret = ft_strsubfree(ret, skip_zeros(ret),
+					(size_t)p + precision + 1)) == NULL)
+		return (NULL);
+	if (p < 0)
+		p = add_zeros(&ret, p);
 	integer = sub_integer(&ret, p, precision);
 	if (precision == 0)
 		return (integer);
-//	printf("check3 :%s\n", ret);	
-	ret = ft_strsubfree(ret, 0, precision);
+	if ((ret = ft_strsubfree(ret, 0, precision)) == NULL)
+		return (NULL);
 	if (ft_strlen(ret) < precision)
 		ret = prcs_precision_end(&ret, precision);
-//	printf("check5 ret:%s\ncheck5 int:%s\n", ret, integer);
 	ret = ft_strjoinfree(&integer, &ret, 3);
 	return (ret);
 }
 
-int round_s(char **s, int point, size_t precision)
+int		round_s(char **s, int point, size_t precision)
 {
 	size_t	index;
 
-	index =  (point < 0) ? precision : (unsigned int)point + precision;
+	index = (point < 0) ? precision : (unsigned int)point + precision;
 	if (ft_strlen(*s) <= index + 1)
 		return (0);
 	if (*(*s + index + 1) < '5')
@@ -77,7 +75,6 @@ int round_s(char **s, int point, size_t precision)
 		}
 		*(*s + index) = '0';
 		index--;
-	
 	}
 	if (*(*s + index) != '9')
 	{
@@ -87,7 +84,7 @@ int round_s(char **s, int point, size_t precision)
 	return (1);
 }
 
-int	skip_zeros(char *s)
+int		skip_zeros(char *s)
 {
 	int	i;
 
@@ -102,13 +99,6 @@ char	*sub_integer(char **s, int point, int precision)
 	char	*ret;
 	char	*tmp;
 
-	if (point < 0)
-	{
-		tmp = ft_strnew(-point);
-		ft_memset(tmp, '0', -point);
-		*s = ft_strjoinfree(&tmp, s, 3);
-		point = 0;
-	}
 	if (round_s(s, point, precision) == 1)
 		ret = ft_strdup("1");
 	else if (point == 0)

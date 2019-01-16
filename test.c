@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:08:51 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/15 23:24:01 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/16 03:29:55 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libftprintf.h"
@@ -63,11 +63,13 @@ printf("ft: %.100Lf\n", );
 //	printf("returned : %i\n", ret);
 
 	
-long double a = -1.933870e+37L;
+double a = 0.1433870e+308;
 double b = 0.101;
 //ft_printf("%lu\n", -42);
 //printf("%lu\n", -42);
-ft_printf("%Lf", a);
+ft_printf("%.1000f\n", a);
+//printf("%.1000f\n", a);
+
 //printf("%lu\n", -42);
 return (0);
 }

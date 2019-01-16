@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_diouxX.c                                   :+:      :+:    :+:   */
+/*   process_dioux.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 20:06:42 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/15 22:07:45 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/16 01:45:59 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*prcs_d(va_list *ap, t_printops *opt, size_t *l)
 		arg = (long long)(va_arg(*ap, long long));
 	else
 		arg = (int)va_arg(*ap, int);
-	sign = (arg >= 0) ? 1:-1;
+	sign = (arg >= 0) ? 1 : -1;
 	ret = ft_lltoa(arg);
 	if (arg == 0 && opt->precision == 0)
 		*ret = '\0';
@@ -42,8 +42,8 @@ char	*prcs_d(va_list *ap, t_printops *opt, size_t *l)
 
 char	*prcs_o(va_list *ap, t_printops *opt, size_t *l)
 {
-	t_lm		lm;
-	char		*ret;
+	t_lm				lm;
+	char				*ret;
 	unsigned long long	arg;
 	int					sign;
 
@@ -51,14 +51,14 @@ char	*prcs_o(va_list *ap, t_printops *opt, size_t *l)
 	if (lm == 1)
 		arg = (unsigned short)va_arg(*ap, unsigned int);
 	else if (lm == 2)
-		arg = (unsigned char)(va_arg(*ap,unsigned int));
+		arg = (unsigned char)(va_arg(*ap, unsigned int));
 	else if (lm == 3)
 		arg = (unsigned long)(va_arg(*ap, unsigned long));
 	else if (lm == 4 || lm == 6)
 		arg = (unsigned long long)(va_arg(*ap, unsigned long long));
 	else
 		arg = (unsigned int)va_arg(*ap, unsigned int);
-	sign = (arg > 0) ? 1:0;
+	sign = (arg > 0) ? 1 : 0;
 	ret = ft_llutoa(arg, 8, 22);
 	if (arg == 0 && opt->precision == 0 && (opt->flag).sharp != '#')
 		*ret = '\0';
@@ -70,8 +70,8 @@ char	*prcs_o(va_list *ap, t_printops *opt, size_t *l)
 
 char	*prcs_u(va_list *ap, t_printops *opt, size_t *l)
 {
-	t_lm		lm;
-	char		*ret;
+	t_lm				lm;
+	char				*ret;
 	unsigned long long	arg;
 	int					sign;
 
@@ -79,14 +79,14 @@ char	*prcs_u(va_list *ap, t_printops *opt, size_t *l)
 	if (lm == 1)
 		arg = (unsigned short)va_arg(*ap, unsigned int);
 	else if (lm == 2)
-		arg = (unsigned char)(va_arg(*ap,unsigned int));
+		arg = (unsigned char)(va_arg(*ap, unsigned int));
 	else if (lm == 3)
 		arg = (unsigned long)(va_arg(*ap, unsigned long));
 	else if (lm == 4 || lm == 6)
 		arg = (unsigned long long)(va_arg(*ap, unsigned long long));
 	else
-		arg = (unsigned int)va_arg(*ap, unsigned int);	
-	sign = (arg == 0) ? 0:1;
+		arg = (unsigned int)va_arg(*ap, unsigned int);
+	sign = (arg == 0) ? 0 : 1;
 	ret = ft_llutoa(arg, 10, 20);
 	if (arg == 0 && opt->precision == 0)
 		*ret = '\0';
@@ -98,23 +98,21 @@ char	*prcs_u(va_list *ap, t_printops *opt, size_t *l)
 
 char	*prcs_x(va_list *ap, t_printops *opt, size_t *l)
 {
-	t_lm		lm;
-	char		*ret;
+	char				*ret;
 	unsigned long long	arg;
 	int					sign;
-	
-	lm = opt->lmod;
-	if (lm == 1)
+
+	if (opt->lmod == 1)
 		arg = (unsigned short)va_arg(*ap, unsigned int);
-	else if (lm == 2)
-		arg = (unsigned char)(va_arg(*ap,unsigned int));
-	else if (lm == 3)
+	else if (opt->lmod == 2)
+		arg = (unsigned char)(va_arg(*ap, unsigned int));
+	else if (opt->lmod == 3)
 		arg = (unsigned long)(va_arg(*ap, unsigned long));
-	else if (lm == 4 || lm == 6)
+	else if (opt->lmod == 4 || opt->lmod == 6)
 		arg = (unsigned long long)(va_arg(*ap, unsigned long long));
 	else
 		arg = (unsigned int)va_arg(*ap, unsigned int);
-	sign = (arg > 0) ? 1:0;
+	sign = (arg > 0) ? 1 : 0;
 	ret = ft_llutoa(arg, 16, 16);
 	if (arg == 0 && opt->precision == 0)
 		*ret = '\0';

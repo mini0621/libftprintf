@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 15:21:57 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/15 23:32:16 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/16 03:28:39 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,23 @@ char	*ft_dbtoa(t_double *n, size_t precision, int e)
 	subnormal = ((short)n->expo == -1023) ? 1: 0;
 	if ((ret = get_frac10(n, 52, subnormal)) == NULL)
 		return (NULL);
-	//printf("check :%s\n", ret);
-	p = get10th_expo(n->expo) + 1;
+	p = get10th_expo(n->expo) + 1 - subnormal;
 	if (e == 1)
 		return (ft_strsubfree(ret, skip_zeros(ret), precision + 2));
-	ret = ft_strsubfree(ret, skip_zeros(ret), (size_t)p + precision + 1);
-//	printf("check2 :%s\n", ret);
-//	printf("p : %i\n", p);
+	if (p < 0)
+		ret = ft_strsubfree(ret, skip_zeros(ret), precision + 1);
+	else if ((ret = ft_strsubfree(ret, skip_zeros(ret),
+					(size_t)p + precision + 1)) == NULL)
+		return (NULL);
+	if (p < 0)
+		p = add_zeros(&ret, p);
 	integer = sub_integer(&ret, p, precision);
 	if (precision == 0)
 		return (integer);
-//	printf("check3 :%s\n", ret);	
-	ret = ft_strsubfree(ret, 0, precision);
+	if ((ret = ft_strsubfree(ret, 0, precision)) == NULL)
+		return (NULL);
 	if (ft_strlen(ret) < precision)
 		ret = prcs_precision_end(&ret, precision);
-//	printf("check5 ret:%s\ncheck5 int:%s\n", ret, integer);
 	ret = ft_strjoinfree(&integer, &ret, 3);
 	return (ret);
 }

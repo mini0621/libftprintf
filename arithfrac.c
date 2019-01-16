@@ -6,13 +6,13 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 18:49:16 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/15 23:06:27 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/16 01:51:23 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int		div_frac(unsigned long long *a, int times)
+int					div_frac(unsigned long long *a, int times)
 {
 	int					i;
 	int					e;
@@ -35,32 +35,8 @@ int		div_frac(unsigned long long *a, int times)
 	return (e);
 }
 
-int		shift_frac_left(unsigned long long *a)
-{
-	int	e;
-	int i;
-
-	e = 100;
-	while (e >= 0 && a[e] == 0)
-		e--;
-	if (e == 100)
-		return (0);
-	i = 100;
-	while (e >= 0)
-	{
-		a[i] = a[e];
-		i--;
-		e--;
-	}
-	while (i >= 0)
-	{
-		a[i] = 0;
-		i--;
-	}
-	return (e);
-}
-
-unsigned long long get_mincarry(unsigned long long *a, unsigned long long carry)
+unsigned long long	get_mincarry(unsigned long long *a,
+		unsigned long long carry)
 {
 	unsigned long long tmp;
 
@@ -78,7 +54,7 @@ unsigned long long get_mincarry(unsigned long long *a, unsigned long long carry)
 		return (0);
 }
 
-void		add_frac(unsigned long long *a, unsigned long long **b)
+void				add_frac(unsigned long long *a, unsigned long long **b)
 {
 	int	i;
 	int e;
@@ -94,16 +70,15 @@ void		add_frac(unsigned long long *a, unsigned long long **b)
 	free(*b);
 }
 
-void	mult_frac(unsigned long long *frac, int a, int times)
+void				mult_frac(unsigned long long *frac, int a, int times)
 {
 	int	i;
 	int	index;
-	int	zero = 50;
 
 	i = 0;
 	while (i < times)
 	{
-		index = zero;
+		index = 50;
 		while (index < 101)
 		{
 			frac[index] *= a;
@@ -114,10 +89,10 @@ void	mult_frac(unsigned long long *frac, int a, int times)
 	}
 }
 
-void	carry_frac(unsigned long long *frac10)
+void				carry_frac(unsigned long long *frac10)
 {
-	int	i;
-	unsigned long long c;
+	int					i;
+	unsigned long long	c;
 
 	i = 0;
 	while (i < 100)
@@ -133,30 +108,3 @@ void	carry_frac(unsigned long long *frac10)
 		i++;
 	}
 }
-
-int		shift_frac_right(unsigned long long *a)
-{
-	int	e;
-	int i;
-
-	e = 0;
-	while (e <= 100 && a[e] == 0)
-		e++;
-	if (e < 10)
-		return (0);
-	i = 10;
-	while (e <= 100)
-	{
-		a[i] = a[e];
-		i++;
-		e++;
-	}
-	while (i <= 100)
-	{
-		a[i] = 0;
-		i++;
-	}
-	return (e);
-}
-
-

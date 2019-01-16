@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 18:49:16 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/15 23:25:17 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/16 02:37:57 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char				*get_frac10(t_double *n , int frac_bits, int subnormal)
 	if (subnormal == 1)
 		div_frac(a, 1022);
 	else if (expo > 0)
-		 mult_frac(a, 2, (int)expo);
+		mult_frac(a, 2, (int)expo);
 	else if (expo < 0)
 		e = div_frac(a, -(int)(expo));
 	return (fractoa(a, e));
@@ -82,3 +82,47 @@ char				*fractoa(unsigned long long *frac, int e)
 	free(frac);
 	return (ret);
 }
+
+
+int					shift_frac_left(unsigned long long *a)
+{
+	int	e;
+	int i;
+
+	e = 100;
+	while (e >= 0 && a[e] == 0)
+		e--;
+	if (e == 100)
+		return (0);
+	i = 100;
+	while (e >= 0)
+	{
+		a[i] = a[e];
+		i--;
+		e--;
+	}
+	while (i >= 0)
+	{
+		a[i] = 0;
+		i--;
+	}
+	return (e);
+}
+
+int					get10th_expo(uint16_t expo)
+{
+	long double	p;
+	int			i;
+
+	p = (short)(expo);
+	p = (p * 0.301029999566L);
+	i = (int)p;
+	if (p == i)
+		return (i);
+	if (p > i)
+		i = (i + 1 - p < p - i) ? i + 1 : i;
+	else
+		i = (p - i + 1 < p - 1) ? i - 1 : i;
+	return (i);
+}
+

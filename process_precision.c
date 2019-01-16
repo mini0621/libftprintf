@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 14:06:47 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/16 01:00:11 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/16 03:29:50 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,5 @@ char	*prcs_precision_end(char **s, size_t precision)
 	}
 	ft_memset(ret, '0', precision * sizeof(char));
 	*s = ft_strjoinfree(s, &ret, 3);
-	return (ret);
+	return (*s);
 }
