@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 15:21:57 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/13 19:47:59 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/15 23:38:43 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,7 @@ char	*ft_ldtoa(t_double *n, size_t precision, int e)
 		return (ft_strsubfree(ret, skip_zeros(ret), precision + 2));
 	if (p < 0)
 		ret = ft_strsubfree(ret, skip_zeros(ret), precision + 1);
-	ret = ft_strsubfree(ret, skip_zeros(ret), p + precision + 1);
-	//printf("check2 :%s\n", ret);
-	//printf("p : %i\n", p);
+	ret = ft_strsubfree(ret, skip_zeros(ret), (size_t)p + precision + 1);
 	integer = sub_integer(&ret, p, precision);
 	if (precision == 0)
 		return (integer);
@@ -116,9 +114,9 @@ char	*sub_integer(char **s, int point, int precision)
 	else if (point == 0)
 		ret = ft_strdup("0");
 	else
-		ret = ft_strsub(*s, 0, point);
+		ret = ft_strsub(*s, 0, (size_t)point);
 	if (point > 0)
-		*s = ft_strsubfree(*s, point, precision);
+		*s = ft_strsubfree(*s, (size_t)point, precision);
 	if (precision != 0)
 	{
 		tmp = ft_strdup(".");

@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 23:12:11 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/15 18:25:09 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/16 01:04:02 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,23 @@ char	*prcs_flags(t_printops *opt, char **s, int sign)
 {
 	t_flags	flags;
 	char	sp;
+
 	flags = opt->flag;
 	sp = opt->cnvrtsp;
-
 	if (s == NULL || *s == NULL)
 		return (NULL);
 	if (sp == 's' && (*s = prcs_precision_s(s, opt->precision)) == NULL)
-			return (NULL);
-	if ((sp == 'd' || sp == 'i' || sp == 'o'|| sp == 'u'|| sp == 'x'|| sp == 'X')
-			&& (*s = prcs_precision(s, opt->precision, sign)) == NULL)
+		return (NULL);
+	if ((sp == 'd' || sp == 'i' || sp == 'o' || sp == 'u' || sp == 'x'
+	|| sp == 'X') && (*s = prcs_precision(s, opt->precision, sign)) == NULL)
 		return (NULL);
 	if (sign > 0 && flags.sharp == '#' && (*s = prcs_sharp(sp, s)) == NULL)
 		return (NULL);
-	if (sign > 0 && flags.plus_sp != '\0' && (*s = prcs_plus(sp, s, flags.plus_sp)) == NULL)
+	if (sign > 0 && flags.plus_sp != '\0'
+			&& (*s = prcs_plus(sp, s, flags.plus_sp)) == NULL)
 		return (NULL);
-	if (flags.min_0 == '0' && opt->width > 0 && (*s = prcs_zero(sp, s, opt->width, &flags)) == NULL)
+	if (flags.min_0 == '0' && opt->width > 0
+			&& (*s = prcs_zero(sp, s, opt->width, &flags)) == NULL)
 		return (NULL);
 	if (opt->width > 0 && (*s = prcs_min(s, opt->width, flags.min_0)) == NULL)
 		return (NULL);
@@ -46,7 +48,7 @@ char	*prcs_sharp(char sp, char **s)
 		ret = ft_strdup("0");
 		return (ft_strjoinfree(&ret, s, 3));
 	}
-	else if(sp == 'x' || sp == 'X')
+	else if (sp == 'x' || sp == 'X')
 	{
 		ret = ft_strdup("0x");
 		return (ft_strjoinfree(&ret, s, 3));
@@ -55,10 +57,10 @@ char	*prcs_sharp(char sp, char **s)
 		return (*s);
 }
 
-char	*prcs_plus(char	sp, char **s, char c)
+char	*prcs_plus(char sp, char **s, char c)
 {
 	char	*ret;
-	
+
 	if (sp == 'd' || sp == 'i' || sp == 'f')
 	{
 		ret = ft_strnew(ft_strlen(*s) + 1);
@@ -74,9 +76,9 @@ char	*prcs_plus(char	sp, char **s, char c)
 char	*prcs_zero(char sp, char **s, size_t w, t_flags *flags)
 {
 	char	*ret;
-	size_t		i;
+	size_t	i;
 
-	if (sp == 'c' || sp == 's' || sp == 'p' || ft_strlen(*s) >= w
+	if (sp == 'p' || ft_strlen(*s) >= w
 			|| ft_strchr(*s, 'n') != NULL)
 		return (*s);
 	if ((ret = ft_strnew(w)) == NULL)
@@ -90,9 +92,9 @@ char	*prcs_zero(char sp, char **s, size_t w, t_flags *flags)
 		i = 1;
 	else
 		i = 0;
-	if (i != 0)	
+	if (i != 0)
 		ft_strncpy(ret, *s, i);
-	ft_memset(ret + i, '0', (w - ft_strlen(*s)) *sizeof(char));
+	ft_memset(ret + i, '0', (w - ft_strlen(*s)) * sizeof(char));
 	ft_strcat(ret, *s + i);
 	free(*s);
 	return (ret);

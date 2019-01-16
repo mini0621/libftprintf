@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 18:49:16 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/12 19:50:16 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/15 23:06:27 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int		div_frac(unsigned long long *a, int times)
 {
-	int	i;
-	int	e;
-	unsigned long long c;
+	int					i;
+	int					e;
+	unsigned long long	c;
 
 	e = 0;
 	while (times != 0)

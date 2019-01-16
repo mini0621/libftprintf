@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 20:06:42 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/13 16:20:36 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/16 01:13:27 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,21 @@ int		ft_printf(const char *fmt, ...)
 	if (*fmt == '\0')
 		return (0);
 	if ((start = join_chars(&output, start, &len)) == NULL)
-			return (-1);
+		return (-1);
 	while (*start != '\0')
 	{
 		output = join_cnvrt(&output, &start, &ap, &len);
-//	printf("ret is %s, len is %zu\n", output, len);
 		if (output == NULL)
-				return (-1);
+			return (-1);
 		if ((start = join_chars(&output, start, &len)) == NULL)
-			return(-1);
+			return (-1);
 	}
 	va_end(ap);
-	printoutput(output,len);
+	printoutput(output, len);
 	return (len);
 }
 
-void printoutput(char *output, size_t len)
+void	printoutput(char *output, size_t len)
 {
 	write(1, output, len);
 	free(output);
@@ -53,21 +52,19 @@ char	*join_chars(char **output, char *start, size_t *len)
 	size_t	i;
 
 	i = 0;
-	while(*(start + i) != '%' && *(start + i) != '\0')
+	while (*(start + i) != '%' && *(start + i) != '\0')
 		i++;
 	if (i == 0)
 		return (start);
 	s = *output;
 	if ((*output = ft_memalloc(*len + i + 1)) == NULL)
 	{
-			free(s);
-			return (NULL);
+		free(s);
+		return (NULL);
 	}
 	if (*len != 0)
-	{
 		ft_memcpy(*output, s, *len);
-		free(s);
-	}
+	free(s);
 	ft_memcpy(*output + *len, start, i);
 	*len += i;
 	return (start + i);
@@ -91,7 +88,6 @@ char	*join_cnvrt(char **output, char **start, va_list *ap, size_t *len)
 	if (*output != NULL)
 		ft_memcpy(ret, *output, *len);
 	ft_memcpy(ret + *len, s, slen);
-	//printf("ret is %s, len is %zu, slen is %zu\n", ret,*len, slen);
 	*len += slen;
 	if (*output != NULL)
 		free(*output);

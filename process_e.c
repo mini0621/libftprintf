@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 18:00:27 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/13 18:59:58 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/15 23:39:46 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 char	*prcs_e(va_list *ap, t_printops *opt, size_t *l)
 {
-	char		*ret;
-	t_lm		lm;
-	int			sign;
+	char	*ret;
+	t_lm	lm;
+	int		sign;
 	
+	if (opt->precision == 0xffffffffffffffff)
+		opt->precision = 6;
 	lm = opt->lmod;
 	ret = NULL;
 	if (lm == 5)

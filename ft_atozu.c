@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 19:31:04 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/13 18:29:22 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/15 23:00:16 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 size_t	ft_atozu(const char *str)
 {
-	int	i;
+	int		i;
 	size_t	ret;
-	size_t neg;
+	size_t	neg;
 
 	i = 0;
 	neg = 1;

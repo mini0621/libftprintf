@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 15:21:57 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/13 19:21:26 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/15 23:32:16 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*ft_dbtoa(t_double *n, size_t precision, int e)
 	p = get10th_expo(n->expo) + 1;
 	if (e == 1)
 		return (ft_strsubfree(ret, skip_zeros(ret), precision + 2));
-	ret = ft_strsubfree(ret, skip_zeros(ret), p + precision + 1);
+	ret = ft_strsubfree(ret, skip_zeros(ret), (size_t)p + precision + 1);
 //	printf("check2 :%s\n", ret);
 //	printf("p : %i\n", p);
 	integer = sub_integer(&ret, p, precision);

@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 23:02:24 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/10 18:45:13 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/15 23:11:21 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strsubfree(char *s, unsigned int start, size_t len)
 	if (ptr == NULL)
 		return (NULL);
 	i = 0;
-	while (i < len)
+	while (s[start] != '\0' && i < len)
 	{
 		ptr[i] = s[start];
 		i++;
