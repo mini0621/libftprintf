@@ -6,11 +6,11 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 18:49:16 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/16 01:51:23 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/16 22:28:15 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int					div_frac(unsigned long long *a, int times)
 {

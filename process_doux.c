@@ -6,11 +6,11 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 20:06:42 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/16 01:45:59 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/17 00:17:16 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 char	*prcs_d(va_list *ap, t_printops *opt, size_t *l)
 {

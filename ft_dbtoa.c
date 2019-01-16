@@ -6,11 +6,11 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 15:21:57 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/16 03:28:39 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/16 21:59:54 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 char	*ft_dbtoa(t_double *n, size_t precision, int e)
 {
@@ -19,7 +19,7 @@ char	*ft_dbtoa(t_double *n, size_t precision, int e)
 	int		p;
 	int		subnormal;
 
-	subnormal = ((short)n->expo == -1023) ? 1: 0;
+	subnormal = ((short)n->expo == -1023) ? 1 : 0;
 	if ((ret = get_frac10(n, 52, subnormal)) == NULL)
 		return (NULL);
 	p = get10th_expo(n->expo) + 1 - subnormal;
@@ -30,8 +30,6 @@ char	*ft_dbtoa(t_double *n, size_t precision, int e)
 	else if ((ret = ft_strsubfree(ret, skip_zeros(ret),
 					(size_t)p + precision + 1)) == NULL)
 		return (NULL);
-	if (p < 0)
-		p = add_zeros(&ret, p);
 	integer = sub_integer(&ret, p, precision);
 	if (precision == 0)
 		return (integer);

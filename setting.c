@@ -6,11 +6,11 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 18:57:02 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/16 00:58:25 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/17 00:34:02 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int			is_cnvrtsp(char c)
 {

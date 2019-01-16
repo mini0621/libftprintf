@@ -1,5 +1,4 @@
 /* ************************************************************************** */
-
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   process_csp.c                                      :+:      :+:    :+:   */
@@ -7,11 +6,11 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:58:39 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/14 22:19:44 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/16 23:43:55 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 char	*prcs_c(va_list *ap, t_printops *opt, size_t *l)
 {
@@ -21,9 +20,8 @@ char	*prcs_c(va_list *ap, t_printops *opt, size_t *l)
 	int		terminate;
 
 	c = (char)va_arg(*ap, int);
-
-	terminate = (c == '\0') ? 1:0;
-	c = (terminate == 1) ? 'A':c;
+	terminate = (c == '\0') ? 1 : 0;
+	c = (terminate == 1) ? 'A' : c;
 	if ((ret = ft_strnew(1)) == NULL)
 		return (NULL);
 	ft_strncpy(ret, &c, 1);
@@ -52,10 +50,10 @@ char	*prcs_s(va_list *ap, t_printops *opt, size_t *l)
 
 char	*prcs_p(va_list *ap, t_printops *opt, size_t *l)
 {
-	char		*ret;
-	unsigned long long arg;
+	char				*ret;
+	unsigned long long	arg;
 
-	arg = (unsigned long long )va_arg(*ap, void *);
+	arg = (unsigned long long)va_arg(*ap, void *);
 	(opt->flag).sharp = '#';
 	opt->cnvrtsp = 'x';
 	if ((ret = ft_llutoa(arg, 16, 16)) == NULL)

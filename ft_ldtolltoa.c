@@ -6,23 +6,23 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/27 21:56:41 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/15 22:18:01 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/16 23:32:23 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-long double ft_neg_power(int power)
+long double	ft_neg_power(int power)
 {
 	if (power <= 0)
 		return (1);
-	return (0.1 * ft_neg_power(power -1));
+	return (0.1 * ft_neg_power(power - 1));
 }
 
-long double round_ld(long double n, int precision)
+long double	round_ld(long double n, int precision)
 {
-	int i;
-	int d;
+	int			i;
+	int			d;
 	long double	ret;
 
 	ret = n;
@@ -37,21 +37,19 @@ long double round_ld(long double n, int precision)
 	if (d > 4)
 		ret = ret + ft_neg_power(precision);
 	return (ret);
-	
-	
 }
 
-long double removeint(long double n, int precision, char **integer)
+long double	removeint(long double n, int precision,
+		char **integer)
 {
 	if (n < 0)
 		n = -n;
 	n = round_ld(n, precision);
 	*integer = ft_llutoa((unsigned long long)n, 10, 20);
 	return (n - (unsigned long long)n);
-
 }
 
-char	*ft_ldtolltoa(long double n, int precision)
+char		*ft_ldtolltoa(long double n, int precision)
 {
 	char	*integer;
 	int		i;
@@ -61,10 +59,10 @@ char	*ft_ldtolltoa(long double n, int precision)
 	if (precision == 0)
 		return (integer);
 	i = 1;
-	if ((ret = ft_strnew(precision + 1))== NULL)
+	if ((ret = ft_strnew(precision + 1)) == NULL)
 		return (0);
 	ret[0] = '.';
-	while(i <= precision)
+	while (i <= precision)
 	{
 		n = n * 10;
 		ret[i] = (int)n + '0';

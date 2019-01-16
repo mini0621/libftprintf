@@ -6,11 +6,11 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 23:12:11 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/16 01:04:02 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/17 00:22:01 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 char	*prcs_flags(t_printops *opt, char **s, int sign)
 {
@@ -108,7 +108,8 @@ char	*prcs_min(char **s, size_t w, char min)
 	if (w == 0 || (w < ft_strlen(*s)))
 		return (*s);
 	len = w - ft_strlen(*s);
-	ret = ft_strnew(len);
+	if ((ret = ft_strnew(len)) == NULL)
+		return (NULL);
 	ft_memset(ret, ' ', len);
 	if (min == '-')
 		return (ft_strjoinfree(s, &ret, 3));

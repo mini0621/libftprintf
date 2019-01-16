@@ -6,17 +6,18 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 18:49:16 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/16 02:37:57 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/16 23:30:55 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 unsigned long long	*init_frac(uint64_t frac)
 {
 	unsigned long long	*a;
 
-	if ((a = (unsigned long long*)malloc(sizeof(unsigned long long) * 101)) == NULL)
+	if ((a = (unsigned long long*)malloc(sizeof(unsigned long long) * 101))
+			== NULL)
 		return (NULL);
 	ft_bzero(a, sizeof(unsigned long long) * 101);
 	if (frac == 0)
@@ -27,10 +28,10 @@ unsigned long long	*init_frac(uint64_t frac)
 	a[50] = (unsigned long long)frac % 100000000;
 	a[51] = ((unsigned long long)frac / 100000000) % 100000000;
 	a[52] = (unsigned long long)frac / 10000000000000000;
-	return  (a);
+	return (a);
 }
 
-char				*get_frac10(t_double *n , int frac_bits, int subnormal)
+char				*get_frac10(t_double *n, int frac_bits, int subnormal)
 {
 	unsigned long long	*a;
 	short				expo;
@@ -83,7 +84,6 @@ char				*fractoa(unsigned long long *frac, int e)
 	return (ret);
 }
 
-
 int					shift_frac_left(unsigned long long *a)
 {
 	int	e;
@@ -125,4 +125,3 @@ int					get10th_expo(uint16_t expo)
 		i = (p - i + 1 < p - 1) ? i - 1 : i;
 	return (i);
 }
-

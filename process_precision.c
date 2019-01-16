@@ -6,11 +6,11 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 14:06:47 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/16 03:29:50 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/16 22:31:38 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 char	*prcs_precision(char **s, size_t precision, int sign)
 {
