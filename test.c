@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:08:51 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/17 17:32:02 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/17 17:59:53 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -14,9 +14,12 @@
 #include <stdlib.h>
 #include <limits.h>
 #include <math.h>
+ #include <fcntl.h>
+
 int main(int argc, char **argv)
 {
 	int ret;
+
 	//t_printops *opt = readops(&(argv[1]));
 	//	printf("flags : charp %c, min0 %c, +sp %c \n width : %i, precision : %i, lmod: %i, cmvrtsp: %c \n",opt->flag.sharp, opt->flag.min_0, opt->flag.plus_sp, opt->width, opt->precision, opt->lmod, opt->cnvrtsp);
 	//	free(opt);
@@ -44,8 +47,8 @@ int main(int argc, char **argv)
 			  printf("real: %0-+ i\n", 56);
 			  printf("real: %#0-+ i\n", 56);
 			  */
-	/*
-	//ret = ft_printf("ft: %.100Lf\n", 1.23L);
+
+	ft_printf("ft: %.100Lf\n", 1.23L);
 	ft_printf("fto: %10oa\n", 10);
 	ft_printf("ftx: %10xa\n", 10);
 	ft_printf("ftd: %10da\n", 10);
@@ -54,14 +57,13 @@ int main(int argc, char **argv)
 	ft_printf("ftf: %%a\n", 10.0);
 
 
-	printf("ft: %.50sa\n", "Hellooooooooo");
-	printf("ft: %10ca\n", 'Y');
-	printf("ft: %-10da\n", 10);
-	printf("ft: %-10ua\n", 10);
-	printf("ft: %.100Lf\n", 1.4e+10L);
-	printf("ft: %.100Lf\n", );
-	*/
-	//	printf("returned : %i\n", ret);
+	ft_printf("ft: %.50sa\n", "Hellooooooooo");
+	ft_printf("ft: %10ca\n", 'Y');
+	ft_printf("ft: %-10da\n", 10);
+	ft_printf("ft: %-10ua\n", 10);
+	ft_printf("ft: %.100Lf\n", 1.4e+10L);
+	ft_printf("ft: %.100Lf\n",8.0L);
+		ft_printf("returned : %i\n", ret);
 
 
 	double a = 0.1433870e+308;
@@ -78,5 +80,14 @@ int main(int argc, char **argv)
 	ft_printf("a%.2ca", NULL);
 	//printf("a%.2ca", NULL);
 	//ft_printf("@moulitest: %#.x %#.0x", 0, 0);
+	//
+	
+	int fd;
+
+	fd = open("txt", O_WRONLY);
+
+	ret = ft_dprintf(fd, "This should be in the file. %s, %i", "hi", 17);
+	//ret = ft_dprintf(fd, "This should be in the file. %s, %i", "hi", 17);
+	printf("%i", ret);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 20:06:42 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/17 16:18:22 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/17 18:04:06 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		ft_dprintf(int fd, const char *fmt, ...)
 			return (-1);
 	}
 	va_end(ap);
-	dprintoutput(output, len);
+	dprintoutput(fd, output, len);
 	return (len);
 }
 

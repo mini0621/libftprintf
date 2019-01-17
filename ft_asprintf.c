@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 20:06:42 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/17 15:55:16 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/17 18:04:40 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ int		ft_asprintf(char **ret, const char *fmt, ...)
 
 int		asprinterror(char **ret)
 {
-	ret == NULL;
+	ret = NULL;
 	return (-1);
 }
