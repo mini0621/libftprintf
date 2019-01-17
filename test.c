@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:08:51 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/17 00:34:06 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/17 16:15:23 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -69,11 +69,11 @@ int main(int argc, char **argv)
 	//ft_printf("%lu\n", -42);
 	//printf("%lu\n", -42);
 	//printf("%.1000f\n", a);
-	printf("%.0p, %.p\n", 0, 0);
-	ft_printf("%.0p, %.p\n", 0, 0);
+	printf("%.2p, %.p\n", &a, &a);
+	ft_printf("%.2p, %.p\n", &a, &a);
 	//ft_dprintf(-1, "%18446744073709551615d\n", 1);
-	printf("%*d\n", "ll", 11);
-	printf("%lld\n",  11);
-	printf("%9.10lld\n", 11);
+	ft_printf("%10.12d\n", 11);
+	ft_printf("%*.*d\n",10, 12, 11);
+	printf("%*.*d\n", 10, 12, 11);
 	return (0);
 }

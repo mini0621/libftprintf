@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:58:39 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/16 23:43:55 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/17 16:16:06 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,10 @@ char	*prcs_p(va_list *ap, t_printops *opt, size_t *l)
 
 	arg = (unsigned long long)va_arg(*ap, void *);
 	(opt->flag).sharp = '#';
-	opt->cnvrtsp = 'x';
 	if ((ret = ft_llutoa(arg, 16, 16)) == NULL)
 		return (NULL);
+	if (arg == 0 && opt->precision == 0)
+		*ret = '\0';
 	if (prcs_flags(opt, &ret, 1) == NULL)
 		return (NULL);
 	*l = ft_strlen(ret);

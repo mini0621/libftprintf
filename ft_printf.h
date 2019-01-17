@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 22:18:49 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/16 23:32:06 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/17 16:15:39 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,12 @@ typedef struct		s_double
 }					t_double;
 
 int					ft_printf(const char *fmt, ...);
+int					ft_sprintf(char *str, const char *fmt, ...);
+int					ft_dprintf(int fd, const char *fmt, ...);
+int					ft_asprintf(char **ret, const char *fmt, ...);
 void				printoutput(char *output, size_t len);
+void				snprintoutput(char *output, size_t len, size_t size);
+void				dprintoutput(char *output, size_t len);
 char				*join_chars(char **output, char *fmt, size_t *len);
 char				*join_cnvrt(char **output, char **start,
 		va_list *ap, size_t *len);
@@ -69,7 +74,7 @@ char				*prcs_percent(t_printops *opt, size_t *l);
 
 int					is_cnvrtsp(char c);
 t_printops			*initoption(void);
-t_printops			*readops(char **start);
+t_printops			*readops(char **start, va_list *ap);
 void				adjust_ops(t_printops *opt, char *i, int ret, char **start);
 void				storeops(char **start, int i, t_printops *opt);
 

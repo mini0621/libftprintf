@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 18:57:02 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/17 00:34:02 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/17 16:15:49 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int			is_cnvrtsp(char c)
 	|| c == 'c' || c == 'f' || c == 's' || c == 'p' || c == 'e' || c == '%')
 		return (1);
 	if (c != 'l' && c != 'h' && c != '.' && c != 'L' && c != ' '
-		&& c != ' ' && c != '#' && c != '-' && c != '+'
+		&& c != ' ' && c != '#' && c != '-' && c != '+' && c != '*'
 		&& ft_isdigit(c) == 0 && c != 'j')
 		return (-1);
 	return (0);
@@ -40,7 +40,7 @@ t_printops	*initoption(void)
 	return (opt);
 }
 
-t_printops	*readops(char **start)
+t_printops	*readops(char **start, va_list *ap)
 {
 	int			i;
 	t_printops	*opt;
@@ -52,11 +52,12 @@ t_printops	*readops(char **start)
 	while (*(*start + i) != '\0' && (ret = is_cnvrtsp(*(*start + i))) == 0)
 	{
 		storeops(start, i, opt);
-		if ((*(*start + i) <= '9' && *(*start + i) >= '1')
-				|| *(*start + i) == '.')
+		if (*(*start + i) == '.' && *(*start + i++ + 1) == '*')
+			opt->precision = va_arg(*ap, size_t);
+		if (*(*start + i) == '*' && *(*start + i - 1) != '.')
+			opt->width = va_arg(*ap, size_t);
+		if (*(*start + i) <= '9' && *(*start + i) >= '1')
 		{
-			if (*(*start + i) == '.')
-				i++;
 			while (*(*start + i) <= '9' && *(*start + i) >= '0')
 				i++;
 		}
@@ -97,7 +98,7 @@ void		storeops(char **start, int i, t_printops *opt)
 		opt->flag.plus_sp = *(*start + i);
 	if (*(*start + i) <= '9' && *(*start + i) > '0' && opt->width == 0)
 		opt->width = ft_atozu(*start + i);
-	if (*(*start + i) == '.')
+	if (*(*start + i) == '.' && *(*start + i + 1) != '*')
 		opt->precision = ft_atozu(*start + ++i);
 	if (*(*start + i) == 'l' && opt->lmod == none)
 		opt->lmod = l;

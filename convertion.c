@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 20:38:25 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/17 00:20:39 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/17 14:58:34 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char		*convert(va_list *ap, char **start, size_t *l)
 	t_prcs_fp	prcs;
 	char		*ret;
 
-	opt = readops(start);
+	opt = readops(start, ap);
 	if (opt->cnvrtsp == '\0')
 	{
 		free(opt);

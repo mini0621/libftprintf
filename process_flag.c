@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 23:12:11 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/17 00:22:01 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/17 15:16:36 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ char	*prcs_flags(t_printops *opt, char **s, int sign)
 	if (sp == 's' && (*s = prcs_precision_s(s, opt->precision)) == NULL)
 		return (NULL);
 	if ((sp == 'd' || sp == 'i' || sp == 'o' || sp == 'u' || sp == 'x'
-	|| sp == 'X') && (*s = prcs_precision(s, opt->precision, sign)) == NULL)
+				|| sp == 'X' || sp == 'p')
+			&& (*s = prcs_precision(s, opt->precision, sign)) == NULL)
 		return (NULL);
 	if (sign > 0 && flags.sharp == '#' && (*s = prcs_sharp(sp, s)) == NULL)
 		return (NULL);
@@ -48,7 +49,7 @@ char	*prcs_sharp(char sp, char **s)
 		ret = ft_strdup("0");
 		return (ft_strjoinfree(&ret, s, 3));
 	}
-	else if (sp == 'x' || sp == 'X')
+	else if (sp == 'x' || sp == 'X' || sp == 'p')
 	{
 		ret = ft_strdup("0x");
 		return (ft_strjoinfree(&ret, s, 3));
