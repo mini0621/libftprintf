@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 18:57:02 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/17 16:15:49 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/17 17:31:13 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,12 @@ t_printops	*readops(char **start, va_list *ap)
 	while (*(*start + i) != '\0' && (ret = is_cnvrtsp(*(*start + i))) == 0)
 	{
 		storeops(start, i, opt);
-		if (*(*start + i) == '.' && *(*start + i++ + 1) == '*')
+		if (*(*start + i) == '*' && *(*start + i - 1) == '.')
 			opt->precision = va_arg(*ap, size_t);
 		if (*(*start + i) == '*' && *(*start + i - 1) != '.')
 			opt->width = va_arg(*ap, size_t);
+		if (*(*start + i) == '.')
+			i++;
 		if (*(*start + i) <= '9' && *(*start + i) >= '1')
 		{
 			while (*(*start + i) <= '9' && *(*start + i) >= '0')
@@ -64,11 +66,10 @@ t_printops	*readops(char **start, va_list *ap)
 		else
 			i++;
 	}
-	adjust_ops(opt, *start + i, ret, start);
-	return (opt);
+	return (adjust_ops(opt, *start + i, ret, start));
 }
 
-void		adjust_ops(t_printops *opt, char *i, int ret, char **start)
+t_printops	*adjust_ops(t_printops *opt, char *i, int ret, char **start)
 {
 	char	sp;
 	size_t	precision;
@@ -85,6 +86,7 @@ void		adjust_ops(t_printops *opt, char *i, int ret, char **start)
 	&& (sp == 'd' || sp == 'i' || sp == 'o'
 		|| sp == 'u' || sp == 'x' || sp == 'X'))
 		(opt->flag).min_0 = '\0';
+	return (opt);
 }
 
 void		storeops(char **start, int i, t_printops *opt)
@@ -98,8 +100,6 @@ void		storeops(char **start, int i, t_printops *opt)
 		opt->flag.plus_sp = *(*start + i);
 	if (*(*start + i) <= '9' && *(*start + i) > '0' && opt->width == 0)
 		opt->width = ft_atozu(*start + i);
-	if (*(*start + i) == '.' && *(*start + i + 1) != '*')
-		opt->precision = ft_atozu(*start + ++i);
 	if (*(*start + i) == 'l' && opt->lmod == none)
 		opt->lmod = l;
 	else if (*(*start + i) == 'l' && opt->lmod != none)
@@ -112,4 +112,6 @@ void		storeops(char **start, int i, t_printops *opt)
 		opt->lmod = L;
 	if (*(*start + i) == 'j')
 		opt->lmod = j;
+	if (*(*start + i) == '.' && *(*start + i + 1) != '*')
+		opt->precision = ft_atozu(*start + i + 1);
 }

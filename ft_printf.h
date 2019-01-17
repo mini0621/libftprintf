@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 22:18:49 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/17 16:15:39 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/17 17:31:36 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ char				*prcs_percent(t_printops *opt, size_t *l);
 int					is_cnvrtsp(char c);
 t_printops			*initoption(void);
 t_printops			*readops(char **start, va_list *ap);
-void				adjust_ops(t_printops *opt, char *i, int ret, char **start);
+t_printops			*adjust_ops(t_printops *opt, char *i, int ret,
+		char **start);
 void				storeops(char **start, int i, t_printops *opt);
 
 char				*prcs_e(va_list *ap, t_printops *opt, size_t *l);

@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 14:06:47 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/16 22:31:38 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/17 16:26:53 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ char	*prcs_precision_s(char **s, size_t precision)
 		**s = '\0';
 		return (*s);
 	}
+	if (**s == '\0')
+		return (*s);
 	if (precision == 0xffffffffffffffff)
 		return (*s);
 	*s = ft_strsubfree(*s, 0, precision);

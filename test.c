@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:08:51 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/17 16:15:23 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/17 17:32:02 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -72,8 +72,11 @@ int main(int argc, char **argv)
 	printf("%.2p, %.p\n", &a, &a);
 	ft_printf("%.2p, %.p\n", &a, &a);
 	//ft_dprintf(-1, "%18446744073709551615d\n", 1);
-	ft_printf("%10.12d\n", 11);
-	ft_printf("%*.*d\n",10, 12, 11);
-	printf("%*.*d\n", 10, 12, 11);
+	//ft_printf("%10.12d\n", 11);
+	//ft_printf("%*.*d\n",10, 12, 11);
+	//printf("%*.*d\n", 10, 12, 11);
+	ft_printf("a%.2ca", NULL);
+	//printf("a%.2ca", NULL);
+	//ft_printf("@moulitest: %#.x %#.0x", 0, 0);
 	return (0);
 }
