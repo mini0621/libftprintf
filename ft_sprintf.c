@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 20:06:42 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/17 16:16:46 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/18 08:17:43 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ int		ft_sprintf(char *str, const char *fmt, ...)
 			return (-1);
 	}
 	va_end(ap);
-	snprintoutput(output, len, 2147483647);
+	snprintoutput(str, output, len, 2147483647);
 	return (len);
 }

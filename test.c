@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:08:51 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/17 17:59:53 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/18 08:36:04 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -83,11 +83,12 @@ int main(int argc, char **argv)
 	//
 	
 	int fd;
-
+	char str[200];
 	fd = open("txt", O_WRONLY);
 
-	ret = ft_dprintf(fd, "This should be in the file. %s, %i", "hi", 17);
 	//ret = ft_dprintf(fd, "This should be in the file. %s, %i", "hi", 17);
+	ret = ft_dprintf(fd, "This should be in the file. %s, %i", "hi", 17);
 	printf("%i", ret);
+	close(fd);
 	return (0);
 }

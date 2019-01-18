@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 22:18:49 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/17 18:04:56 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/18 08:17:17 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,12 @@ typedef struct		s_double
 
 int					ft_printf(const char *fmt, ...);
 int					ft_sprintf(char *str, const char *fmt, ...);
-int					ft_snprintf(char *str, const char *fmt, ...);
+int					ft_snprintf(char *str, size_t size, const char *fmt, ...);
 int					ft_dprintf(int fd, const char *fmt, ...);
 int					ft_asprintf(char **ret, const char *fmt, ...);
 void				printoutput(char *output, size_t len);
 int					asprinterror(char **ret);
-void				snprintoutput(char *output, size_t len, size_t size);
+void				snprintoutput(char *str, char *output, size_t len, size_t size);
 void				dprintoutput(int fd, char *output, size_t len);
 char				*join_chars(char **output, char *fmt, size_t *len);
 char				*join_cnvrt(char **output, char **start,
