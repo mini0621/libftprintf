@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 23:12:11 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/17 16:36:04 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/18 18:12:05 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ char	*prcs_plus(char sp, char **s, char c)
 {
 	char	*ret;
 
-	if (sp == 'd' || sp == 'i' || sp == 'f')
+	if ((sp == 'd' || sp == 'i' || sp == 'f' || sp == 'e')
+		&& ft_strncmp(*s, "nan", 3) != 0)
 	{
 		ret = ft_strnew(ft_strlen(*s) + 1);
 		if (ret != NULL)

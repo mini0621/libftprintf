@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 22:18:49 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/18 08:17:17 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/18 09:07:07 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ int					ft_dprintf(int fd, const char *fmt, ...);
 int					ft_asprintf(char **ret, const char *fmt, ...);
 void				printoutput(char *output, size_t len);
 int					asprinterror(char **ret);
-void				snprintoutput(char *str, char *output, size_t len, size_t size);
+void				snprintoutput(char *str, char *output, size_t len,
+		size_t size);
 void				dprintoutput(int fd, char *output, size_t len);
 char				*join_chars(char **output, char *fmt, size_t *len);
 char				*join_cnvrt(char **output, char **start,
@@ -79,7 +80,7 @@ t_printops			*initoption(void);
 t_printops			*readops(char **start, va_list *ap);
 t_printops			*adjust_ops(t_printops *opt, char *i, int ret,
 		char **start);
-void				storeops(char **start, int i, t_printops *opt);
+void				storeops(char *i, t_printops *opt, va_list *ap);
 
 char				*prcs_e(va_list *ap, t_printops *opt, size_t *l);
 char				*prcs_x(va_list *ap, t_printops *opt, size_t *l);

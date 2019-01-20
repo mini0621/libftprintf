@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 15:21:57 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/16 22:17:57 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/18 18:44:52 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int		add_zeros(char **s, int point)
 {
 	char	*tmp;
 
-	point--;
 	if ((tmp = ft_strnew(-point)) == NULL)
 	{
 		free(*s);
@@ -36,7 +35,7 @@ char	*ft_ldtoa(t_double *n, size_t precision, int e)
 
 	if ((ret = get_frac10(n, 63, 0)) == NULL)
 		return (NULL);
-	p = get10th_expo(n->expo) + 1;
+	p = get10th_expo(n->expo);
 	if (e == 1)
 		return (ft_strsubfree(ret, skip_zeros(ret), precision + 2));
 	if (p < 0)
@@ -99,11 +98,13 @@ char	*sub_integer(char **s, int point, int precision)
 
 	if (point < 0)
 		point = add_zeros(s, point);
+	if (point < 0)
+		return (NULL);
 	if (round_s(s, point, precision) == 1)
 		ret = ft_strdup("1");
 	else if (point == 0)
 		ret = ft_strdup("0");
-	else
+	if (point > 0)
 		ret = ft_strsub(*s, 0, (size_t)point);
 	if (point > 0)
 		*s = ft_strsubfree(*s, (size_t)point, precision);

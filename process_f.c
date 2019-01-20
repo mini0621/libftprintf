@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:59:51 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/17 17:45:34 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/18 18:45:18 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ t_double	*get_double(double n)
 		d->sign = -1;
 	else
 		d->sign = 1;
-	printf("first 16 bit is %04x\n", (c >> 4));
 	d->expo = (((c & 0x7fff) >> 4) - 1023);
 	d->frac = *((uint64_t*)&n);
 	d->frac = d->frac & 0x000fffffffffffff;
@@ -82,9 +81,8 @@ t_double	*get_double(double n)
 
 char		*sp_double(int sign, uint64_t frac)
 {
-	if (frac != 0)
+	if (frac != 0 && frac != 0x8000000000000000)
 		return (ft_strdup("nan"));
-	else if (sign > 0)
-		return (ft_strdup("inf"));
-	return (ft_strdup("-inf"));
+	sign++;
+	return (ft_strdup("inf"));
 }

@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:59:51 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/16 22:31:05 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/18 18:45:09 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char		*prcs_ld(va_list *ap, t_printops *opt, int *sign)
 	if ((n = get_ldouble(arg)) == NULL)
 		return (NULL);
 	*sign = (arg == 0) ? 0 : n->sign;
-	if (n->expo == 0xefff)
+	if (n->expo == 0x4000)
 		ret = sp_double(n->sign, n->frac);
 	else if (arg == 0 || (opt->precision < 7 && arg < 1000000000000000
 				&& arg > -1000000000000000))

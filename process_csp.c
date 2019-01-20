@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 17:58:39 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/17 17:12:36 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/18 09:31:24 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,15 @@ char	*prcs_cflags(t_printops *opt, char **s, size_t *l)
 {
 	size_t	w;
 	char	*ret;
+	char	a;
 
 	*l = 1;
 	w = opt->width;
-	if (s == NULL || *s == NULL)
-		return (NULL);
+	a = ((opt->flag).min_0 == '0') ? '0' : ' ';
 	if (w < 1)
 		return (*s);
-	ret = ft_strnew(w);
+	if (s == NULL || *s == NULL || (ret = ft_strnew(w)) == NULL)
+		return (NULL);
 	if ((opt->flag).min_0 == '-')
 	{
 		ft_memcpy(ret, *s, 1);
@@ -84,7 +85,7 @@ char	*prcs_cflags(t_printops *opt, char **s, size_t *l)
 	}
 	else
 	{
-		ft_memset(ret, ' ', w - 1);
+		ft_memset(ret, a, w - 1);
 		ft_memcpy(ret + w - 1, *s, 1);
 	}
 	*l = w;

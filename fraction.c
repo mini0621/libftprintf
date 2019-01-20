@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 18:49:16 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/16 23:30:55 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/18 18:23:53 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,13 +115,17 @@ int					get10th_expo(uint16_t expo)
 	int			i;
 
 	p = (short)(expo);
+	if (p == 1 || p == 0)
+		return (1);
 	p = (p * 0.301029999566L);
 	i = (int)p;
 	if (p == i)
 		return (i);
-	if (p > i)
+	if (p >= i)
 		i = (i + 1 - p < p - i) ? i + 1 : i;
 	else
 		i = (p - i + 1 < p - 1) ? i - 1 : i;
+	if (i > 1)
+		return (i + 1);
 	return (i);
 }

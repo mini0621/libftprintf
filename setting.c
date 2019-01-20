@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 18:57:02 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/17 17:31:13 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/18 09:17:55 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,31 +42,27 @@ t_printops	*initoption(void)
 
 t_printops	*readops(char **start, va_list *ap)
 {
-	int			i;
+	char		*i;
 	t_printops	*opt;
 	int			ret;
 
 	if ((opt = initoption()) == NULL)
 		return (NULL);
-	i = 1;
-	while (*(*start + i) != '\0' && (ret = is_cnvrtsp(*(*start + i))) == 0)
+	i = *start + 1;
+	while (*i != '\0' && (ret = is_cnvrtsp(*i)) == 0)
 	{
-		storeops(start, i, opt);
-		if (*(*start + i) == '*' && *(*start + i - 1) == '.')
-			opt->precision = va_arg(*ap, size_t);
-		if (*(*start + i) == '*' && *(*start + i - 1) != '.')
-			opt->width = va_arg(*ap, size_t);
-		if (*(*start + i) == '.')
+		storeops(i, opt, ap);
+		if (*i == '.' && *(i + 1) <= '9' && *(i + 1) > '0')
 			i++;
-		if (*(*start + i) <= '9' && *(*start + i) >= '1')
+		if (*i <= '9' && *i >= '1')
 		{
-			while (*(*start + i) <= '9' && *(*start + i) >= '0')
+			while (*i <= '9' && *i >= '0')
 				i++;
 		}
 		else
 			i++;
 	}
-	return (adjust_ops(opt, *start + i, ret, start));
+	return (adjust_ops(opt, i, ret, start));
 }
 
 t_printops	*adjust_ops(t_printops *opt, char *i, int ret, char **start)
@@ -89,29 +85,31 @@ t_printops	*adjust_ops(t_printops *opt, char *i, int ret, char **start)
 	return (opt);
 }
 
-void		storeops(char **start, int i, t_printops *opt)
+void		storeops(char *i, t_printops *opt, va_list *ap)
 {
-	opt->flag.sharp = (*(*start + i) == '#') ? '#' : opt->flag.sharp;
-	if ((*(*start + i) == '0' && opt->flag.min_0 != '-')
-			|| *(*start + i) == '-')
-		opt->flag.min_0 = *(*start + i);
-	if ((*(*start + i) == ' ' && opt->flag.plus_sp != '+')
-			|| *(*start + i) == '+')
-		opt->flag.plus_sp = *(*start + i);
-	if (*(*start + i) <= '9' && *(*start + i) > '0' && opt->width == 0)
-		opt->width = ft_atozu(*start + i);
-	if (*(*start + i) == 'l' && opt->lmod == none)
+	opt->flag.sharp = (*i == '#') ? '#' : opt->flag.sharp;
+	if ((*i == '0' && opt->flag.min_0 != '-') || *i == '-')
+		opt->flag.min_0 = *i;
+	if ((*i == ' ' && opt->flag.plus_sp != '+') || *i == '+')
+		opt->flag.plus_sp = *i;
+	if (*i <= '9' && *i > '0' && opt->width == 0)
+		opt->width = ft_atozu(i);
+	if (*i == 'l' && opt->lmod == none)
 		opt->lmod = l;
-	else if (*(*start + i) == 'l' && opt->lmod != none)
+	else if (*i == 'l' && opt->lmod != none)
 		opt->lmod = ll;
-	if (*(*start + i) == 'h' && opt->lmod == none)
+	if (*i == 'h' && opt->lmod == none)
 		opt->lmod = h;
-	else if (*(*start + i) == 'h' && opt->lmod != none)
+	else if (*i == 'h' && opt->lmod != none)
 		opt->lmod = hh;
-	if (*(*start + i) == 'L')
+	if (*i == 'L')
 		opt->lmod = L;
-	if (*(*start + i) == 'j')
+	if (*i == 'j')
 		opt->lmod = j;
-	if (*(*start + i) == '.' && *(*start + i + 1) != '*')
-		opt->precision = ft_atozu(*start + i + 1);
+	if (*i == '.' && *(i + 1) != '*')
+		opt->precision = ft_atozu(i + 1);
+	if (*i == '*' && *(i - 1) == '.')
+		opt->precision = va_arg(*ap, size_t);
+	if (*i == '*' && *(i - 1) != '.')
+		opt->width = va_arg(*ap, size_t);
 }

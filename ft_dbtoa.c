@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/09 15:21:57 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/16 21:59:54 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/01/18 18:22:58 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_dbtoa(t_double *n, size_t precision, int e)
 	subnormal = ((short)n->expo == -1023) ? 1 : 0;
 	if ((ret = get_frac10(n, 52, subnormal)) == NULL)
 		return (NULL);
-	p = get10th_expo(n->expo) + 1 - subnormal;
+	p = get10th_expo(n->expo) - subnormal;
 	if (e == 1)
 		return (ft_strsubfree(ret, skip_zeros(ret), precision + 2));
 	if (p < 0)
