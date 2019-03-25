@@ -25,7 +25,7 @@ typedef struct	s_tnode
 	int				h;
 }				t_tnode;
 
-
+// many things to double check
 int					ft_max(int a, int b);
 t_tnode				*ft_avlnew(void const *content);
 void				ft_avladd(t_tnode **root, t_tnode *new, void (*cmp)(void *, void *));
