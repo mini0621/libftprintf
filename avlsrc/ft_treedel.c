@@ -6,27 +6,31 @@
 /*   By: sunakim <sunakim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 19:35:59 by sunakim           #+#    #+#             */
-/*   Updated: 2019/03/25 19:35:59 by sunakim          ###   ########.fr       */
+/*   Updated: 2019/03/26 16:25:44 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_avl.h"
 
-static void ft_nodedel(t_tnode *nood, void (del)(void *))
+static void ft_nodedel(t_tnode *node, void (del)(void *))
 {
-	if (nood != NULL)
+	if (node != NULL)
 	{
 		ft_nodedel(node->l);
 		ft_nodedel(node->r);
-		del(node);
+		del(node->cnt);
+		free(node);
+		node = NULL;
 	}
 }
 
 void	ft_treedel(t_tnode **root, void (del)(void *))
 {
-	if (*root != NULL
+	if (*root != NULL)
 	{
 		ft_nodedel(*root);
-		del(root);
+		del(root->cnt);
+		free(*root);
+		*root = NULL;
 	}
 }

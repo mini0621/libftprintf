@@ -29,7 +29,11 @@ FTIOSRC=$(addprefix ft_printf/, ft_printf.c convertion.c setting.c process_csp.c
 		process_doux.c ft_lltoa.c process_e.c process_f.c process_flag.c 		 \
 		 ft_sprintf.c ft_dprintf.c ft_asprintf.c ft_snprintf.c)
 
+FTAVLSRC=$(addprefix avlsrc/,	ft_avl.h	ft_avladd.c	ft_avlfind.c				\
+		ft_avlheight.c	ft_avlnew.c		ft_treedel.c	lrotate.c      rrotate.c)
+
 FTIOOBJ=$(FTIOSRC:.c=.o)
+FTAVLOBJ=$(FTAVLSRC:.c=.o)
 OBJ = $(FTSRC:.c=.o) 
 
 
@@ -40,7 +44,7 @@ OBJ = $(FTSRC:.c=.o)
 
 RM = rm -f 
 
-$(NAME): $(OBJ) $(FTIOOBJ) 
+$(NAME): $(OBJ) $(FTIOOBJ) $(FTAVLOBJ)
 	ar rcs $(NAME) $(OBJ) $(FTIOOBJ)
 
 all: $(NAME)
@@ -48,6 +52,7 @@ all: $(NAME)
 clean:
 	$(RM) $(OBJ)
 	$(RM) $(FTIOOBJ)
+	$(RM) $(FTAVLOBJ)
 
 
 fclean: clean
