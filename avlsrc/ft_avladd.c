@@ -6,7 +6,7 @@
 /*   By: sunakim <sunakim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 15:08:13 by sunakim           #+#    #+#             */
-/*   Updated: 2019/03/25 15:08:13 by sunakim          ###   ########.fr       */
+/*   Updated: 2019/03/26 12:32:19 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,12 @@ static int balance(t_tnode *n)
 	return (height(n->l) - height(n->r));
 }
 
-void	ft_avladd(t_tnode **root, t_tnode *new, void (*cmp)(void *, void *))
+t_tnode	*ft_avladd(t_tnode **root, t_tnode *new, void (*cmp)(void *, void *))
 {
 	if (*root == NULL)
 	{
-		if (new == NULL)
-			ft_error();
-		else
-			*root = new;
+		*root = new;
+		return (*root)
 	}
 	if ((cmp(new->cnt, (*root)->cnt)) < 0)
 		(*root)->l = ft_avladd(&((*root)->l), new, cmp);
@@ -61,5 +59,7 @@ void	ft_avladd(t_tnode **root, t_tnode *new, void (*cmp)(void *, void *))
 		ft_error(); // same keys ->error;
 	//change height
 	(*root)->h = 1 + ft_max(height((*root)->l, height((*root)->r)));
-	balAVL(root, new, cmp);
+	*root = balAVL(root, new, cmp);
+	//update all the change under the root
+	return *root
 }

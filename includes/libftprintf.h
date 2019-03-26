@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:55:20 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/03/08 16:18:59 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/03/26 12:35:40 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,5 @@ t_list				*ft_lstfind(t_list *alst, void *content,
 		int (*cmp)(void *, void *));
 char				*ft_strjoinfree(char **s1, char **s2, int i);
 char				*ft_strupper(char *s);
+int					ft_max(int a, int b);
 #endif

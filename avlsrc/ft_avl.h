@@ -6,7 +6,7 @@
 /*   By: mnishimo <mnishimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/08 16:20:41 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/03/08 16:37:06 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/03/26 12:34:49 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FT_AVL_H
 
 # include "../includes/libftprintf.h"
-# include "../includes/lemin.h"
 
 typedef struct	s_tnode
 {
@@ -26,8 +25,7 @@ typedef struct	s_tnode
 }				t_tnode;
 
 // many things to double check
-int					ft_max(int a, int b);
-t_tnode				*ft_avlnew(void const *content);
+t_tnode				*ft_avlnew(void const *content, size_t contentsize);
 void				ft_avladd(t_tnode **root, t_tnode *new, void (*cmp)(void *, void *));
 int					ft_avlheight();
 void				rrotate(t_tnode *top);

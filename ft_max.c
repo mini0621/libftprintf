@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_avlfind.c                                       :+:      :+:    :+:   */
+/*   ft_max.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sunakim <sunakim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/25 14:38:57 by sunakim           #+#    #+#             */
-/*   Updated: 2019/03/26 12:28:14 by mnishimo         ###   ########.fr       */
+/*   Created: 2019/03/25 15:38:05 by sunakim           #+#    #+#             */
+/*   Updated: 2019/03/25 15:38:05 by sunakim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_avl.h"
+#include "libftprintf.h"
 
-t_tnode	*ft_avlfind(t_tnode **root, void *value, void (*cmp)(void *, void *))
+int	ft_max(int a, int b)
 {
-	t_tnode *p;
-
-	if (*root == NULL)
-		return (NULL);
-	p = *root;
-	while (p != NULL)
-	{
-		if ((cmp(value, p->cnt)) == 0)
-			return (p);
-		else if ((cmp(value, p->cnt)) < 0)
-			p = p->l;
-		else
-			p = p->r;
-	}
-	return (NULL);
+	return ( (a > b) ? a : b);
 }
