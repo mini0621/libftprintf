@@ -6,13 +6,13 @@
 /*   By: sunakim <sunakim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 16:26:19 by sunakim           #+#    #+#             */
-/*   Updated: 2019/03/26 16:17:06 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/03/27 18:28:11 by sunakim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_avl.h"
+# include "../includes/ft_avl.h"
 
-int height(t_tnode *n)
+int height (t_tnode* n)
 {
 	if (n == NULL)
 		return (0);

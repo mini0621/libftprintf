@@ -6,11 +6,11 @@
 /*   By: sunakim <sunakim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 16:27:19 by sunakim           #+#    #+#             */
-/*   Updated: 2019/03/26 16:16:09 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/03/27 18:28:25 by sunakim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_avl.h"
+# include "../includes/ft_avl.h"
 
 t_tnode	*rrotate(t_tnode *top)
 {

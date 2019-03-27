@@ -5,7 +5,7 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 
 INCLUDES = includes
-HEADER = $(addprefix includes/, libftprintf.h)
+HEADER = $(addprefix includes/, libftprintf.h ft_avl.h)
 
 FTSRC = ft_lstiter.c    ft_putchar.c    ft_strdel.c     ft_strnew.c  ft_lstlast.c  \
 		ft_putchar_fd.c ft_strdup.c     ft_strnstr.c ft_atoi.c  ft_lstlen.c        \
@@ -29,7 +29,7 @@ FTIOSRC=$(addprefix ft_printf/, ft_printf.c convertion.c setting.c process_csp.c
 		process_doux.c ft_lltoa.c process_e.c process_f.c process_flag.c 		 \
 		 ft_sprintf.c ft_dprintf.c ft_asprintf.c ft_snprintf.c)
 
-FTAVLSRC=$(addprefix avlsrc/,	ft_avl.h	ft_avladd.c	ft_avlfind.c				\
+FTAVLSRC=$(addprefix avlsrc/,	ft_avladd.c	ft_avlfind.c				\
 		ft_avlheight.c	ft_avlnew.c		ft_treedel.c	lrotate.c      rrotate.c)
 
 FTIOOBJ=$(FTIOSRC:.c=.o)
