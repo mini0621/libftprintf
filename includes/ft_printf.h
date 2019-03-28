@@ -6,14 +6,14 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 22:18:49 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/03/08 15:56:26 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/03/28 16:17:06 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "../includes/libftprintf.h"
+# include "libftprintf.h"
 
 typedef enum		e_lm
 {

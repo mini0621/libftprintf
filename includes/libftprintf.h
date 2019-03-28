@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:55:20 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/03/28 14:17:49 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/03/28 18:36:26 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,28 @@
 # include "ft_avl.h"
 # include "ft_printf.h"
 
+# define BUFF_SIZE 10
 typedef struct		s_list
 {
 	void			*content;
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
+
+
+typedef struct		s_fd
+{
+	int				fd;
+	char			*remain;
+}					t_fd;
+
+int					get_next_line(const int fd, char **line);
+int					cmpfd(void *fd1, void *fd);
+t_list				*initbuff(int fd, t_list **lst, char **buff,
+		int *readsize);
+t_list				*initfd(t_list **lst, int fd);
+int					findline(const int fd, char **buff, t_list *fdlst,
+		char **line);
 
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
@@ -47,7 +63,7 @@ char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);
 char				*ft_strstr(const char *haystack, const char *needle);
 char				*ft_strnstr(const char *haystack, const char *needle,
-						size_t len);
+		size_t len);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_atoi(const char *str);
