@@ -6,7 +6,7 @@
 /*   By: sunakim <sunakim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 15:08:13 by sunakim           #+#    #+#             */
-/*   Updated: 2019/03/27 19:23:05 by sunakim          ###   ########.fr       */
+/*   Updated: 2019/03/28 15:43:38 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,15 @@ static void balavl(t_tnode **root, t_tnode *new, int (*cmp)(void *, void *))
 	//left right
 	if (b > 1 && (cmp(new->cnt, (*root)->cnt)) > 0)
 	{
-		(*root)->l = lrotate((*root)->l);
-		*root = rrotate((*root));
+		(*root)->r = rrotate((*root)->r);
+		*root = lrotate((*root));
 	}
 	//right left
 	if (b < -1 && (cmp(new->cnt, (*root)->cnt)) < 0)
 	{
-		(*root)->r = rrotate((*root)->r);
-		*root = lrotate((*root));
+		(*root)->l = lrotate((*root)->l);
+		*root = rrotate((*root));
+
 	}
 }
 
@@ -68,10 +69,12 @@ t_tnode	*ft_avladd(t_tnode **root, t_tnode *new, int (*cmp)(void *, void *), voi
 		}
 	}
 	else
+	{
 		//delete everything and set
 		ft_treedel(&new, del);
 		ft_treedel(root, del);
 		return (NULL);
+	}
 	//change height
 	(*root)->h = 1 + ft_max(height((*root)->l), height((*root)->r));
 	balavl(root, new, cmp);

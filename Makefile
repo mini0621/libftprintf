@@ -2,7 +2,8 @@ NAME = libftprintf.a
 
 CC = gcc 
 
-CFLAGS = -Wall -Werror -Wextra
+#CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g
 
 INCLUDES = includes
 HEADER = $(addprefix includes/, libftprintf.h ft_avl.h)

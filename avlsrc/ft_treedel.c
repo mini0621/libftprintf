@@ -6,7 +6,7 @@
 /*   By: sunakim <sunakim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 19:35:59 by sunakim           #+#    #+#             */
-/*   Updated: 2019/03/27 18:45:14 by sunakim          ###   ########.fr       */
+/*   Updated: 2019/03/28 15:00:04 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void	ft_treedel(t_tnode **root, void (del)(void *))
 	if (*root != NULL)
 	{
 		ft_nodedel(*root, del);
-		del((*root)->cnt);
-		free(*root);
 		*root = NULL;
 	}
 }

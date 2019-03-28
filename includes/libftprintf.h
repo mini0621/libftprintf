@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:55:20 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/03/26 12:35:40 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/03/28 14:17:49 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include "ft_avl.h"
+# include "ft_printf.h"
 
 typedef struct		s_list
 {
