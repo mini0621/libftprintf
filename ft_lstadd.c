@@ -6,7 +6,7 @@
 /*   By: mnishimo <mnishimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 22:40:02 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/12 22:33:20 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/03/30 13:33:12 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_lstadd(t_list **alst, t_list *new)
 {
+	if (!new || !alst)
+		return ;
 	new->next = *alst;
 	*alst = new;
 }

@@ -6,7 +6,7 @@
 /*   By: sunakim <sunakim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 19:35:59 by sunakim           #+#    #+#             */
-/*   Updated: 2019/03/28 15:00:04 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/03/30 13:10:58 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static void ft_nodedel(t_tnode *node, void (del)(void *))
 	{
 		ft_nodedel(node->l, del);
 		ft_nodedel(node->r, del);
-		del(node->cnt);
+		if (del != NULL)
+			del(node->cnt);
 		free(node);
 		node = NULL;
 	}
