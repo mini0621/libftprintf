@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdel.c                                        :+:      :+:    :+:   */
+/*   ft_min.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnishimo <mnishimo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sunakim <sunakim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/27 22:32:41 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/03/30 14:45:44 by mnishimo         ###   ########.fr       */
+/*   Created: 2019/03/25 15:38:05 by sunakim           #+#    #+#             */
+/*   Updated: 2019/03/30 14:29:34 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
+int	ft_min(int a, int b)
 {
-	t_list	*p1;
-
-	p1 = *alst;
-	while (p1 != NULL)
-	{
-		if (del)
-			del(p1->content, p1->content_size);
-		*alst = p1->next;
-		free(p1);
-		p1 = *alst;
-	}
-	*alst = NULL;
+	return ( (a < b) ? a : b);
 }
