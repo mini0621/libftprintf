@@ -6,7 +6,7 @@
 /*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:55:20 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/03/30 14:28:37 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/03/31 22:19:33 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,4 +121,6 @@ char				*ft_strupper(char *s);
 int					ft_max(int a, int b);
 int					ft_min(int a, int b);
 void				ft_deltab(char **tab);
+void				ft_lstsort(t_list **alist, 
+		int(*cmp)(void *, void *));
 #endif
