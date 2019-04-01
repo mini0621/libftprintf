@@ -6,7 +6,7 @@
 /*   By: mnishimo <mnishimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 22:03:21 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/03/31 23:36:44 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/04/01 19:41:46 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ void			ft_lstsort(t_list **alist, int(*cmp)(void *, void *))
 	sorted = *alist;
 	cur = *alist;
 	if (!cur->next->next && cmp(cur->content, cur->next->content)> 0)
-		swap(cur->content, cur->next->content);
+		ft_swap(cur->content, cur->next->content);
 	while (cur)
 	{
 		index = sorted;
 		while (cur)
 		{
-			if (cmp(cur->content, index->content) > 0)
+			if (cmp(cur->content, index->content) < 0)
 				index = cur;
 			cur = cur->next;
 		}
