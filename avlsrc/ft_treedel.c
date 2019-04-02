@@ -6,13 +6,13 @@
 /*   By: sunakim <sunakim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 19:35:59 by sunakim           #+#    #+#             */
-/*   Updated: 2019/03/30 13:10:58 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/04/02 17:56:36 by sunakim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../includes/ft_avl.h"
 
-static void ft_nodedel(t_tnode *node, void (del)(void *))
+static void	ft_nodedel(t_tnode *node, void (del)(void *))
 {
 	if (node != NULL)
 	{
