@@ -6,7 +6,7 @@
 /*   By: sunakim <sunakim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 15:08:13 by sunakim           #+#    #+#             */
-/*   Updated: 2019/04/02 19:53:13 by sunakim          ###   ########.fr       */
+/*   Updated: 2019/04/03 18:54:54 by sunakim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,29 @@ static void balavl(t_tnode **root, t_tnode *new, int (*cmp)(void *, void *))
 	int b;
 	//get the balance
 	b = balance((*root));
+	if (b == 2)
+	{
 	// left left
-	if (b > 1 && (cmp(new->cnt, (*root)->cnt)) < 0)
-		*root = rrotate((*root));
-	// right righ
-	if (b < -1 && (cmp(new->cnt, (*root)->cnt)) > 0)
-		*root = lrotate((*root));
+		if (cmp(new->cnt, (*root)->l->cnt) < 0)
+			*root = rrotate((*root));
 	//left right
-	if (b > 1 && (cmp(new->cnt, (*root)->cnt)) > 0)
-	{
-		(*root)->l = lrotate((*root)->l);
-		*root = rrotate((*root));
+		else
+		{
+			(*root)->l = lrotate((*root)->l);
+			*root = rrotate((*root));
+		}
 	}
-	//right left
-	if (b < -1 && (cmp(new->cnt, (*root)->cnt)) < 0)
+	if (b == -2)
 	{
-		(*root)->r = rrotate((*root)->r);
-		*root = lrotate((*root));
-
+		// right righ
+		if (cmp(new->cnt, (*root)->r->cnt) > 0)
+			*root = lrotate((*root));
+		//right left
+		else
+		{
+			(*root)->r = rrotate((*root)->r);
+			*root = lrotate((*root));
+		}
 	}
 }
 
