@@ -22,7 +22,8 @@ FTSRC = ft_lstiter.c    ft_putchar.c    ft_strdel.c     ft_strnew.c  ft_lstlast.
 		ft_lstdel.c     ft_memset.c     ft_strcmp.c     ft_strncpy.c ft_lstdelone.c\
 		ft_power.c      ft_strcpy.c     ft_strnequ.c ft_lstpushback.c ft_lstfind.c \
 		ft_lstdelof.c ft_strjoinfree.c ft_strupper.c ft_strndup.c ft_strsubfree.c \
-		ft_atozu.c		ft_max.c ft_deltab.c get_next_line.c ft_min.c ft_lstsort.c
+		ft_atozu.c		ft_max.c ft_deltab.c get_next_line.c ft_min.c ft_lstsort.c \
+		ft_atollu.c
 
 FTIOSRC=$(addprefix ft_printf/, ft_printf.c convertion.c setting.c process_csp.c \
 		fraction.c process_ld.c \
