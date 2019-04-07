@@ -6,7 +6,7 @@
 /*   By: sunakim <sunakim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:55:20 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/04/04 17:16:49 by sunakim          ###   ########.fr       */
+/*   Updated: 2019/04/07 18:53:58 by sunakim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_atoi(const char *str);
 size_t				ft_atozu(const char *str);
-unsigned long long 	ft_atollu(const char *str);
+unsigned long long	ft_atollu(const char *str);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
 int					ft_isalnum(int c);
@@ -122,6 +122,6 @@ char				*ft_strupper(char *s);
 int					ft_max(int a, int b);
 int					ft_min(int a, int b);
 void				ft_deltab(char **tab);
-void				ft_lstsort(t_list **alist, 
-		int(*cmp)(void *, void *));
+void				ft_lstsort(t_list **alist,
+					int(*cmp)(void *, void *));
 #endif

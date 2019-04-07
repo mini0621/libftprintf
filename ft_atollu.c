@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atollu.c                                          :+:      :+:    :+:   */
+/*   ft_atollu.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sunakim <sunakim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 19:31:04 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/04/04 17:11:11 by sunakim          ###   ########.fr       */
+/*   Updated: 2019/04/07 18:48:01 by sunakim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ unsigned long long int	ft_atollu(const char *str)
 {
 	int						i;
 	unsigned long long int	ret;
-	unsigned long long int	 neg;
+	unsigned long long int	neg;
 
 	i = 0;
 	neg = 1;

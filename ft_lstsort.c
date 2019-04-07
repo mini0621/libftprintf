@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstsort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnishimo <mnishimo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sunakim <sunakim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 22:03:21 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/04/01 19:41:46 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/04/07 18:52:21 by sunakim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static	t_list	*insertion_swap(t_list *index, t_list **sorted)
 	return ((*sorted));
 }
 
-void			ft_lstsort(t_list **alist, int(*cmp)(void *, void *))
+void			ft_lstsort(t_list **alist, int (*cmp)(void *, void *))
 {
 	t_list	*index;
 	t_list	*cur;
@@ -47,7 +47,7 @@ void			ft_lstsort(t_list **alist, int(*cmp)(void *, void *))
 		return ;
 	sorted = *alist;
 	cur = *alist;
-	if (!cur->next->next && cmp(cur->content, cur->next->content)> 0)
+	if (!cur->next->next && cmp(cur->content, cur->next->content) > 0)
 		ft_swap(cur->content, cur->next->content);
 	while (cur)
 	{
@@ -60,5 +60,4 @@ void			ft_lstsort(t_list **alist, int(*cmp)(void *, void *))
 		}
 		cur = insertion_swap(index, &sorted);
 	}
-
 }

@@ -6,31 +6,20 @@
 /*   By: sunakim <sunakim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 15:08:13 by sunakim           #+#    #+#             */
-/*   Updated: 2019/04/07 11:37:14 by sunakim          ###   ########.fr       */
+/*   Updated: 2019/04/07 18:44:03 by sunakim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/ft_avl.h"
+#include "../includes/ft_avl.h"
 
-static int balance(t_tnode *n)
+static int	balance(t_tnode *n)
 {
 	if (n == NULL)
 		return (0);
 	return (height(n->l) - height(n->r));
 }
 
-/*
-static void update_height(t_tnode *n)
-{
-	t_t *cur;
-
-	cur = 
-	if (n == NULL)
-		return ;
-}
-*/
-
-static void balavl(t_tnode **root, t_tnode *new, int (*cmp)(void *, void *))
+static void	balavl(t_tnode **root, t_tnode *new, int (*cmp)(void *, void *))
 {
 	int b;
 	//get the balance
@@ -61,9 +50,9 @@ static void balavl(t_tnode **root, t_tnode *new, int (*cmp)(void *, void *))
 	}
 }
 
-t_tnode	*ft_avladd(t_tnode **root, t_tnode *new, int (*cmp)(void *, void *), void (*del)(void *))
+t_tnode		*ft_avladd(t_tnode **root, t_tnode *new, int (*cmp)(void *, void *), void (*del)(void *))
 {
-	if (*root == NULL)	
+	if (*root == NULL)
 	{
 		*root = new;
 		(*root)->h = 1;   //new
@@ -96,5 +85,5 @@ t_tnode	*ft_avladd(t_tnode **root, t_tnode *new, int (*cmp)(void *, void *), voi
 	(*root)->h = 1 + ft_max(height((*root)->l), height((*root)->r));
 	balavl(root, new, cmp);
 	//update all the change under the root
-	return *root;
+	return (*root);
 }
