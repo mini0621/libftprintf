@@ -6,7 +6,7 @@
 /*   By: sunakim <sunakim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 16:27:39 by sunakim           #+#    #+#             */
-/*   Updated: 2019/03/27 18:28:22 by sunakim          ###   ########.fr       */
+/*   Updated: 2019/04/07 14:33:28 by sunakim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_tnode	*lrotate(t_tnode *top)
 	trl = tr->l;
 	tr->l = top;
 	top->r = trl;
-	top->h = ft_max(height(top->l), height(top->r) + 1);
-	tr->h = ft_max(height(tr->l), height(tr->r) + 1);
+	top->h = ft_max(height(top->l), height(top->r)) + 1;
+	tr->h = ft_max(height(tr->l), height(tr->r)) + 1;
 	return (tr);
 }

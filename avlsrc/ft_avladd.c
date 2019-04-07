@@ -6,7 +6,7 @@
 /*   By: sunakim <sunakim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 15:08:13 by sunakim           #+#    #+#             */
-/*   Updated: 2019/04/03 18:54:54 by sunakim          ###   ########.fr       */
+/*   Updated: 2019/04/07 11:37:14 by sunakim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,17 @@ static int balance(t_tnode *n)
 		return (0);
 	return (height(n->l) - height(n->r));
 }
+
+/*
+static void update_height(t_tnode *n)
+{
+	t_t *cur;
+
+	cur = 
+	if (n == NULL)
+		return ;
+}
+*/
 
 static void balavl(t_tnode **root, t_tnode *new, int (*cmp)(void *, void *))
 {
@@ -55,6 +66,7 @@ t_tnode	*ft_avladd(t_tnode **root, t_tnode *new, int (*cmp)(void *, void *), voi
 	if (*root == NULL)	
 	{
 		*root = new;
+		(*root)->h = 1;   //new
 		return (*root);
 	}
 	if ((cmp(new->cnt, (*root)->cnt)) < 0)
