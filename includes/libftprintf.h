@@ -6,7 +6,7 @@
 /*   By: sunakim <sunakim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:55:20 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/04/07 18:53:58 by sunakim          ###   ########.fr       */
+/*   Updated: 2019/04/08 14:39:28 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ t_list				*ft_lstat(t_list *alst, unsigned int nbr);
 void				ft_lstpushback(t_list **alst, t_list *new);
 void				ft_lstdelof(t_list **alst, void *content,
 		int (*cmp)(void *, void *));
+t_list				*ft_lstdup(t_list *src, void(*cp)(t_list *, t_list *));
 t_list				*ft_lstfind(t_list *alst, void *content,
 		int (*cmp)(void *, void *));
 char				*ft_strjoinfree(char **s1, char **s2, int i);
