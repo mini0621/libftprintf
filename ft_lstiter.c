@@ -6,7 +6,7 @@
 /*   By: mnishimo <mnishimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 22:43:04 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/12 22:25:27 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/04/09 23:15:01 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 void	ft_lstiter(t_list *lst, void (*f)(t_list *elem))
 {
-	while (lst != NULL)
+	t_list	*cur;
+
+	cur = lst;
+	while (cur)
 	{
-		f(lst);
-		lst = lst->next;
+		f(cur);
+		cur = cur->next;
 	}
 }
