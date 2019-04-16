@@ -6,7 +6,7 @@
 /*   By: sunakim <sunakim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:55:20 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/04/08 14:39:28 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/04/16 16:20:23 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ typedef struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
+
+typedef struct		s_queue
+{
+	t_list	*top;
+	t_list	*last;
+}					t_queue;
 
 
 typedef struct		s_fd
@@ -125,4 +131,9 @@ int					ft_min(int a, int b);
 void				ft_deltab(char **tab);
 void				ft_lstsort(t_list **alist,
 					int(*cmp)(void *, void *));
+
+t_queue				*ft_qappend(t_queue *q, t_list *nl);
+t_queue				*ft_qnew(void);
+t_list				*ft_qpop(t_queue *q);
+void				ft_qdel(t_queue **q, void (*del)(void *, size_t));
 #endif
