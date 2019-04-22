@@ -6,7 +6,7 @@
 /*   By: sunakim <sunakim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:55:20 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/04/18 10:57:17 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/04/22 16:23:41 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ int					ft_min(int a, int b);
 void				ft_deltab(char **tab);
 void				ft_lstsort(t_list **alist,
 					int(*cmp)(void *, void *));
+t_list				*ft_lstsub(t_list **top, t_list *tar);
 
 t_queue				*ft_qappend(t_queue *q, t_list *nl);
 t_queue				*ft_qpush(t_queue *q, t_list *nl);
