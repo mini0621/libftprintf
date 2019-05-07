@@ -6,7 +6,7 @@
 /*   By: sunakim <sunakim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:55:20 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/04/22 16:23:41 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/05/05 21:05:50 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,8 @@ t_list				*ft_lstlast(t_list *alst);
 int					ft_lstlen(t_list *alst);
 t_list				*ft_lstat(t_list *alst, unsigned int nbr);
 void				ft_lstpushback(t_list **alst, t_list *new);
+void				ft_lstinsert(t_list **alst, t_list *new, 
+		int (*cmp)(void *, void *));
 void				ft_lstdelof(t_list **alst, void *content,
 		int (*cmp)(void *, void *));
 t_list				*ft_lstdup(t_list *src, void(*cp)(t_list *, t_list *));
