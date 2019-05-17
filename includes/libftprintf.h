@@ -6,7 +6,7 @@
 /*   By: sunakim <sunakim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:55:20 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/05/05 21:05:50 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/05/17 12:02:46 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,4 +140,5 @@ t_queue				*ft_qpush(t_queue *q, t_list *nl);
 t_queue				*ft_qnew(void);
 t_list				*ft_qpop(t_queue *q);
 void				ft_qdel(t_queue **q, void (*del)(void *, size_t));
+void				ft_qclear(t_queue **q, void (*del)(void *, size_t));
 #endif

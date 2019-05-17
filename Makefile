@@ -2,8 +2,8 @@ NAME = libftprintf.a
 
 CC = gcc 
 
-#CFLAGS = -Wall -Werror -Wextra
-CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g
+CFLAGS = -Wall -Werror -Wextra -g
+#CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g
 
 INCLUDES = includes
 HEADER = $(addprefix includes/, libftprintf.h ft_avl.h)
@@ -24,7 +24,7 @@ FTSRC = ft_lstiter.c    ft_putchar.c    ft_strdel.c     ft_strnew.c  ft_lstlast.
 		ft_lstdelof.c ft_strjoinfree.c ft_strupper.c ft_strndup.c ft_strsubfree.c \
 		ft_atozu.c		ft_max.c ft_deltab.c get_next_line.c ft_min.c ft_lstsort.c \
 		ft_atollu.c		ft_lstdup.c ft_qappend.c ft_qnew.c ft_qpop.c ft_qdel.c  \
-		ft_qpush.c ft_lstsub.c ft_lstinsert.c
+		ft_qpush.c ft_lstsub.c ft_lstinsert.c ft_qclear.c
 
 FTIOSRC=$(addprefix ft_printf/, ft_printf.c convertion.c setting.c process_csp.c \
 		fraction.c process_ld.c \

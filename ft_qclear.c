@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_qpop.c                                          :+:      :+:    :+:   */
+/*   ft_qclear.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mnishimo <mnishimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/16 16:00:34 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/05/17 18:07:07 by mnishimo         ###   ########.fr       */
+/*   Created: 2019/04/16 16:07:21 by mnishimo          #+#    #+#             */
+/*   Updated: 2019/05/15 23:01:39 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-t_list	*ft_qpop(t_queue *q)
+void	ft_qclear(t_queue **q, void (*del)(void *, size_t))
 {
-	t_list	*ret;
-
-	if (!(q->top))
-		return (NULL);
-	ret = q->top;
-	if (q->last == q->top)
-		q->last = NULL;
-	q->top = q->top->next;
-	ret->next = NULL;
-	return (ret);
+	if (!q || !(*q))
+		return ;
+	ft_lstdel(&((*q)->top), del);
+	(*q)->last = NULL;
 }
