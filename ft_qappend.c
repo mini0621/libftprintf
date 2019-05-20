@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_qappend.c                                          :+:      :+:    :+:   */
+/*   ft_qappend.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnishimo <mnishimo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sunakim <sunakim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 22:12:04 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/05/17 18:07:01 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/05/20 10:38:42 by sunakim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_queue	*ft_qappend(t_queue *q, t_list *nl)
 		q->top = nl;
 	if (q->last)
 	{
-		q->last->next =  nl;
+		q->last->next = nl;
 		q->last = nl;
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: sunakim <sunakim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 17:55:20 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/05/17 12:02:46 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/05/20 10:33:59 by sunakim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "ft_printf.h"
 
 # define BUFF_SIZE 10
+
 typedef struct		s_list
 {
 	void			*content;
@@ -34,7 +35,6 @@ typedef struct		s_queue
 	t_list	*top;
 	t_list	*last;
 }					t_queue;
-
 
 typedef struct		s_fd
 {
@@ -119,7 +119,7 @@ t_list				*ft_lstlast(t_list *alst);
 int					ft_lstlen(t_list *alst);
 t_list				*ft_lstat(t_list *alst, unsigned int nbr);
 void				ft_lstpushback(t_list **alst, t_list *new);
-void				ft_lstinsert(t_list **alst, t_list *new, 
+void				ft_lstinsert(t_list **alst, t_list *new,
 		int (*cmp)(void *, void *));
 void				ft_lstdelof(t_list **alst, void *content,
 		int (*cmp)(void *, void *));

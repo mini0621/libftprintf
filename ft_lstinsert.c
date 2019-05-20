@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstinsert.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnishimo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sunakim <sunakim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 18:02:14 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/05/07 19:13:17 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/05/20 10:37:52 by sunakim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	ft_lstinsert(t_list **alst, t_list *new, int (*cmp)(void *, void *))
 {
 	t_list	*cur;
 	t_list	*pre;
-	
-	if (alst == NULL )
+
+	if (alst == NULL)
 		return ;
 	if (*alst == NULL || cmp((*alst)->content, new->content) < 0)
 	{

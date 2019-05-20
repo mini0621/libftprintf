@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnishimo <mnishimo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sunakim <sunakim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 14:24:08 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/04/08 14:56:15 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/05/20 10:37:37 by sunakim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_list	*ft_lstdup(t_list *src, void (*cp)(t_list *, t_list *))
 	last = NULL;
 	while (cur)
 	{
-		if (!(nl = ft_lstnew(NULL ,cur->content_size)))
+		if (!(nl = ft_lstnew(NULL, cur->content_size)))
 			return (ret);
 		cp(nl, cur);
 		if (!ret)
