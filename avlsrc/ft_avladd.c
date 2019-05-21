@@ -6,7 +6,7 @@
 /*   By: sunakim <sunakim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 15:08:13 by sunakim           #+#    #+#             */
-/*   Updated: 2019/05/20 10:36:42 by sunakim          ###   ########.fr       */
+/*   Updated: 2019/05/21 17:37:51 by mnishimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,12 @@ t_tnode			*ft_avladd(t_tnode **root, t_tnode *new,
 	if ((cmp(new->cnt, (*root)->cnt)) < 0)
 	{
 		if (!((*root)->l = ft_avladd(&((*root)->l), new, cmp, del)))
-			treedel_null(root, del);
+			return (treedel_null(root, del));
 	}
 	else if ((cmp(new->cnt, (*root)->cnt)) > 0)
 	{
 		if (!((*root)->r = ft_avladd(&((*root)->r), new, cmp, del)))
-			treedel_null(root, del);
+			return (treedel_null(root, del));
 	}
 	else
 	{
