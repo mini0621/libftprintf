@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnishimo <mnishimo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sunakim <sunakim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 22:12:04 by mnishimo          #+#    #+#             */
-/*   Updated: 2019/01/12 22:28:33 by mnishimo         ###   ########.fr       */
+/*   Updated: 2019/05/23 14:22:39 by sunakim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_list	*ft_lstnew(void const *content, size_t content_size)
 	if (content == NULL)
 	{
 		ptr->content = NULL;
-		ptr->content_size = 0;
+		ptr->content_size = content_size;
 		ptr->next = NULL;
 	}
 	else
