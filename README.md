@@ -7,6 +7,7 @@ including basic libc functions, linked lists, AVL tree, and printf.
 
 ## Description
 #### libc functions
+```
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
@@ -29,8 +30,10 @@ char				*ft_strnstr(const char *haystack, const char *needle, size_t len);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_atoi(const char *str);
+```
 
 #### other util functions
+```
 size_t				ft_atozu(const char *str);
 unsigned long long	ft_atollu(const char *str);
 int					ft_isalpha(int c);
@@ -72,8 +75,10 @@ char				*ft_strupper(char *s);
 int					ft_max(int a, int b);
 int					ft_min(int a, int b);
 void				ft_deltab(char **tab);
+```
 
 #### linked lists
+```
 t_list				*ft_lstnew(void const *content, size_t content_size);
 t_list				*ft_lstnomallocnew(void const *content, size_t content_size);
 void				ft_lstdelone(t_list **alst, void (*del)(void*, size_t));
@@ -90,23 +95,29 @@ void				ft_lstdelof(t_list **alst, void *content, int (*cmp)(void *, void *));
 t_list				*ft_lstfind(t_list *alst, void *content, int (*cmp)(void *, void *));
 void				ft_lstsort(t_list **alist, int(*cmp)(void *, void *));
 t_list				*ft_lstsub(t_list **top, t_list *tar);
+```
 
 #### queue
+```
 t_queue				*ft_qappend(t_queue *q, t_list *nl);
 t_queue				*ft_qpush(t_queue *q, t_list *nl);
 t_queue				*ft_qnew(void);
 t_list				*ft_qpop(t_queue *q);
 void				ft_qdel(t_queue **q, void (*del)(void *, size_t));
 void				ft_qclear(t_queue **q, void (*del)(void *, size_t));
+```
 
 #### printf functions
+```
 int					ft_printf(const char *fmt, ...);
 int					ft_sprintf(char *str, const char *fmt, ...);
 int					ft_snprintf(char *str, size_t size, const char *fmt, ...);
 int					ft_dprintf(int fd, const char *fmt, ...);
 int					ft_asprintf(char **ret, const char *fmt, ...);
+```
 
 #### AVL tree
+```
 t_tnode			*ft_avlnew(void const *content, size_t contentsize);
 t_tnode			*ft_avladd(t_tnode **root, t_tnode *new, int (*cmp)(void *, void *), void (*del)(void *));
 int				height (t_tnode *n);
@@ -114,9 +125,12 @@ t_tnode			*rrotate(t_tnode *top);
 t_tnode			*lrotate(t_tnode *top);
 t_tnode			*ft_avlfind(t_tnode *root, void *value, int (*cmp)(void *, void *));
 void			ft_treedel(t_tnode **root, void (*del)(void *));
+```
 
 #### get next line 
+```
 int					get_next_line(const int fd, char **line);
+```
 
 ## Requirement
 gcc
