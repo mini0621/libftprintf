@@ -5,9 +5,14 @@ l'ecole 42 project libft, get_next_line and libftprintf.
 A base library used in 42, 
 including basic libc functions, linked lists, AVL tree, and printf.
 
+topics: C, libc, memory allocation, algorythm, recursive, data structure, library, makefile, tree, linked list, AVL tree, self-balancing tree
+
+skills: C programming basics, libc, memory allocation, leak management, makefile, data structure, recursive, fileIO
+
+
 ## Description
 #### libc functions
-```
+``
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
